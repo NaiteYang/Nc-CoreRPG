@@ -1,0 +1,5 @@
+Player:
+  MaxLevel: 50
+  MaxExp:
+    Default: 100
+    Float: 0.87

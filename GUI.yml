@@ -1,0 +1,28 @@
+﻿Setting:
+    Items:
+        Data:
+            DisplayName: §6數據
+            Lores:
+            - §7查詢自己目前的基礎數值
+            - §7可從這些數據中了解自己的潛在能力
+            - §7並能詳細清楚自我數值的優缺點
+            - §0 
+            - §a➠ 點擊查看
+            
+        Property: 
+            DisplayName: §6屬性
+            Lores:
+            - §7可從中了解屬性的用途
+            - §7並且選擇自行所需的屬性
+            - §7將選擇的屬性提升自己的基礎數值
+            - §7讓自己的實力強化
+            - §0 
+            - §a➠ 點擊查看
+        None:
+            DisplayName: §0 
+            Lores:
+            - §0 
+    
+    Inventory:
+        Client:
+            GUIName: §1客戶端
