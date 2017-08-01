@@ -1,5 +1,34 @@
 Player:
-  MaxLevel: 50
+  MaxLevel: 100
   MaxExp:
     Default: 100
     Float: 0.87
+  Ability:
+    Mana:
+      DefaultMax: 100
+      DefaultRestore: 5
+      RestoreTime: 1200
+    Health:
+      DefaultMax: 100
+      DefaultRestore: 5
+      RestoreTime: 1200
+    Mentality:
+      DefaultMax: 50
+      DefaultRestore: 5
+      RestoreTime: 72000
+      DecreaseTime: 1200
+    Vitality:
+      DefaultMax: 30
+      DefaultRestore: 3
+      RestoreTime: 54000
+      DecreaseTime: 1200
+    DefaultATK: 2
+    DefaultMAG: 3
+    DefaultDEF: 1
+    DefaultRES: 2
+    DefaultAAR: 0.012
+    DefaultSAR: 0.027
+    DefaultAKB: 0.037
+    DefaultSKB: 0.023
+    DefaultAHIT: 0.674
+    DefaultSHIT: 0.496
