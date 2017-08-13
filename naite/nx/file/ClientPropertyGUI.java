@@ -11,29 +11,29 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import nx.core.Core;
 
-public class ClientDataGUI 
+public class ClientPropertyGUI
 {
 	static Core main;
-	public ClientDataGUI(Core core){main = core;}
+	public ClientPropertyGUI(Core core){main = core;}
 	
-	public static YamlConfiguration dC = null;
-	public static File dF = null;
+	public static YamlConfiguration pC = null;
+	public static File pF = null;
 	
 	// reload
 	@SuppressWarnings("deprecation")
-	public static void reloadDataGUI()
+	public static void reloadPropertyGUI()
 	{
-		if (dF == null) 
-			dF = new File(Core.plugin.getDataFolder() + File.separator + "Interface" + File.separator + "datagui.yml");
-		if (!dF.exists())
+		if (pF == null) 
+			pF = new File(Core.plugin.getDataFolder() + File.separator + "Interface" + File.separator + "propertygui.yml");
+		if (!pF.exists())
 		{
 			new File(Core.plugin.getDataFolder() + File.separator + "Interface").mkdir();
-			Core.plugin.saveResource("Interface/datagui.yml", true);
+			Core.plugin.saveResource("Interface/propertygui.yml", true);
 		}
-		dC = YamlConfiguration.loadConfiguration(dF);
+		pC = YamlConfiguration.loadConfiguration(pF);
 		
 		// =================== 確認檔案是否損失，避免誤刪
-	    InputStream is = Core.plugin.getResource("Interface/datagui.yml");
+	    InputStream is = Core.plugin.getResource("Interface/propertygui.yml");
 		YamlConfiguration defaultYaml = YamlConfiguration.loadConfiguration(is);
 	    
 	    boolean newMsg = false;
@@ -41,9 +41,9 @@ public class ClientDataGUI
 	    {
 	      if (!defaultYaml.isConfigurationSection(key)) 
 	      {
-	        if (dC.getString(key, null) == null)
+	        if (pC.getString(key, null) == null)
 	        {
-	          dC.set(key, defaultYaml.getString(key));
+	          pC.set(key, defaultYaml.getString(key));
 	          newMsg = true;
 	        }
 	      }
@@ -51,7 +51,7 @@ public class ClientDataGUI
 	    if (newMsg) 
 	    {
 	      try{
-	        dC.save(dF);
+	        pC.save(pF);
 	      }catch (IOException ex){
 	        ex.printStackTrace();
 	      }
@@ -59,21 +59,21 @@ public class ClientDataGUI
 	}
 	
 	// getConfig
-	public static FileConfiguration getDataGUI()
+	public static FileConfiguration getPropertyGUI()
 	{
-		if(dC == null){reloadDataGUI();}
-		return dC;
+		if(pC == null){reloadPropertyGUI();}
+		return pC;
 	}
 	
 	// save
-	public static void saveDataGUI()
+	public static void savePropertyGUI()
 	{
-		if((dC == null) || (dF == null)){return;}
+		if((pC == null) || (pF == null)){return;}
 		try{
-			getDataGUI().save(dF);
+			getPropertyGUI().save(pF);
 		}catch(IOException e){
 			e.printStackTrace();
-			Bukkit.getLogger().log(Level.SEVERE, "Can not be saved." + dF, e );
+			Bukkit.getLogger().log(Level.SEVERE, "Can not be saved." + pF, e );
 		}
 	}
 }

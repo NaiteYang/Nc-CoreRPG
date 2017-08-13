@@ -27,7 +27,7 @@ public class DefaultData {
 	public int RestorHealth = 5;		// 血量恢復  (屬性制 - 感知)
 	
 	public int Mentality = 600;			// 精力
-	public int MaxMentality = 600;		// 最大精力  (屬性制 - 體質)
+	public int MaxVMentality = 600;		// 最大精力  (屬性制 - 體質)
 	public int RestorMentality = 10;	// 精力恢復  (屬性制 - 感知)
 	
 	public int Vitality = 600;			// 耐力
@@ -35,10 +35,10 @@ public class DefaultData {
 	public int RestorVitality = 10;		// 耐力恢復  (屬性制 - 感知)
 	
 	// 基礎數值 (基礎+屬性)
-	public int ATK = 5;		// 物理攻擊		(屬性制 - 力量)
-	public int MAG = 5;		// 魔法攻擊		(屬性制 - 智力)
-	public int DEF = 0;		// 物理防禦		(屬性制 - 敏捷)
-	public int RES = 0;		// 魔法防禦		(屬性制 - 敏捷)
+	public int ATK = 5;		// 物理攻擊	(屬性制 - 力量)
+	public int MAG = 5;		// 魔法攻擊	(屬性制 - 智力)
+	public int DEF = 0;		// 物理防禦	(屬性制 - 敏捷)
+	public int RES = 0;		// 魔法防禦	(屬性制 - 敏捷)
 	public int AAR = 0;		// 物理閃避率	(屬性制 - 敏捷)
 	public int SAR = 0;		// 魔法閃避率	(屬性制 - 敏捷)
 	public int AKB = 3;		// 物理爆擊率	(屬性制 - 幸運)

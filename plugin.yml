@@ -6,4 +6,4 @@ description: This is a player base data value on RPG games.
 
 commands:
     np:
-        description: Player user main commands.
+      description: Player user main commands.

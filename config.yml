@@ -3,3 +3,6 @@ Player:
   MaxExp:
     Default: 100
     Float: 0.87
+
+Replice:
+  PlayerSkull: "&c&l{Skull}"
