@@ -6,7 +6,7 @@ import nx.core.Core;
 /**
  * Created by User on 2017/7/9.
  */
-public class Settings {
+public class PropertySettings{
 
 	private static int maxLevel; //最高等級
 	private static int maxExpDefault;
@@ -22,10 +22,12 @@ public class Settings {
 	private static int defaultRestoreMentality;
 	private static long mentalityRestoreTime;
 	private static long mentalityDecreaseTime;
+	private static int mentalityDecrease;
 	private static int defaultMaxVitality;
 	private static int defaultRestoreVitality;
 	private static long vitalityRestoreTime;
 	private static long vitalityDecreaseTime;
+	private static int vitalityDecrease;
 
 	private static int defaultAtk;
 	private static int defaultMag;
@@ -37,6 +39,13 @@ public class Settings {
 	private static double defaultSkb;
 	private static double defaultAhit;
 	private static double defaultShit;
+
+	private static int maxStr;
+	private static int maxInt;
+	private static int maxAgi;
+	private static int maxLuk;
+	private static int maxCon;
+	private static int maxWis;
 
 	public static void reload(){
 		Core.plugin.reloadConfig();
@@ -55,10 +64,12 @@ public class Settings {
 		defaultRestoreMentality = Core.plugin.getConfig().getInt("Player.Ability.Mentality.DefaultRestore");
 		mentalityRestoreTime = Core.plugin.getConfig().getLong("Player.Ability.Mentality.RestoreTime");
 		mentalityDecreaseTime = Core.plugin.getConfig().getLong("Player.Ability.Mentality.DecreaseTime");
+		mentalityDecrease = Core.plugin.getConfig().getInt("Player.Ability.Mentality.Decrease");
 		defaultMaxVitality = Core.plugin.getConfig().getInt("Player.Ability.Vitality.DefaultMax");
 		defaultRestoreVitality = Core.plugin.getConfig().getInt("Player.Ability.Vitality.DefaultRestore");
 		vitalityRestoreTime = Core.plugin.getConfig().getLong("Player.Ability.Vitality.RestoreTime");
 		vitalityDecreaseTime = Core.plugin.getConfig().getLong("Player.Ability.Vitality.DecreaseTime");
+		vitalityDecrease = Core.plugin.getConfig().getInt("Player.Ability.Vitality.Decrease");
 
 		defaultAtk = Core.plugin.getConfig().getInt("Player.DefaultATK");
 		defaultMag = Core.plugin.getConfig().getInt("Player.DefaultMAG");
@@ -70,6 +81,13 @@ public class Settings {
 		defaultSkb = Core.plugin.getConfig().getDouble("Player.DefaultSKB");
 		defaultAhit = Core.plugin.getConfig().getDouble("Player.DefaultAHIT");
 		defaultShit = Core.plugin.getConfig().getDouble("Player.DefaultSHIT");
+
+		maxStr = Core.plugin.getConfig().getInt("Player.AttributeMax.STR");
+		maxInt = Core.plugin.getConfig().getInt("Player.AttributeMax.INT");
+		maxAgi = Core.plugin.getConfig().getInt("Player.AttributeMax.AGI");
+		maxLuk = Core.plugin.getConfig().getInt("Player.AttributeMax.LUK");
+		maxCon = Core.plugin.getConfig().getInt("Player.AttributeMax.Con");
+		maxWis = Core.plugin.getConfig().getInt("Player.AtrributeMax.Wis");
 	}
 
 	public static int getMaxExp(int level){
@@ -146,6 +164,10 @@ public class Settings {
 		return mentalityDecreaseTime;
 	}
 
+	public static int getMentalityDecrease(){
+		return mentalityDecrease;
+	}
+
 	public static int getDefaultMaxVitality(){
 		return defaultMaxVitality;
 	}
@@ -160,6 +182,10 @@ public class Settings {
 
 	public static long getVitalityDecreaseTime(){
 		return vitalityDecreaseTime;
+	}
+
+	public static int getVitalityDecrease(){
+		return vitalityDecrease;
 	}
 
 	public static int getDefaultAtk(){
@@ -200,5 +226,29 @@ public class Settings {
 
 	public static double getDefaultShit(){
 		return defaultShit;
+	}
+
+	public static int getMaxStr(){
+		return maxStr;
+	}
+
+	public static int getMaxInt(){
+		return maxInt;
+	}
+
+	public static int getMaxAgi(){
+		return maxAgi;
+	}
+
+	public static int getMaxLuk(){
+		return maxLuk;
+	}
+
+	public static int getMaxCon(){
+		return maxCon;
+	}
+
+	public static int getMaxWis(){
+		return maxWis;
 	}
 }

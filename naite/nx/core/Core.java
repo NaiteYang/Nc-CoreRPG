@@ -1,10 +1,13 @@
 package nx.core;
 
+import nx.data.PropertySettings;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import nx.cmd.PlayerCmd;
 import nx.event.InvClick;
 import nx.file.ClientGUI;
+
 public class Core extends JavaPlugin{
 	
 	public static Core plugin;
@@ -24,10 +27,15 @@ public class Core extends JavaPlugin{
 		
 		saveDefaultConfig();
 		ClientGUI.saveClientGUI();
+		PropertySettings.reload();
+
+
 	}
+
 	public void onDisable(){
 		
 		saveDefaultConfig();
-		
+
+		Bukkit.getScheduler().cancelTasks(this);
 	}
 }

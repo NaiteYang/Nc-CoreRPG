@@ -17,11 +17,13 @@ Player:
       DefaultRestore: 5
       RestoreTime: 72000
       DecreaseTime: 1200
+      Decrease: 1
     Vitality:
       DefaultMax: 30
       DefaultRestore: 3
       RestoreTime: 54000
       DecreaseTime: 1200
+      Decrease: 1
     DefaultATK: 2
     DefaultMAG: 3
     DefaultDEF: 1
@@ -32,3 +34,10 @@ Player:
     DefaultSKB: 0.023
     DefaultAHIT: 0.674
     DefaultSHIT: 0.496
+  AttributeMax:
+    STR: 30
+    INT: 20
+    AGI: 100
+    LUK: 100
+    CON: 70
+    WIS: 10

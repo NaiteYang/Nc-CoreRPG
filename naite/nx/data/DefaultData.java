@@ -1,12 +1,16 @@
 package nx.data;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import nx.core.Core;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.UUID;
 
 public class DefaultData{
 
@@ -19,6 +23,7 @@ public class DefaultData{
 	private int level = 1;  // 等級
 	private int exp = 0;  // 經驗
 
+	//狀態值
 	private int mana = 0;        // 魔力
 	private int maxMana = 0;  // 最大魔力  (屬性制 - 體質)
 	private int restoreMana = 0;  // 魔力恢復  (屬性制 - 感知)
@@ -35,7 +40,7 @@ public class DefaultData{
 	private int maxVitality = 0;    // 最大耐力  (屬性制 - 體質)
 	private int restoreVitality = 0;  // 耐力恢復  (屬性制 - 感知)
 
-	// 基礎數值 (基礎+屬性)
+	// 能力值
 	private int atk = 0;        // 物理攻擊		(屬性制 - 力量)
 	private int mag = 0;        // 魔法攻擊		(屬性制 - 智力)
 	private int def = 0;        // 物理防禦		(屬性制 - 敏捷)
@@ -59,14 +64,51 @@ public class DefaultData{
 	private File file = null;
 	private YamlConfiguration yaml = null;
 
+	private static HashMap<Player, DefaultData> playerDatas = new HashMap<>();
+
 	// 玩家資料
 	public DefaultData(Player player){
 		this.player = player;
 		player.setHealthScaled(true);
 		loadFile();
+
+		playerDatas.put(player, this);
 	}
 
-	//屬性與能力值讀取與變更
+	public static DefaultData getPlayerData(UUID uuid){
+		return getPlayerData(Bukkit.getPlayer(uuid));
+	}
+
+	public static DefaultData getPlayerData(Player player){
+		if(playerDatas.containsKey(player)){
+			return playerDatas.get(player);
+		}
+		else{
+			return new DefaultData(player);
+		}
+	}
+
+	public static void removePlayerData(UUID uuid){
+		playerDatas.remove(Bukkit.getPlayer(uuid));
+	}
+
+	public static void removePlayerData(Player player){
+		playerDatas.remove(player);
+	}
+
+	//儲存狀態值
+	public void saveStatusData(){
+		yaml.set("mana", getMana());
+		yaml.set("health", getHealth());
+		yaml.set("mentality", getMentality());
+		yaml.set("vitality", getVitality());
+		try{
+			yaml.save(file);
+		}
+		catch(IOException e){
+			e.printStackTrace();
+		}
+	}
 
 	//檔案讀取
 	private void loadFile(){
@@ -104,25 +146,25 @@ public class DefaultData{
 		if(yaml.getString("str", null) == null){
 			yaml.set("str", 0);
 		}
-		str = yaml.getInt("str");
+		str = yaml.getInt("str") > PropertySettings.getMaxStr() ? PropertySettings.getMaxStr() : yaml.getInt("str");
 		computeStr();
 
 		if(yaml.getString("int", null) == null){
 			yaml.set("int", 0);
 		}
-		inte = yaml.getInt("int");
+		inte = yaml.getInt("int") > PropertySettings.getMaxInt() ? PropertySettings.getMaxInt() : yaml.getInt("int");
 		computeInt();
 
 		if(yaml.getString("agi", null) == null){
 			yaml.set("agi", 0);
 		}
-		agi = yaml.getInt("agi");
+		agi = yaml.getInt("agi") > PropertySettings.getMaxAgi() ? PropertySettings.getMaxAgi() : yaml.getInt("agi");
 		computeAgi();
 
 		if(yaml.getString("luk", null) == null){
 			yaml.set("luk", 0);
 		}
-		luk = yaml.getInt("luk");
+		luk = yaml.getInt("luk") > PropertySettings.getMaxLuk() ? PropertySettings.getMaxLuk() : yaml.getInt("luk");
 		computeLuk();
 
 		if(yaml.getString("con", null) == null){
@@ -137,7 +179,7 @@ public class DefaultData{
 		wis = yaml.getInt("wis");
 		computeWis();
 
-		//基本數值
+		//狀態值
 		if(yaml.getString("mana", null) == null){
 			yaml.set("mana", getMaxMana());
 		}
@@ -147,6 +189,7 @@ public class DefaultData{
 			yaml.set("health", getMaxHealth());
 		}
 		health = yaml.getInt("health") > getMaxHealth() ? getMaxHealth() : yaml.getInt("health");
+		player.setHealthScale(health);
 
 		if(yaml.getString("mentality", null) == null){
 			yaml.set("mentality", getMaxMentality());
@@ -166,49 +209,49 @@ public class DefaultData{
 		}
 	}
 
-	//計算屬性相關的能力值與基本數值
+	//計算屬性相關的能力值與狀態值
 
 	private void computeStr(){
-		atk = Settings.getDefaultAtk() + getStr(); //物理攻擊 = 預設 + 力量*1
+		atk = PropertySettings.getDefaultAtk() + getStr(); //物理攻擊 = 預設 + 力量*1
 	}
 
 	private void computeInt(){
-		mag = Settings.getDefaultMag() + getInt() * 2; //魔法攻擊 = 預設 + 智力*2
+		mag = PropertySettings.getDefaultMag() + getInt() * 2; //魔法攻擊 = 預設 + 智力*2
 	}
 
 	private void computeAgi(){
-		def = Settings.getDefaultDef() + getAgi() * 2; //物理防禦 = 預設 + 敏捷*2
-		res = Settings.getDefaultRes() + getAgi(); //魔法防禦 = 預設 + 敏捷*1
-		aar = Settings.getDefaultAar() + getAgi() * 0.03; //物理閃避 = 預設 + 敏捷*0.03
-		sar = Settings.getDefaultSar() + getAgi() * 0.02; //魔法閃避 = 預設 + 敏捷*0.02
+		def = PropertySettings.getDefaultDef() + getAgi() * 2; //物理防禦 = 預設 + 敏捷*2
+		res = PropertySettings.getDefaultRes() + getAgi(); //魔法防禦 = 預設 + 敏捷*1
+		aar = PropertySettings.getDefaultAar() + getAgi() * 0.03; //物理閃避 = 預設 + 敏捷*0.03
+		sar = PropertySettings.getDefaultSar() + getAgi() * 0.02; //魔法閃避 = 預設 + 敏捷*0.02
 	}
 
 	private void computeLuk(){
-		akb = Settings.getDefaultAkb() + getLuk() * 0.05; //物理爆擊 = 預設 + 幸運*0.05
-		skb = Settings.getDefaultSkb() + getLuk() * 0.03; //魔法爆擊 = 預設 + 幸運*0.03
-		ahit = Settings.getDefaultAhit() + getLuk() * 0.02; //物理命中 = 預設 + 幸運*0.02
-		shit = Settings.getDefaultShit() + getLuk() * 0.01; //魔法命中 = 預設 + 幸運*0.01
+		akb = PropertySettings.getDefaultAkb() + getLuk() * 0.05; //物理爆擊 = 預設 + 幸運*0.05
+		skb = PropertySettings.getDefaultSkb() + getLuk() * 0.03; //魔法爆擊 = 預設 + 幸運*0.03
+		ahit = PropertySettings.getDefaultAhit() + getLuk() * 0.02; //物理命中 = 預設 + 幸運*0.02
+		shit = PropertySettings.getDefaultShit() + getLuk() * 0.01; //魔法命中 = 預設 + 幸運*0.01
 	}
 
 	private void computeCon(){
-		maxHealth = Settings.getDefaultMaxHealth() + getCon() * 10; //最大血量 = 預設 + 體質*10
-		maxMana = Settings.getDefaultMaxMana() + getCon() * 5; //最大魔力 = 預設 + 體質*5
-		maxMentality = Settings.getDefaultMaxMentality() + getCon(); //最大精力 = 預設 + 體質*1
-		maxVitality = Settings.getDefaultMaxVitality() + getCon(); //最大耐力 = 預設 + 體質*1
+		maxHealth = PropertySettings.getDefaultMaxHealth() + getCon() * 10; //最大血量 = 預設 + 體質*10
+		maxMana = PropertySettings.getDefaultMaxMana() + getCon() * 5; //最大魔力 = 預設 + 體質*5
+		maxMentality = PropertySettings.getDefaultMaxMentality() + getCon(); //最大精力 = 預設 + 體質*1
+		maxVitality = PropertySettings.getDefaultMaxVitality() + getCon(); //最大耐力 = 預設 + 體質*1
 	}
 
 	private void computeWis(){
-		restoreHealth = Settings.getDefaultRestoreHealth() + getWis() * 5; //血量恢復 = 預設 + 感知*5
-		restoreMana = Settings.getDefaultRestoreMana() + getWis() * 5; //魔力恢復 = 預設 + 感知*5
-		restoreMentality = Settings.getDefaultRestoreMentality() + getWis(); //精力恢復 = 預設 + 感知*1
-		restoreVitality = Settings.getDefaultRestoreVitality() + getWis(); //耐力恢復 = 預設 + 感知*1
+		restoreHealth = PropertySettings.getDefaultRestoreHealth() + getWis() * 5; //血量恢復 = 預設 + 感知*5
+		restoreMana = PropertySettings.getDefaultRestoreMana() + getWis() * 5; //魔力恢復 = 預設 + 感知*5
+		restoreMentality = PropertySettings.getDefaultRestoreMentality() + getWis(); //精力恢復 = 預設 + 感知*1
+		restoreVitality = PropertySettings.getDefaultRestoreVitality() + getWis(); //耐力恢復 = 預設 + 感知*1
 	}
 
 	//設定(並且更新該屬性相關的能力值與變更檔案內容)與取得屬性
 
 	//STR
 	public void setStr(int value){
-		str = value;
+		str = value > PropertySettings.getMaxStr() ? PropertySettings.getMaxStr() : value;
 		computeStr();
 		yaml.set("str", value);
 		try{
@@ -229,7 +272,7 @@ public class DefaultData{
 
 	//INT
 	public void setInt(int value){
-		inte = value;
+		inte = value > PropertySettings.getMaxInt() ? PropertySettings.getMaxInt() : value;
 		computeInt();
 		yaml.set("int", value);
 		try{
@@ -250,7 +293,7 @@ public class DefaultData{
 
 	//AGI
 	public void setAgi(int value){
-		agi = value;
+		agi = value > PropertySettings.getMaxAgi() ? PropertySettings.getMaxAgi() : value;
 		computeAgi();
 		yaml.set("agi", value);
 		try{
@@ -271,7 +314,7 @@ public class DefaultData{
 
 	//LUK
 	public void setLuk(int value){
-		luk = value;
+		luk = value > PropertySettings.getMaxLuk() ? PropertySettings.getMaxLuk() : value;
 		computeLuk();
 		yaml.set("luk", value);
 		try{
@@ -292,7 +335,7 @@ public class DefaultData{
 
 	//CON
 	public void setCon(int value){
-		con = value;
+		con = value > PropertySettings.getMaxCon() ? PropertySettings.getMaxCon() : value;
 		computeCon();
 		yaml.set("con", value);
 		try{
@@ -313,7 +356,7 @@ public class DefaultData{
 
 	//WIS
 	public void setWis(int value){
-		wis = value;
+		wis = value > PropertySettings.getMaxWis() ? PropertySettings.getMaxWis() : value;
 		computeWis();
 		yaml.set("wis", value);
 		try{
@@ -371,7 +414,7 @@ public class DefaultData{
 			max = 9 * level - 158;
 		}
 
-		player.setExp(max * (level / Settings.getMaxExp(level)));
+		player.setExp(max * (level / PropertySettings.getMaxExp(level)));
 	}
 
 	public void addLevel(int lvl){ //提升等級(並且發送訊息及增加技能點)
@@ -406,8 +449,8 @@ public class DefaultData{
 
 		int upLvl = 0; //提升的等級
 		for(; ; ){
-			if(exp >= Settings.getMaxExp(level) && level < Settings.getMaxLevel()){ //達到可升級經驗且未達最高等級
-				exp -= Settings.getMaxExp(level); //扣除經驗值
+			if(exp >= PropertySettings.getMaxExp(level) && level < PropertySettings.getMaxLevel()){ //達到可升級經驗且未達最高等級
+				exp -= PropertySettings.getMaxExp(level); //扣除經驗值
 				upLvl++;
 			}
 			else{
@@ -433,7 +476,7 @@ public class DefaultData{
 		return exp;
 	}
 
-	//基本數值控制
+	//狀態值控制
 
 	//mana
 	public int getMana(){
@@ -449,7 +492,15 @@ public class DefaultData{
 	}
 
 	public void setMana(int value){
-		mana = value > getMaxMana() ? getMaxMana() : value;
+		if(value > getMaxMana()){
+			mana = getMaxMana();
+		}
+		else if(value < 0){
+			mana = 0;
+		}
+		else{
+			mana = value;
+		}
 	}
 
 	public void removeMana(int value){
@@ -474,7 +525,15 @@ public class DefaultData{
 	}
 
 	public void setHealth(int value){
-		health = value > getMaxHealth() ? getMaxHealth() : value;
+		if(value > getMaxHealth()){
+			health = getMaxHealth();
+		}
+		else if(value < 0){
+			health = 0;
+		}
+		else{
+			health = value;
+		}
 		player.setHealthScale(getHealth());
 	}
 
@@ -500,7 +559,15 @@ public class DefaultData{
 	}
 
 	public void setMentality(int value){
-		mentality = value > getMaxMentality() ? getMaxMentality() : value;
+		if(value > getMaxMentality()){
+			mentality = getMaxMentality();
+		}
+		else if(value < 0){
+			mentality = 0;
+		}
+		else{
+			mentality = value;
+		}
 	}
 
 	public void removeMentality(int value){
@@ -525,7 +592,15 @@ public class DefaultData{
 	}
 
 	public void setVitality(int value){
-		vitality = value > getMaxVitality() ? getMaxVitality() : value;
+		if(value > getMaxVitality()){
+			vitality = getMaxVitality();
+		}
+		else if(value < 0){
+			vitality = 0;
+		}
+		else{
+			vitality = value;
+		}
 	}
 
 	public void removeVitality(int value){
@@ -576,5 +651,74 @@ public class DefaultData{
 
 	public double getShit(){
 		return shit;
+	}
+
+	//取得實際攻擊和防禦
+
+	public int getRealAtk(){
+		int equipmentAtkIncrease = 0; //裝備物理攻擊提升
+		double equipmentAtkTimes = 1; //裝備物理攻擊加倍
+		return (int) (getAtk() * equipmentAtkTimes) + equipmentAtkIncrease;
+	}
+
+	public int getRealMag(){
+		int equipmentMagIncrease = 0;
+		double equipmentMagTimes = 1;
+		return (int) (getMag() * equipmentMagTimes) + equipmentMagIncrease;
+	}
+
+	public int getRealDef(){
+		int equipmentDefIncrease = 0;
+		double equipmentDefTimes = 1;
+		return (int) (getDef() * equipmentDefTimes) + equipmentDefIncrease;
+	}
+
+	public int getRealRes(){
+		int equipmentResIncrease = 0;
+		double equipmentResTimes = 1;
+		return (int) (getRes() * equipmentResTimes) + equipmentResIncrease;
+	}
+
+	public double getRealAar(){
+		double equipmentAarIncrease = 0;
+		double equipmentAarTimes = 1;
+		return getAar() * equipmentAarTimes + equipmentAarIncrease;
+	}
+
+	public double getRealSar(){
+		double equipmentSarIncrease = 0;
+		double equipmentSarTimes = 1;
+		return getSar() * equipmentSarTimes + equipmentSarIncrease;
+	}
+
+	public double getRealAkb(){
+		double equipmentAkbIncrease = 0;
+		double equipmentAkbTimes = 1;
+		return getAkb() * equipmentAkbTimes + equipmentAkbIncrease;
+	}
+
+	public double getRealSkb(){
+		double equipmentSkbIncrease = 0;
+		double equipmentSkbTimes = 1;
+		return getSkb() * equipmentSkbTimes + equipmentSkbIncrease;
+	}
+
+	public double getRealAhit(){
+		double equipmentAhitIncrease = 0;
+		double equipmentAhitTimes = 1;
+		return getAhit() * equipmentAhitTimes + equipmentAhitIncrease;
+	}
+
+	public double getRealShit(){
+		double equipmentShitIncrease = 0;
+		double equipmentShitTimes = 1;
+		return getShit() * equipmentShitTimes + equipmentShitIncrease;
+	}
+
+	//攻擊與受傷
+
+	//物理攻擊
+	public void attack(Entity entity){
+
 	}
 }
