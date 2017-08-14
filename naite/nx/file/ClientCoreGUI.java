@@ -38,22 +38,22 @@ public class ClientCoreGUI
 	    boolean newMsg = false;
 	    for (String key : defaultYaml.getKeys(true)) 
 	    {
-	      if (!defaultYaml.isConfigurationSection(key)) 
-	      {
-	        if (cC.getString(key, null) == null)
-	        {
-	          cC.set(key, defaultYaml.getString(key));
-	          newMsg = true;
-	        }
-	      }
+	    	if (!defaultYaml.isConfigurationSection(key)) 
+	    	{
+	    		if (cC.getString(key, null) == null)
+	    		{
+	    			cC.set(key, defaultYaml.getString(key));
+	    			newMsg = true;
+	    		}
+	    	}
 	    }
 	    if (newMsg) 
 	    {
-	      try{
-	        cC.save(cF);
-	      }catch (IOException ex){
-	        ex.printStackTrace();
-	      }
+	    	try{
+	    		cC.save(cF);
+	    	}catch (IOException ex){
+	    		ex.printStackTrace();
+	    	}
 	    }
 	}
 	

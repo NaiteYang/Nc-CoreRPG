@@ -39,22 +39,22 @@ public class ClientPropertyGUI
 	    boolean newMsg = false;
 	    for (String key : defaultYaml.getKeys(true)) 
 	    {
-	      if (!defaultYaml.isConfigurationSection(key)) 
-	      {
-	        if (pC.getString(key, null) == null)
-	        {
-	          pC.set(key, defaultYaml.getString(key));
-	          newMsg = true;
-	        }
-	      }
+	    	if (!defaultYaml.isConfigurationSection(key)) 
+	    	{
+	    		if (pC.getString(key, null) == null)
+	    		{
+	    			pC.set(key, defaultYaml.getString(key));
+	    			newMsg = true;
+	    		}
+	    	}
 	    }
 	    if (newMsg) 
 	    {
-	      try{
-	        pC.save(pF);
-	      }catch (IOException ex){
-	        ex.printStackTrace();
-	      }
+	    	try{
+	    		pC.save(pF);
+	      	}catch (IOException ex){
+	      		ex.printStackTrace();
+	      	}
 	    }
 	}
 	

@@ -39,22 +39,22 @@ public class ClientDataGUI
 	    boolean newMsg = false;
 	    for (String key : defaultYaml.getKeys(true)) 
 	    {
-	      if (!defaultYaml.isConfigurationSection(key)) 
-	      {
-	        if (dC.getString(key, null) == null)
-	        {
-	          dC.set(key, defaultYaml.getString(key));
-	          newMsg = true;
-	        }
-	      }
+	    	if (!defaultYaml.isConfigurationSection(key)) 
+	    	{
+	    		if (dC.getString(key, null) == null)
+	    		{
+	    			dC.set(key, defaultYaml.getString(key));
+	    			newMsg = true;
+	    		}
+	    	}
 	    }
 	    if (newMsg) 
 	    {
-	      try{
-	        dC.save(dF);
-	      }catch (IOException ex){
-	        ex.printStackTrace();
-	      }
+	    	try{
+	    		dC.save(dF);
+	    	}catch (IOException ex){
+	    		ex.printStackTrace();
+	    	}
 	    }
 	}
 	
