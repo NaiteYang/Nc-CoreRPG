@@ -1,6 +1,6 @@
 package nx.event;
 
-import nx.data.DefaultData;
+import nx.data.PlayerPropertyData;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,7 +19,7 @@ public class InvClick implements Listener
 		Player p = (Player) invce.getWhoClicked();
 		Inventory inv = invce.getInventory();
 		
-		if(inv.getName().equals(CoreGUI.invName)||inv.getName().equals(DataGUI.invName)||inv.getName().equals(PropertyGUI.invName.replaceAll("%point%", String.valueOf(DefaultData.getPlayerData(p).getPoint()))))
+		if(inv.getName().equals(CoreGUI.invName)||inv.getName().equals(DataGUI.invName)||inv.getName().equals(PropertyGUI.invName.replaceAll("%point%", String.valueOf(PlayerPropertyData.getPlayerData(p).getPoint()))))
 		{
 			try{
 				invce.getCurrentItem().equals(null);

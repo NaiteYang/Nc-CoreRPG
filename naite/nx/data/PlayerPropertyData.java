@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class DefaultData{
+public class PlayerPropertyData{
 
 	private static String title = "§6[NcProperty] ";
 
@@ -65,10 +65,10 @@ public class DefaultData{
 	private File file = null;
 	private YamlConfiguration yaml = null;
 
-	private static HashMap<Player, DefaultData> playerDatas = new HashMap<>();
+	private static HashMap<Player, PlayerPropertyData> playerDatas = new HashMap<>();
 
 	// 玩家資料
-	public DefaultData(Player player){
+	public PlayerPropertyData(Player player){
 		this.player = player;
 		player.setHealthScaled(true);
 		loadFile();
@@ -76,16 +76,16 @@ public class DefaultData{
 		playerDatas.put(player, this);
 	}
 
-	public static DefaultData getPlayerData(UUID uuid){
+	public static PlayerPropertyData getPlayerData(UUID uuid){
 		return getPlayerData(Bukkit.getPlayer(uuid));
 	}
 
-	public static DefaultData getPlayerData(Player player){
+	public static PlayerPropertyData getPlayerData(Player player){
 		if(playerDatas.containsKey(player)){
 			return playerDatas.get(player);
 		}
 		else{
-			return new DefaultData(player);
+			return new PlayerPropertyData(player);
 		}
 	}
 

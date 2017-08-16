@@ -1,6 +1,6 @@
 package nx.gui;
 
-import nx.data.DefaultData;
+import nx.data.PlayerPropertyData;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -66,7 +66,7 @@ public class PropertyGUI
 	}
 
 	private static String replaceData(String str, String item, Player p){
-		DefaultData data = DefaultData.getPlayerData(p);
+		PlayerPropertyData data = PlayerPropertyData.getPlayerData(p);
 		switch(item){
 			case "Str":
 				return str.replaceAll("%str%", String.valueOf(data.getStr()));
@@ -89,7 +89,7 @@ public class PropertyGUI
 	public static void openInterface(Player p)
 	{
 		setItem(p);
-		Inventory inv = Bukkit.createInventory(null, 54, invName.replaceAll("%point%", String.valueOf(DefaultData.getPlayerData(p).getPoint())));
+		Inventory inv = Bukkit.createInventory(null, 54, invName.replaceAll("%point%", String.valueOf(PlayerPropertyData.getPlayerData(p).getPoint())));
 		for (int i = 0;i<54;i++){inv.setItem(i, none);}
 		CoreGUI.getGeneralPlayerSkull(p);
 		inv.setItem(4, CoreGUI.generalPlayerSkull);

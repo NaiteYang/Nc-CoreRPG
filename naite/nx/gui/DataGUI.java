@@ -1,6 +1,6 @@
 package nx.gui;
 
-import nx.data.DefaultData;
+import nx.data.PlayerPropertyData;
 import nx.data.PropertySettings;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -76,10 +76,10 @@ public class DataGUI
 	}
 
 	private static String replaceData(String str, String item, Player p){
-		DefaultData data = DefaultData.getPlayerData(p);
+		PlayerPropertyData data = PlayerPropertyData.getPlayerData(p);
 		switch(item){
 			case "Level":
-				return str.replaceAll("%lvl%", String.valueOf(DefaultData.getPlayerData(p).getLevel()));
+				return str.replaceAll("%lvl%", String.valueOf(PlayerPropertyData.getPlayerData(p).getLevel()));
 			case "Experience":
 				return str.replaceAll("%exp%", String.valueOf(data.getExp()))
 						.replaceAll("%maxexp%", String.valueOf(PropertySettings.getMaxExp(data.getLevel())))

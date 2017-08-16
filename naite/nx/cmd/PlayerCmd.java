@@ -4,13 +4,13 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import nx.data.DefaultData;
+import nx.data.PlayerPropertyData;
 import nx.gui.CoreGUI;
 
 public class PlayerCmd implements CommandExecutor {
 	
 	public static String title = "§6[NcProperty] ";
-	public static DefaultData PD;
+	public static PlayerPropertyData PD;
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String lable, String[] args){
