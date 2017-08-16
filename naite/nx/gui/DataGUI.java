@@ -1,5 +1,7 @@
 package nx.gui;
 
+import nx.data.DefaultData;
+import nx.data.PropertySettings;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -12,6 +14,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import nx.event.ColorSwitch;
 import nx.file.ClientDataGUI;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataGUI 
 {
@@ -42,29 +47,89 @@ public class DataGUI
 	public static String invName = yaml.getString("Setting.Inventory.DisplayName");
 	
 	// get item meta
-	public static void setMeta(ItemStack stack,String item)
+	public static void setMeta(ItemStack stack,String item, Player p)
 	{
 		ItemMeta im = stack.getItemMeta(); 
 		im.setDisplayName(yaml.getString("Setting.Items." + item + ".DisplayName", " "));
-		im.setLore(yaml.getStringList("Setting.Items." + item + ".Lore"));
+		im.setLore(replaceData(yaml.getStringList("Setting.Items." + item + ".Lore"), item, p));
 		im.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 		stack.setItemMeta(im);
 	}
-	
+
 	// get potion meta
-	public static void setMeta(ItemStack stack,String item, Color color)
+	public static void setMeta(ItemStack stack,String item, Color color, Player p)
 	{
-		PotionMeta pm = (PotionMeta) stack.getItemMeta(); 
+		PotionMeta pm = (PotionMeta) stack.getItemMeta();
 		pm.setDisplayName(yaml.getString("Setting.Items." + item + ".DisplayName", " "));
-		pm.setLore(yaml.getStringList("Setting.Items." + item + ".Lore"));
+		pm.setLore(replaceData(yaml.getStringList("Setting.Items." + item + ".Lore"), item, p));
 		pm.setColor(color);
 		pm.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
 		stack.setItemMeta(pm);
+	}
+
+	private static List<String> replaceData(List<String> list, String item, Player p){
+		List<String> replace = new ArrayList<>();
+		for(String str : list){
+			replace.add(replaceData(str, item, p));
+		}
+		return replace;
+	}
+
+	private static String replaceData(String str, String item, Player p){
+		DefaultData data = DefaultData.getPlayerData(p);
+		switch(item){
+			case "Level":
+				return str.replaceAll("%lvl%", String.valueOf(DefaultData.getPlayerData(p).getLevel()));
+			case "Experience":
+				return str.replaceAll("%exp%", String.valueOf(data.getExp()))
+						.replaceAll("%maxexp%", String.valueOf(PropertySettings.getMaxExp(data.getLevel())))
+						.replaceAll("%needexp%", String.valueOf(PropertySettings.getMaxExp(data.getLevel()) - data.getExp()));
+			case "Health":
+				return str.replaceAll("%hp%", String.valueOf(data.getHealth()))
+						.replaceAll("%rehp%", String.valueOf(data.getRestoreHealth()))
+						.replaceAll("%maxhp%", String.valueOf(data.getMaxHealth()));
+			case "Mana":
+				return str.replaceAll("%mp%", String.valueOf(data.getMana()))
+						.replaceAll("%remp%", String.valueOf(data.getRestoreMana()))
+						.replaceAll("%maxmp%", String.valueOf(data.getMaxMana()));
+			case "Mentality":
+				return str.replaceAll("%va%", String.valueOf(data.getMentality()))
+						.replaceAll("%reva%", String.valueOf(data.getRestoreMentality()))
+						.replaceAll("%maxva%", String.valueOf(data.getMaxMentality()));
+			case "Vitality":
+				return str.replaceAll("%ma%", String.valueOf(data.getVitality()))
+						.replaceAll("%rema%", String.valueOf(data.getRestoreVitality()))
+						.replaceAll("%maxma%", String.valueOf(data.getMaxVitality()));
+			case "Atk":
+				return str.replaceAll("%atk%", String.valueOf(data.getRealAtk()));
+			case "Def":
+				return str.replaceAll("%def%", String.valueOf(data.getRealDef()));
+			case "Aar":
+				return str.replaceAll("%aar%", String.valueOf(data.getRealAar()));
+			case "Akb":
+				return str.replaceAll("%akb%", String.valueOf(data.getRealAkb()));
+			case "Ahit":
+				return str.replaceAll("%ahit%", String.valueOf(data.getRealAhit()));
+			case "Mag":
+				return str.replaceAll("%mag%", String.valueOf(data.getRealMag()));
+			case "Res":
+				return str.replaceAll("%res%", String.valueOf(data.getRealRes()));
+			case "Sar":
+				return str.replaceAll("%sar%", String.valueOf(data.getRealSar()));
+			case "Skb":
+				return str.replaceAll("%skb%", String.valueOf(data.getRealSkb()));
+			case "Shit":
+				return str.replaceAll("%shit%", String.valueOf(data.getRealShit()));
+			default:
+				return str;
+		}
 	}
 	
 	// open gui
 	public static void openInterface(Player p)
 	{
+		setItem(p);
+
 		Inventory inv = Bukkit.createInventory(null, 54, invName);
 		for (int i = 0;i<54;i++){inv.setItem(i, none);}
 		CoreGUI.getGeneralPlayerSkull(p);
@@ -94,29 +159,28 @@ public class DataGUI
 	{
 		ColorSwitch.replaceColor(yaml);
 		invName = yaml.getString("Setting.Inventory.DisplayName");
-		setItem();
 	}
 	
 	// set items
-	public static void setItem()
+	public static void setItem(Player p)
 	{
-		setMeta(none, "None"); // None
-		setMeta(level, "Level"); // Level
-		setMeta(exp, "Experience"); // Experience
-		setMeta(health, "Health", Color.RED); // Health	
-		setMeta(mana, "Mana", Color.BLUE); // Mana
-		setMeta(mentality, "Mentality", Color.AQUA); // Mentality
-		setMeta(vitality, "Vitality", Color.ORANGE); // Vitality
-		setMeta(atk, "Atk"); // Attack
-		setMeta(def, "Def"); // Defense
-		setMeta(aar, "Aar"); // Physics avoidance rate
-		setMeta(akb, "Akb"); // Physics kill burst
-		setMeta(ahit, "Ahit"); // Physics hit
-		setMeta(mag, "Mag"); // Magic
-		setMeta(res, "Res"); // Sorcery defense
-		setMeta(sar, "Sar"); // Sorcery avoidance
-		setMeta(skb, "Skb"); // Sorcery kill burst
-		setMeta(shit, "Shit"); // Sorcery hit
-		setMeta(back, "Back"); //back the system gui
+		setMeta(none, "None", p); // None
+		setMeta(level, "Level", p); // Level
+		setMeta(exp, "Experience", p); // Experience
+		setMeta(health, "Health", Color.RED, p); // Health
+		setMeta(mana, "Mana", Color.BLUE, p); // Mana
+		setMeta(mentality, "Mentality", Color.AQUA, p); // Mentality
+		setMeta(vitality, "Vitality", Color.ORANGE, p); // Vitality
+		setMeta(atk, "Atk", p); // Attack
+		setMeta(def, "Def", p); // Defense
+		setMeta(aar, "Aar", p); // Physics avoidance rate
+		setMeta(akb, "Akb", p); // Physics kill burst
+		setMeta(ahit, "Ahit", p); // Physics hit
+		setMeta(mag, "Mag", p); // Magic
+		setMeta(res, "Res", p); // Sorcery defense
+		setMeta(sar, "Sar", p); // Sorcery avoidance
+		setMeta(skb, "Skb", p); // Sorcery kill burst
+		setMeta(shit, "Shit", p); // Sorcery hit
+		setMeta(back, "Back", p); //back the system gui
 	}
 }
