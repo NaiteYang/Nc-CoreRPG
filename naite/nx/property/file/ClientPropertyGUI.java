@@ -1,15 +1,14 @@
-package nx.file;
+package nx.property.file;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
 
+import nx.property.core.Core;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-
-import nx.core.Core;
 
 public class ClientPropertyGUI
 {

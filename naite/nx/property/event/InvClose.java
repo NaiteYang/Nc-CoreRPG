@@ -1,4 +1,4 @@
-package nx.event;
+package nx.property.event;
 
 import org.bukkit.event.Listener;
 

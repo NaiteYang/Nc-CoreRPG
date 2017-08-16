@@ -1,7 +1,9 @@
-package nx.gui;
+package nx.property.gui;
 
-import nx.data.PlayerPropertyData;
-import nx.data.PropertySettings;
+import nx.property.data.PlayerPropertyData;
+import nx.property.data.PropertySettings;
+import nx.property.event.ColorSwitch;
+import nx.property.file.ClientDataGUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -12,8 +14,6 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
-import nx.event.ColorSwitch;
-import nx.file.ClientDataGUI;
 
 import java.util.ArrayList;
 import java.util.List;

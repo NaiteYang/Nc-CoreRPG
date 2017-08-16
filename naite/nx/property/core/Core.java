@@ -1,18 +1,18 @@
-package nx.core;
+package nx.property.core;
 
+import nx.property.file.ClientDataGUI;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.command.ConsoleCommandSender;
-import nx.data.PropertySettings;
+import nx.property.data.PropertySettings;
 import org.bukkit.plugin.java.JavaPlugin;
-import nx.cmd.PlayerCmd;
-import nx.event.InvClick;
-import nx.file.ClientCoreGUI;
-import nx.file.ClientDataGUI;
-import nx.file.ClientPropertyGUI;
-import nx.gui.CoreGUI;
-import nx.gui.DataGUI;
-import nx.gui.PropertyGUI;
+import nx.property.cmd.PlayerCmd;
+import nx.property.event.InvClick;
+import nx.property.file.ClientCoreGUI;
+import nx.property.file.ClientPropertyGUI;
+import nx.property.gui.CoreGUI;
+import nx.property.gui.DataGUI;
+import nx.property.gui.PropertyGUI;
 
 public class Core extends JavaPlugin{
 	

@@ -1,5 +1,8 @@
-package nx.gui;
+package nx.property.gui;
 
+import nx.property.core.Core;
+import nx.property.event.ColorSwitch;
+import nx.property.file.ClientCoreGUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -8,9 +11,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
-import nx.core.Core;
-import nx.event.ColorSwitch;
-import nx.file.ClientCoreGUI;
 
 public class CoreGUI 
 {		

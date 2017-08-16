@@ -1,11 +1,11 @@
-package nx.data;
+package nx.property.data;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
-import nx.core.Core;
+import nx.property.core.Core;
 
 import java.io.File;
 import java.io.IOException;

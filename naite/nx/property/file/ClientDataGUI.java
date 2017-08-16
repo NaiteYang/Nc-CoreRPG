@@ -1,38 +1,39 @@
-package nx.file;
+package nx.property.file;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
+
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import nx.core.Core;
+import nx.property.core.Core;
 
-public class ClientCoreGUI 
+public class ClientDataGUI 
 {
 	static Core main;
-	public ClientCoreGUI(Core core){main = core;}
+	public ClientDataGUI(Core core){main = core;}
 	
-	public static YamlConfiguration cC = null;
-	public static File cF = null;
+	public static YamlConfiguration dC = null;
+	public static File dF = null;
 	
 	// reload
 	@SuppressWarnings("deprecation")
-	public static void reloadCoreGUI()
+	public static void reloadDataGUI()
 	{
-		if (cF == null) 
-			cF = new File(Core.plugin.getDataFolder() + File.separator + "Interface" + File.separator + "coregui.yml");
-		if (!cF.exists())
+		if (dF == null) 
+			dF = new File(Core.plugin.getDataFolder() + File.separator + "Interface" + File.separator + "datagui.yml");
+		if (!dF.exists())
 		{
 			new File(Core.plugin.getDataFolder() + File.separator + "Interface").mkdir();
-			Core.plugin.saveResource("Interface/coregui.yml", true);
+			Core.plugin.saveResource("Interface/datagui.yml", true);
 		}
-		cC = YamlConfiguration.loadConfiguration(cF);
+		dC = YamlConfiguration.loadConfiguration(dF);
 		
 		// =================== 確認檔案是否損失，避免誤刪
-	    InputStream is = Core.plugin.getResource("Interface/coregui.yml");
+	    InputStream is = Core.plugin.getResource("Interface/datagui.yml");
 		YamlConfiguration defaultYaml = YamlConfiguration.loadConfiguration(is);
 	    
 	    boolean newMsg = false;
@@ -40,9 +41,9 @@ public class ClientCoreGUI
 	    {
 	    	if (!defaultYaml.isConfigurationSection(key)) 
 	    	{
-	    		if (cC.getString(key, null) == null)
+	    		if (dC.getString(key, null) == null)
 	    		{
-	    			cC.set(key, defaultYaml.getString(key));
+	    			dC.set(key, defaultYaml.getString(key));
 	    			newMsg = true;
 	    		}
 	    	}
@@ -50,7 +51,7 @@ public class ClientCoreGUI
 	    if (newMsg) 
 	    {
 	    	try{
-	    		cC.save(cF);
+	    		dC.save(dF);
 	    	}catch (IOException ex){
 	    		ex.printStackTrace();
 	    	}
@@ -58,21 +59,21 @@ public class ClientCoreGUI
 	}
 	
 	// getConfig
-	public static FileConfiguration getCoreGUI()
+	public static FileConfiguration getDataGUI()
 	{
-		if(cC == null){reloadCoreGUI();}
-		return cC;
+		if(dC == null){reloadDataGUI();}
+		return dC;
 	}
 	
 	// save
-	public static void saveCoreGUI()
+	public static void saveDataGUI()
 	{
-		if((cC == null) || (cF == null)){return;}
+		if((dC == null) || (dF == null)){return;}
 		try{
-			getCoreGUI().save(cF);
+			getDataGUI().save(dF);
 		}catch(IOException e){
 			e.printStackTrace();
-			Bukkit.getLogger().log(Level.SEVERE, "Can not be saved." + cF, e );
+			Bukkit.getLogger().log(Level.SEVERE, "Can not be saved." + dF, e );
 		}
 	}
 }

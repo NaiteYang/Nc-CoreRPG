@@ -1,5 +1,5 @@
 name: NcProperty
-main: nx.core.Core
+main: naite.nx.property.core.Core
 version: 0.0.1
 author: WeiNaite
 description: This is a player base data value on RPG games.

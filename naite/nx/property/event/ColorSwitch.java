@@ -1,9 +1,10 @@
-package nx.event;
+package nx.property.event;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import nx.property.core.Core;
 import org.bukkit.configuration.file.YamlConfiguration;
-import nx.core.Core;
 
 public class ColorSwitch 
 {

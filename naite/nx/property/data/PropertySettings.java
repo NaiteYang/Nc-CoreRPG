@@ -1,7 +1,7 @@
-package nx.data;
+package nx.property.data;
 
 
-import nx.core.Core;
+import nx.property.core.Core;
 
 /**
  * Created by User on 2017/7/9.
