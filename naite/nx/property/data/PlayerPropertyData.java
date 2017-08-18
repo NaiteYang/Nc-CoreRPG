@@ -68,12 +68,12 @@ public class PlayerPropertyData{
 	private static HashMap<Player, PlayerPropertyData> playerDatas = new HashMap<>();
 
 	// 玩家資料
-	public PlayerPropertyData(Player player){
-		this.player = player;
-		player.setHealthScaled(true);
+	private PlayerPropertyData(Player p){
+		player = p;
+		p.setHealthScaled(true);
 		loadFile();
 
-		playerDatas.put(player, this);
+		playerDatas.put(p, this);
 	}
 
 	public static PlayerPropertyData getPlayerData(UUID uuid){
@@ -89,12 +89,27 @@ public class PlayerPropertyData{
 		}
 	}
 
+	public static void reloadPlayerDatas(){
+		removePlayerDatas();
+		loadPlayerDatas();
+	}
+
+	public static void loadPlayerDatas(){
+		for(Player p : Bukkit.getOnlinePlayers()){
+			getPlayerData(p);
+		}
+	}
+
 	public static void removePlayerData(UUID uuid){
 		playerDatas.remove(Bukkit.getPlayer(uuid));
 	}
 
 	public static void removePlayerData(Player player){
 		playerDatas.remove(player);
+	}
+
+	public static void removePlayerDatas(){
+		playerDatas.clear();
 	}
 
 	//儲存狀態值
@@ -190,7 +205,7 @@ public class PlayerPropertyData{
 			yaml.set("health", getMaxHealth());
 		}
 		health = yaml.getInt("health") > getMaxHealth() ? getMaxHealth() : yaml.getInt("health");
-		player.setHealthScale(health);
+		player.setHealth(health);
 
 		if(yaml.getString("mentality", null) == null){
 			yaml.set("mentality", getMaxMentality());
@@ -239,6 +254,8 @@ public class PlayerPropertyData{
 		maxMana = PropertySettings.getDefaultMaxMana() + getCon() * 5; //最大魔力 = 預設 + 體質*5
 		maxMentality = PropertySettings.getDefaultMaxMentality() + getCon(); //最大精力 = 預設 + 體質*1
 		maxVitality = PropertySettings.getDefaultMaxVitality() + getCon(); //最大耐力 = 預設 + 體質*1
+
+		player.setMaxHealth(maxHealth);
 	}
 
 	private void computeWis(){
@@ -398,6 +415,10 @@ public class PlayerPropertyData{
 		setPoint(getPoint() + value);
 	}
 
+	public void removePoint(int value){
+		setPoint(getPoint() - value);
+	}
+
 	// 等級管理
 
 	private void changeMinecraftExp(){ //修改原版經驗條
@@ -535,7 +556,7 @@ public class PlayerPropertyData{
 		else{
 			health = value;
 		}
-		player.setHealthScale(getHealth());
+		player.setHealth(getHealth());
 	}
 
 	public void removeHealth(int value){

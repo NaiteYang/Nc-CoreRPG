@@ -1,8 +1,9 @@
 package nx.property.core;
 
+import nx.property.data.PlayerPropertyData;
+import nx.property.event.PlayerJoinAndQuit;
 import nx.property.file.ClientDataGUI;
 import nx.property.file.ClientMessages;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.command.ConsoleCommandSender;
@@ -25,15 +26,11 @@ public class Core extends JavaPlugin{
 	public void onEnable()
 	{
 		plugin = this;
-		
+
 		// console
 		Server server = getServer();
 		ConsoleCommandSender console = server.getConsoleSender();
 		console.sendMessage(ChatColor.YELLOW + "NcProperty v1.0.1 has been enabled");
-		
-		ClientCoreGUI.saveCoreGUI();
-		ClientDataGUI.saveDataGUI();
-		ClientPropertyGUI.savePropertyGUI();
 		
 		commands();
 		reload();
@@ -45,6 +42,7 @@ public class Core extends JavaPlugin{
 	public void onDisable()
 	{
 		save();
+		PlayerPropertyData.removePlayerDatas();
 	}
 	
 	public void reload()
@@ -57,6 +55,7 @@ public class Core extends JavaPlugin{
 		ClientPropertyGUI.reloadPropertyGUI();
 		PropertySettings.reload();
 		InvClick.reload();
+		PlayerPropertyData.loadPlayerDatas();
 	}
 	
 	public void files()
@@ -84,6 +83,7 @@ public class Core extends JavaPlugin{
 	
 	public void events()
 	{
+		getServer().getPluginManager().registerEvents(new PlayerJoinAndQuit(), this);
 		getServer().getPluginManager().registerEvents(new InvClick(), this);
 	}
 }
