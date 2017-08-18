@@ -71,16 +71,16 @@ public class PropertySettings{
 		vitalityDecreaseTime = Core.plugin.getConfig().getLong("Player.Ability.Vitality.DecreaseTime");
 		vitalityDecrease = Core.plugin.getConfig().getInt("Player.Ability.Vitality.Decrease");
 
-		defaultAtk = Core.plugin.getConfig().getInt("Player.DefaultATK");
-		defaultMag = Core.plugin.getConfig().getInt("Player.DefaultMAG");
-		defaultDef = Core.plugin.getConfig().getInt("Player.DefaultDEF");
-		defaultRes = Core.plugin.getConfig().getInt("Player.DefaultRES");
-		defaultAar = Core.plugin.getConfig().getDouble("Player.DefaultAAR");
-		defaultSar = Core.plugin.getConfig().getDouble("Player.DefaultSAR");
-		defaultAkb = Core.plugin.getConfig().getDouble("Player.DefaultAKB");
-		defaultSkb = Core.plugin.getConfig().getDouble("Player.DefaultSKB");
-		defaultAhit = Core.plugin.getConfig().getDouble("Player.DefaultAHIT");
-		defaultShit = Core.plugin.getConfig().getDouble("Player.DefaultSHIT");
+		defaultAtk = Core.plugin.getConfig().getInt("Player.Ability.DefaultATK");
+		defaultMag = Core.plugin.getConfig().getInt("Player.Ability.DefaultMAG");
+		defaultDef = Core.plugin.getConfig().getInt("Player.Ability.DefaultDEF");
+		defaultRes = Core.plugin.getConfig().getInt("Player.Ability.DefaultRES");
+		defaultAar = Core.plugin.getConfig().getDouble("Player.Ability.DefaultAAR");
+		defaultSar = Core.plugin.getConfig().getDouble("Player.Ability.DefaultSAR");
+		defaultAkb = Core.plugin.getConfig().getDouble("Player.Ability.DefaultAKB");
+		defaultSkb = Core.plugin.getConfig().getDouble("Player.Ability.DefaultSKB");
+		defaultAhit = Core.plugin.getConfig().getDouble("Player.Ability.DefaultAHIT");
+		defaultShit = Core.plugin.getConfig().getDouble("Player.Ability.DefaultSHIT");
 
 		maxStr = Core.plugin.getConfig().getInt("Player.AttributeMax.STR");
 		maxInt = Core.plugin.getConfig().getInt("Player.AttributeMax.INT");

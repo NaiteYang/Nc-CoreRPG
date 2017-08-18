@@ -1,6 +1,9 @@
 package nx.property.core;
 
+import nx.property.data.PlayerPropertyData;
+import nx.property.event.PlayerJoinAndQuit;
 import nx.property.file.ClientDataGUI;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.command.ConsoleCommandSender;
@@ -21,7 +24,7 @@ public class Core extends JavaPlugin{
 	public void onEnable()
 	{
 		plugin = this;
-		
+
 		// console
 		Server server = getServer();
 		ConsoleCommandSender console = server.getConsoleSender();
@@ -38,6 +41,7 @@ public class Core extends JavaPlugin{
 		
 		// events
 		getServer().getPluginManager().registerEvents(new InvClick(), this);
+		getServer().getPluginManager().registerEvents(new PlayerJoinAndQuit(), this);
 		
 		// save
 		saveDefaultConfig();
@@ -56,6 +60,8 @@ public class Core extends JavaPlugin{
 		ClientCoreGUI.saveCoreGUI();
 		ClientDataGUI.saveDataGUI();
 		ClientPropertyGUI.savePropertyGUI();
+
+		PlayerPropertyData.removePlayerDatas();
 	}
 	
 	public static void reload()
@@ -64,5 +70,6 @@ public class Core extends JavaPlugin{
 		DataGUI.reload();
 		PropertyGUI.reload();
 		PropertySettings.reload();
+		PlayerPropertyData.loadPlayerDatas();
 	}
 }
