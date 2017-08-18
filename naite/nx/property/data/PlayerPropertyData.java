@@ -415,6 +415,10 @@ public class PlayerPropertyData{
 		setPoint(getPoint() + value);
 	}
 
+	public void removePoint(int value){
+		setPoint(getPoint() - value);
+	}
+
 	// 等級管理
 
 	private void changeMinecraftExp(){ //修改原版經驗條
