@@ -68,7 +68,7 @@ public class PlayerPropertyData{
 	private static HashMap<Player, PlayerPropertyData> playerDatas = new HashMap<>();
 
 	// 玩家資料
-	public PlayerPropertyData(Player player){
+	private PlayerPropertyData(Player player){
 		this.player = player;
 		player.setHealthScaled(true);
 		loadFile();
