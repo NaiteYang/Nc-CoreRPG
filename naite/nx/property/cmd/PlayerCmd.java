@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
 
 public class PlayerCmd implements CommandExecutor {
 	
-	public static String title = "§6[NcProperty] ";
 	public static PlayerPropertyData PD;
 	
 	@Override
@@ -27,7 +26,7 @@ public class PlayerCmd implements CommandExecutor {
 		{
 			if(args.length > 0)
 			{
-				p.sendMessage(title + "§c請輸入有效的參數§f");
+				p.sendMessage("§cPlease enter the correct of vaule. Enter the command:§6 /np");
 			}else{
 				p.closeInventory();
 				CoreGUI.openInterface(p);

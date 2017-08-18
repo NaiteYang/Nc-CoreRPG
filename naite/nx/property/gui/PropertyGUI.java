@@ -27,7 +27,7 @@ public class PropertyGUI
 	public static ItemStack luk = new ItemStack(Material.TIPPED_ARROW,1);
 	public static ItemStack con = new ItemStack(Material.BONE,1);
 	public static ItemStack wis = new ItemStack(Material.TOTEM,1);
-	
+	public static ItemStack back = new ItemStack(Material.SPRUCE_DOOR_ITEM,1);
 	
 	// yaml connection path
 	static YamlConfiguration yaml = (YamlConfiguration) ClientPropertyGUI.getPropertyGUI();
@@ -98,7 +98,7 @@ public class PropertyGUI
 		inv.setItem(38, luk);
 		inv.setItem(40, con);
 		inv.setItem(42, wis);
-		inv.setItem(53, DataGUI.back);
+		inv.setItem(53, back);
 		p.openInventory(inv);
 	}
 	
@@ -119,6 +119,7 @@ public class PropertyGUI
 		setMeta(luk, "Luk", Color.GREEN, p); // Luk
 		setMeta(con, "Con", p); // Con
 		setMeta(wis, "Wis", p); // Wis
+		setMeta(back, "Back", p); //back the system gui
 	}
 }
 

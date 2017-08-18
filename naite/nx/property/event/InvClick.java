@@ -1,7 +1,9 @@
 package nx.property.event;
 
 import nx.property.data.PlayerPropertyData;
+import nx.property.file.ClientMessages;
 import nx.property.gui.CoreGUI;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,6 +15,13 @@ import nx.property.gui.PropertyGUI;
 
 public class InvClick implements Listener
 {
+	private static YamlConfiguration yaml = (YamlConfiguration) ClientMessages.getConfig();
+	
+	public static void reload()
+	{
+		ColorSwitch.replaceColor(yaml);
+	}
+	
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent invce)
 	{
@@ -42,10 +51,25 @@ public class InvClick implements Listener
 					p.closeInventory();
 					PropertyGUI.openInterface(p);
 				}
-				if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(DataGUI.back.getItemMeta().getDisplayName()))
+				if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(DataGUI.back.getItemMeta().getDisplayName())||
+				   invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.back.getItemMeta().getDisplayName()))
 				{
 					p.closeInventory();
 					CoreGUI.openInterface(p);
+				}
+				if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.str.getItemMeta().getDisplayName()))
+				{
+					if(PlayerPropertyData.getPlayerData(p).getPoint() == 0)
+					{
+						p.sendMessage("§cYour property point insuffisant.");
+					}
+					if(PlayerPropertyData.getPlayerData(p).getPoint() >= 1)
+					{
+						PlayerPropertyData.getPlayerData(p).addStr(1);
+						p.sendMessage(yaml.getString("Property.Add.Str"));
+						p.closeInventory();
+						PropertyGUI.openInterface(p);
+					}
 				}
 			}else invce.setCancelled(true);
 		}
