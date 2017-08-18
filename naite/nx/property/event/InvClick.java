@@ -57,18 +57,82 @@ public class InvClick implements Listener
 					p.closeInventory();
 					CoreGUI.openInterface(p);
 				}
-				if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.str.getItemMeta().getDisplayName()))
+				if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.str.getItemMeta().getDisplayName())||
+				   invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.ints.getItemMeta().getDisplayName())||
+				   invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.agi.getItemMeta().getDisplayName())||
+				   invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.luk.getItemMeta().getDisplayName())||
+				   invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.con.getItemMeta().getDisplayName())||
+				   invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.wis.getItemMeta().getDisplayName()))
 				{
 					if(PlayerPropertyData.getPlayerData(p).getPoint() == 0)
 					{
-						p.sendMessage("§cYour property point insuffisant.");
+						p.sendMessage(yaml.getString("Property.Lack"));
 					}
-					if(PlayerPropertyData.getPlayerData(p).getPoint() >= 1)
+					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.str.getItemMeta().getDisplayName()))
 					{
-						PlayerPropertyData.getPlayerData(p).addStr(1);
-						p.sendMessage(yaml.getString("Property.Add.Str"));
-						p.closeInventory();
-						PropertyGUI.openInterface(p);
+						if(PlayerPropertyData.getPlayerData(p).getPoint() >= 1)
+						{
+							PlayerPropertyData.getPlayerData(p).removePoint(1);
+							PlayerPropertyData.getPlayerData(p).addStr(1);
+							p.sendMessage(yaml.getString("Property.Add.Str"));
+							p.closeInventory();
+							PropertyGUI.openInterface(p);
+						}
+					}
+					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.ints.getItemMeta().getDisplayName()))
+					{
+						if(PlayerPropertyData.getPlayerData(p).getPoint() >= 1)
+						{
+							PlayerPropertyData.getPlayerData(p).removePoint(1);
+							PlayerPropertyData.getPlayerData(p).addInt(1);
+							p.sendMessage(yaml.getString("Property.Add.Int"));
+							p.closeInventory();
+							PropertyGUI.openInterface(p);
+						}
+					}
+					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.agi.getItemMeta().getDisplayName()))
+					{
+						if(PlayerPropertyData.getPlayerData(p).getPoint() >= 1)
+						{
+							PlayerPropertyData.getPlayerData(p).removePoint(1);
+							PlayerPropertyData.getPlayerData(p).addAgi(1);
+							p.sendMessage(yaml.getString("Property.Add.Agi"));
+							p.closeInventory();
+							PropertyGUI.openInterface(p);
+						}
+					}
+					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.luk.getItemMeta().getDisplayName()))
+					{
+						if(PlayerPropertyData.getPlayerData(p).getPoint() >= 1)
+						{
+							PlayerPropertyData.getPlayerData(p).removePoint(1);
+							PlayerPropertyData.getPlayerData(p).addLuk(1);
+							p.sendMessage(yaml.getString("Property.Add.Luk"));
+							p.closeInventory();
+							PropertyGUI.openInterface(p);
+						}
+					}
+					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.con.getItemMeta().getDisplayName()))
+					{
+						if(PlayerPropertyData.getPlayerData(p).getPoint() >= 1)
+						{
+							PlayerPropertyData.getPlayerData(p).removePoint(1);
+							PlayerPropertyData.getPlayerData(p).addCon(1);
+							p.sendMessage(yaml.getString("Property.Add.Con"));
+							p.closeInventory();
+							PropertyGUI.openInterface(p);
+						}
+					}
+					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.wis.getItemMeta().getDisplayName()))
+					{
+						if(PlayerPropertyData.getPlayerData(p).getPoint() >= 1)
+						{
+							PlayerPropertyData.getPlayerData(p).removePoint(1);
+							PlayerPropertyData.getPlayerData(p).addWis(1);
+							p.sendMessage(yaml.getString("Property.Add.Wis"));
+							p.closeInventory();
+							PropertyGUI.openInterface(p);
+						}
 					}
 				}
 			}else invce.setCancelled(true);
