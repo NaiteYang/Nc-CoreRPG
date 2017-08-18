@@ -238,15 +238,15 @@ public class PlayerPropertyData{
 	private void computeAgi(){
 		def = PropertySettings.getDefaultDef() + getAgi() * 2; //物理防禦 = 預設 + 敏捷*2
 		res = PropertySettings.getDefaultRes() + getAgi(); //魔法防禦 = 預設 + 敏捷*1
-		aar = PropertySettings.getDefaultAar() + getAgi() * 0.03; //物理閃避 = 預設 + 敏捷*0.03
-		sar = PropertySettings.getDefaultSar() + getAgi() * 0.02; //魔法閃避 = 預設 + 敏捷*0.02
+		aar = PropertySettings.getDefaultAar() + getAgi() * 0.003; //物理閃避 = 預設 + 敏捷*0.003
+		sar = PropertySettings.getDefaultSar() + getAgi() * 0.002; //魔法閃避 = 預設 + 敏捷*0.002
 	}
 
 	private void computeLuk(){
-		akb = PropertySettings.getDefaultAkb() + getLuk() * 0.05; //物理爆擊 = 預設 + 幸運*0.05
-		skb = PropertySettings.getDefaultSkb() + getLuk() * 0.03; //魔法爆擊 = 預設 + 幸運*0.03
-		ahit = PropertySettings.getDefaultAhit() + getLuk() * 0.02; //物理命中 = 預設 + 幸運*0.02
-		shit = PropertySettings.getDefaultShit() + getLuk() * 0.01; //魔法命中 = 預設 + 幸運*0.01
+		akb = PropertySettings.getDefaultAkb() + getLuk() * 0.005; //物理爆擊 = 預設 + 幸運*0.005
+		skb = PropertySettings.getDefaultSkb() + getLuk() * 0.003; //魔法爆擊 = 預設 + 幸運*0.003
+		ahit = PropertySettings.getDefaultAhit() + getLuk() * 0.002; //物理命中 = 預設 + 幸運*0.002
+		shit = PropertySettings.getDefaultShit() + getLuk() * 0.001; //魔法命中 = 預設 + 幸運*0.001
 	}
 
 	private void computeCon(){
