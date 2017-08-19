@@ -158,6 +158,8 @@ public class PlayerPropertyData{
 		}
 		exp = yaml.getInt("exp");
 
+		changeMinecraftExp();
+
 		//屬性
 		if(yaml.getString("str", null) == null){
 			yaml.set("str", 0);
@@ -422,21 +424,7 @@ public class PlayerPropertyData{
 	// 等級管理
 
 	private void changeMinecraftExp(){ //修改原版經驗條
-		//經驗條修改
-		player.setLevel(level);
-
-		int max;
-		if(level <= 15){
-			max = 2 * level + 7;
-		}
-		else if(level <= 30){
-			max = 5 * level - 38;
-		}
-		else{
-			max = 9 * level - 158;
-		}
-
-		player.setExp(max * (level / PropertySettings.getMaxExp(level)));
+		player.setExp((float)exp / PropertySettings.getMaxExp(level));
 	}
 
 	public void addLevel(int lvl){ //提升等級(並且發送訊息及增加技能點)
