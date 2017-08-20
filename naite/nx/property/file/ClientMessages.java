@@ -8,8 +8,8 @@ import nx.property.core.Core;
 
 public class ClientMessages{
 
-	public static YamlConfiguration yaml = null;
-	public static File file = null;
+	private static YamlConfiguration yaml = null;
+	private static File file = null;
 
 	// reload
 	public static void reload(){
@@ -20,7 +20,7 @@ public class ClientMessages{
 	}
 
 	// getConfig
-	public static FileConfiguration getConfig(){
+	public static YamlConfiguration getConfig(){
 		if(yaml == null){
 			reload();
 		}

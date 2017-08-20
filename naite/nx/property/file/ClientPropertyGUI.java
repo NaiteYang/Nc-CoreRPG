@@ -8,8 +8,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 public class ClientPropertyGUI{
 
-	public static YamlConfiguration yaml = null;
-	public static File file = null;
+	private static YamlConfiguration yaml = null;
+	private static File file = null;
 
 	// reload
 	public static void reloadPropertyGUI(){
@@ -20,7 +20,7 @@ public class ClientPropertyGUI{
 	}
 
 	// getConfig
-	public static FileConfiguration getPropertyGUI(){
+	public static YamlConfiguration getPropertyGUI(){
 		if(yaml == null){
 			reloadPropertyGUI();
 		}

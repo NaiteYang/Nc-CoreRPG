@@ -3,12 +3,11 @@ package nx.property.file;
 import java.io.File;
 
 import nx.property.core.Core;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 public class ClientCoreGUI{
-	public static YamlConfiguration yaml = null;
-	public static File file = null;
+	private static YamlConfiguration yaml = null;
+	private static File file = null;
 
 	// reload
 	public static void reloadCoreGUI(){
@@ -19,7 +18,7 @@ public class ClientCoreGUI{
 	}
 
 	// getConfig
-	public static FileConfiguration getCoreGUI(){
+	public static YamlConfiguration getCoreGUI(){
 		if(yaml == null){
 			reloadCoreGUI();
 		}

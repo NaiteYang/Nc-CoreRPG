@@ -2,15 +2,14 @@ package nx.property.file;
 
 import java.io.File;
 
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import nx.property.core.Core;
 
 public class ClientDataGUI{
 
-	public static YamlConfiguration yaml = null;
-	public static File file = null;
+	private static YamlConfiguration yaml = null;
+	private static File file = null;
 
 	// reload
 	public static void reloadDataGUI(){
@@ -21,7 +20,7 @@ public class ClientDataGUI{
 	}
 
 	// getConfig
-	public static FileConfiguration getDataGUI(){
+	public static YamlConfiguration getDataGUI(){
 		if(yaml == null){
 			reloadDataGUI();
 		}
