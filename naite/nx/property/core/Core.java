@@ -42,7 +42,7 @@ public class Core extends JavaPlugin{
 	public void onDisable()
 	{
 		save();
-		PlayerPropertyData.removePlayerDatas();
+		PlayerPropertyData.removeAllPlayerData();
 	}
 	
 	public void reload()
@@ -55,7 +55,7 @@ public class Core extends JavaPlugin{
 		ClientPropertyGUI.reloadPropertyGUI();
 		PropertySettings.reload();
 		InvClick.reload();
-		PlayerPropertyData.loadPlayerDatas();
+		PlayerPropertyData.loadOnlinePlayersData();
 	}
 	
 	public void files()

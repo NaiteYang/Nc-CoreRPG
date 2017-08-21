@@ -18,7 +18,7 @@ public class PlayerPropertyData{
 
 	// 客戶端數值
 
-	Player player;  // 玩家
+	private Player player;  // 玩家
 
 	private int point = 0;  // 屬性點數
 	private int level = 1;  // 等級
@@ -65,7 +65,7 @@ public class PlayerPropertyData{
 	private File file = null;
 	private YamlConfiguration yaml = null;
 
-	private static HashMap<Player, PlayerPropertyData> playerDatas = new HashMap<>();
+	private static HashMap<Player, PlayerPropertyData> playerDataMap = new HashMap<>();
 
 	// 玩家資料
 	private PlayerPropertyData(Player p){
@@ -73,7 +73,7 @@ public class PlayerPropertyData{
 		p.setHealthScaled(true);
 		loadFile();
 
-		playerDatas.put(p, this);
+		playerDataMap.put(p, this);
 	}
 
 	public static PlayerPropertyData getPlayerData(UUID uuid){
@@ -81,35 +81,35 @@ public class PlayerPropertyData{
 	}
 
 	public static PlayerPropertyData getPlayerData(Player player){
-		if(playerDatas.containsKey(player)){
-			return playerDatas.get(player);
+		if(playerDataMap.containsKey(player)){
+			return playerDataMap.get(player);
 		}
 		else{
 			return new PlayerPropertyData(player);
 		}
 	}
 
-	public static void reloadPlayerDatas(){
-		removePlayerDatas();
-		loadPlayerDatas();
+	public static void reloadOnlinePlayersData(){
+		removeAllPlayerData();
+		loadOnlinePlayersData();
 	}
 
-	public static void loadPlayerDatas(){
+	public static void loadOnlinePlayersData(){
 		for(Player p : Bukkit.getOnlinePlayers()){
 			getPlayerData(p);
 		}
 	}
 
 	public static void removePlayerData(UUID uuid){
-		playerDatas.remove(Bukkit.getPlayer(uuid));
+		playerDataMap.remove(Bukkit.getPlayer(uuid));
 	}
 
 	public static void removePlayerData(Player player){
-		playerDatas.remove(player);
+		playerDataMap.remove(player);
 	}
 
-	public static void removePlayerDatas(){
-		playerDatas.clear();
+	public static void removeAllPlayerData(){
+		playerDataMap.clear();
 	}
 
 	//儲存狀態值
