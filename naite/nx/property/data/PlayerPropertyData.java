@@ -422,6 +422,7 @@ public class PlayerPropertyData{
 	// 等級管理
 
 	private void changeMinecraftExp(){ //修改原版經驗條
+		player.setLevel(level);
 		player.setExp((float)exp / PropertySettings.getMaxExp(level));
 	}
 
