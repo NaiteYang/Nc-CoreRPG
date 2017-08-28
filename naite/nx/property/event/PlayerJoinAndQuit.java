@@ -16,6 +16,7 @@ public class PlayerJoinAndQuit implements Listener{
 		PlayerPropertyData.getPlayerData(event.getPlayer());
 	}
 
+	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent event){
 		PlayerPropertyData.removePlayerData(event.getPlayer());
 	}
