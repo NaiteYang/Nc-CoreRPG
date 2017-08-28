@@ -15,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,6 +78,8 @@ public class DataGUI
 
 	private static String replaceData(String str, String item, Player p){
 		PlayerPropertyData data = PlayerPropertyData.getPlayerData(p);
+		NumberFormat percent = NumberFormat.getPercentInstance();
+		percent.setMaximumFractionDigits(2);
 		switch(item){
 			case "Level":
 				return str.replaceAll("%lvl%", String.valueOf(PlayerPropertyData.getPlayerData(p).getLevel()));
@@ -105,21 +108,21 @@ public class DataGUI
 			case "Def":
 				return str.replaceAll("%def%", String.valueOf(data.getRealDef()));
 			case "Aar":
-				return str.replaceAll("%aar%", String.valueOf(data.getRealAar()));
+				return str.replaceAll("%aar%", percent.format(data.getRealAar()));
 			case "Akb":
-				return str.replaceAll("%akb%", String.valueOf(data.getRealAkb()));
+				return str.replaceAll("%akb%", percent.format(data.getRealAkb()));
 			case "Ahit":
-				return str.replaceAll("%ahit%", String.valueOf(data.getRealAhit()));
+				return str.replaceAll("%ahit%", percent.format(data.getRealAhit()));
 			case "Mag":
 				return str.replaceAll("%mag%", String.valueOf(data.getRealMag()));
 			case "Res":
 				return str.replaceAll("%res%", String.valueOf(data.getRealRes()));
 			case "Sar":
-				return str.replaceAll("%sar%", String.valueOf(data.getRealSar()));
+				return str.replaceAll("%sar%", percent.format(data.getRealSar()));
 			case "Skb":
-				return str.replaceAll("%skb%", String.valueOf(data.getRealSkb()));
+				return str.replaceAll("%skb%", percent.format(data.getRealSkb()));
 			case "Shit":
-				return str.replaceAll("%shit%", String.valueOf(data.getRealShit()));
+				return str.replaceAll("%shit%", percent.format(data.getRealShit()));
 			default:
 				return str;
 		}
