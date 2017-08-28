@@ -2,7 +2,6 @@ package nx.property.data;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import nx.property.core.Core;
@@ -105,6 +104,7 @@ public class PlayerPropertyData{
 	}
 
 	public static void removePlayerData(Player player){
+		getPlayerData(player).saveData();
 		playerDataMap.remove(player);
 	}
 
@@ -112,12 +112,13 @@ public class PlayerPropertyData{
 		playerDataMap.clear();
 	}
 
-	//儲存狀態值
-	public void saveStatusData(){
+	//儲存狀態值與經驗值
+	public void saveData(){
 		yaml.set("mana", getMana());
 		yaml.set("health", getHealth());
 		yaml.set("mentality", getMentality());
 		yaml.set("vitality", getVitality());
+		yaml.set("exp", getExp());
 		try{
 			yaml.save(file);
 		}
@@ -156,9 +157,7 @@ public class PlayerPropertyData{
 		if(yaml.getString("exp", null) == null){
 			yaml.set("exp", 0);
 		}
-		exp = yaml.getInt("exp");
-
-		changeMinecraftExp();
+		setExp(yaml.getInt("exp"));
 
 		//屬性
 		if(yaml.getString("str", null) == null){
@@ -201,23 +200,22 @@ public class PlayerPropertyData{
 		if(yaml.getString("mana", null) == null){
 			yaml.set("mana", getMaxMana());
 		}
-		mana = yaml.getInt("mana") > getMaxMana() ? getMaxMana() : yaml.getInt("mana");
+		setMana(yaml.getInt("mana") > getMaxMana() ? getMaxMana() : yaml.getInt("mana"));
 
 		if(yaml.getString("health", null) == null){
 			yaml.set("health", getMaxHealth());
 		}
-		health = yaml.getInt("health") > getMaxHealth() ? getMaxHealth() : yaml.getInt("health");
-		player.setHealth(health);
+		setHealth(yaml.getInt("health") > getMaxHealth() ? getMaxHealth() : yaml.getInt("health"));
 
 		if(yaml.getString("mentality", null) == null){
 			yaml.set("mentality", getMaxMentality());
 		}
-		mentality = yaml.getInt("mentality") > getMaxMentality() ? getMaxMentality() : yaml.getInt("mentality");
+		setMentality(yaml.getInt("mentality") > getMaxMentality() ? getMaxMentality() : yaml.getInt("mentality"));
 
 		if(yaml.getString("vitality", null) == null){
 			yaml.set("vitality", getMaxVitality());
 		}
-		vitality = yaml.getInt("vitality") > getMaxVitality() ? getMaxVitality() : yaml.getInt("vitality");
+		setVitality(yaml.getInt("vitality") > getMaxVitality() ? getMaxVitality() : yaml.getInt("vitality"));
 
 		try{
 			yaml.save(file);
@@ -438,6 +436,7 @@ public class PlayerPropertyData{
 	public void setLevel(int lvl){ //設定等級並變更檔案內容
 		level = lvl;
 		yaml.set("level", lvl);
+		yaml.set("exp", getExp());
 		try{
 			yaml.save(file);
 		}
@@ -472,14 +471,6 @@ public class PlayerPropertyData{
 		}
 
 		changeMinecraftExp();
-
-		yaml.set("exp", getExp());
-		try{
-			yaml.save(file);
-		}
-		catch(IOException ex){
-			ex.printStackTrace();
-		}
 	}
 
 	public int getExp(){
@@ -723,12 +714,5 @@ public class PlayerPropertyData{
 		double equipmentShitIncrease = 0;
 		double equipmentShitTimes = 1;
 		return getShit() * equipmentShitTimes + equipmentShitIncrease;
-	}
-
-	//攻擊與受傷
-
-	//物理攻擊
-	public void attack(Entity entity){
-
 	}
 }
