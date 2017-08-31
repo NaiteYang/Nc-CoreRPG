@@ -122,7 +122,9 @@ public class PlayerPropertyData{
 	}
 
 	public static void removeAllPlayerData(){
-		playerDataMap.clear();
+		for(Player p : playerDataMap.keySet()){
+			removePlayerData(p);
+		}
 	}
 
 	//儲存狀態值與經驗值
