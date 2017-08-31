@@ -5,6 +5,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import nx.property.core.Core;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.io.File;
 import java.io.IOException;
@@ -64,6 +66,12 @@ public class PlayerPropertyData{
 	private File file = null;
 	private YamlConfiguration yaml = null;
 
+	//狀態值回復task
+	private BukkitTask manaRestoreTask = null;
+	private BukkitTask healthRestoreTask = null;
+	private BukkitTask mentalityRestoreTask = null;
+	private BukkitTask vitalityRestoreTask = null;
+
 	private static HashMap<Player, PlayerPropertyData> playerDataMap = new HashMap<>();
 
 	// 玩家資料
@@ -104,7 +112,12 @@ public class PlayerPropertyData{
 	}
 
 	public static void removePlayerData(Player player){
-		getPlayerData(player).saveData();
+		PlayerPropertyData data = getPlayerData(player);
+		data.stopManaRestore();
+		data.stopHealthRestore();
+		data.stopMentalityRestore();
+		data.stopVitalityRestore();
+		data.saveData();
 		playerDataMap.remove(player);
 	}
 
@@ -494,14 +507,13 @@ public class PlayerPropertyData{
 	}
 
 	public void setMana(int value){
-		if(value > getMaxMana()){
+		if(value >= getMaxMana()){
 			mana = getMaxMana();
-		}
-		else if(value < 0){
-			mana = 0;
+			stopManaRestore();
 		}
 		else{
-			mana = value;
+			mana = value < 0 ? 0 : value;
+			startManaRestore();
 		}
 	}
 
@@ -527,14 +539,13 @@ public class PlayerPropertyData{
 	}
 
 	public void setHealth(int value){
-		if(value > getMaxHealth()){
+		if(value >= getMaxHealth()){
 			health = getMaxHealth();
-		}
-		else if(value < 0){
-			health = 0;
+			stopHealthRestore();
 		}
 		else{
-			health = value;
+			health = value < 0 ? 0 : value;
+			startHealthRestore();
 		}
 		player.setHealth(getHealth());
 	}
@@ -561,14 +572,13 @@ public class PlayerPropertyData{
 	}
 
 	public void setMentality(int value){
-		if(value > getMaxMentality()){
+		if(value >= getMaxMentality()){
 			mentality = getMaxMentality();
-		}
-		else if(value < 0){
-			mentality = 0;
+			stopMentalityRestore();
 		}
 		else{
-			mentality = value;
+			mentality = value < 0 ? 0 : value;
+			startMentalityRestore();
 		}
 	}
 
@@ -596,12 +606,11 @@ public class PlayerPropertyData{
 	public void setVitality(int value){
 		if(value > getMaxVitality()){
 			vitality = getMaxVitality();
-		}
-		else if(value < 0){
-			vitality = 0;
+			stopVitalityRestore();
 		}
 		else{
-			vitality = value;
+			vitality = value < 0 ? 0 : value;
+			startVitalityRestore();
 		}
 	}
 
@@ -611,6 +620,83 @@ public class PlayerPropertyData{
 
 	public void addVitality(int value){
 		setVitality(getVitality() + value);
+	}
+
+	//狀態值回復
+	private void startManaRestore(){
+		if(manaRestoreTask != null){
+			return;
+		}
+		manaRestoreTask = new BukkitRunnable(){
+			@Override
+			public void run(){
+				addMana(getRestoreMana());
+			}
+		}.runTaskTimer(Core.plugin, PropertySettings.getManaRestoreTime(), PropertySettings.getManaRestoreTime());
+	}
+
+	private void stopManaRestore(){
+		if(manaRestoreTask != null){
+			manaRestoreTask.cancel();
+			manaRestoreTask = null;
+		}
+	}
+
+	private void startHealthRestore(){
+		if(healthRestoreTask != null){
+			return;
+		}
+		healthRestoreTask = new BukkitRunnable(){
+			@Override
+			public void run(){
+				addHealth(getRestoreHealth());
+			}
+		}.runTaskTimer(Core.plugin, PropertySettings.getHealthRestoreTime(), PropertySettings.getHealthRestoreTime());
+	}
+
+	private void stopHealthRestore(){
+		if(healthRestoreTask != null){
+			healthRestoreTask.cancel();
+			healthRestoreTask = null;
+		}
+	}
+
+	private void startMentalityRestore(){
+		if(mentalityRestoreTask != null){
+			return;
+		}
+		mentalityRestoreTask = new BukkitRunnable(){
+			@Override
+			public void run(){
+				addMentality(getRestoreMentality());
+			}
+		}.runTaskTimer(Core.plugin, PropertySettings.getMentalityRestoreTime(), PropertySettings.getMentalityRestoreTime());
+	}
+
+	private void stopMentalityRestore(){
+		if(mentalityRestoreTask != null){
+			mentalityRestoreTask.cancel();
+			mentalityRestoreTask = null;
+		}
+	}
+
+	private void startVitalityRestore(){
+		if(vitalityRestoreTask != null){
+			return;
+		}
+		vitalityRestoreTask = new BukkitRunnable(){
+			@Override
+			public void run(){
+				addVitality(getRestoreVitality());
+			}
+		}.runTaskTimer(Core.plugin, PropertySettings.getVitalityRestoreTime(), PropertySettings.getVitalityRestoreTime());
+	}
+
+	private void stopVitalityRestore(){
+		if(vitalityRestoreTask != null){
+			vitalityRestoreTask.cancel();
+			vitalityRestoreTask = null;
+		}
 	}
 
 	//取得能力值

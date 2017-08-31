@@ -2,8 +2,10 @@ package nx.property.core;
 
 import nx.property.data.PlayerPropertyData;
 import nx.property.event.PlayerJoinAndQuit;
+import nx.property.event.PlayerRegainHealth;
 import nx.property.file.ClientDataGUI;
 import nx.property.file.ClientMessages;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.command.ConsoleCommandSender;
@@ -43,6 +45,7 @@ public class Core extends JavaPlugin{
 	{
 		save();
 		PlayerPropertyData.removeAllPlayerData();
+		Bukkit.getScheduler().cancelTasks(plugin);
 	}
 	
 	public void reload()
@@ -85,5 +88,6 @@ public class Core extends JavaPlugin{
 	{
 		getServer().getPluginManager().registerEvents(new PlayerJoinAndQuit(), this);
 		getServer().getPluginManager().registerEvents(new InvClick(), this);
+		getServer().getPluginManager().registerEvents(new PlayerRegainHealth(), this);
 	}
 }
