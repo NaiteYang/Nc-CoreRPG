@@ -2,6 +2,7 @@ package nx.property.core;
 
 import nx.property.data.PlayerPropertyData;
 import nx.property.event.PlayerJoinAndQuit;
+import nx.property.event.PlayerMove;
 import nx.property.event.PlayerRegainHealth;
 import nx.property.file.ClientDataGUI;
 import nx.property.file.ClientMessages;
@@ -89,5 +90,6 @@ public class Core extends JavaPlugin{
 		getServer().getPluginManager().registerEvents(new PlayerJoinAndQuit(), this);
 		getServer().getPluginManager().registerEvents(new InvClick(), this);
 		getServer().getPluginManager().registerEvents(new PlayerRegainHealth(), this);
+		getServer().getPluginManager().registerEvents(new PlayerMove(), this);
 	}
 }

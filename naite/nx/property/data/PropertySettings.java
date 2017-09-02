@@ -26,7 +26,7 @@ public class PropertySettings{
 	private static int defaultMaxVitality;
 	private static int defaultRestoreVitality;
 	private static long vitalityRestoreTime;
-	private static long vitalityDecreaseTime;
+	private static int vitalityDecreaseWalkDistance;
 	private static int vitalityDecrease;
 
 	private static int defaultAtk;
@@ -68,7 +68,7 @@ public class PropertySettings{
 		defaultMaxVitality = Core.plugin.getConfig().getInt("Player.Ability.Vitality.DefaultMax");
 		defaultRestoreVitality = Core.plugin.getConfig().getInt("Player.Ability.Vitality.DefaultRestore");
 		vitalityRestoreTime = Core.plugin.getConfig().getLong("Player.Ability.Vitality.RestoreTime");
-		vitalityDecreaseTime = Core.plugin.getConfig().getLong("Player.Ability.Vitality.DecreaseTime");
+		vitalityDecreaseWalkDistance = Core.plugin.getConfig().getInt("Player.Ability.Vitality.DecreaseWalkDistance");
 		vitalityDecrease = Core.plugin.getConfig().getInt("Player.Ability.Vitality.Decrease");
 
 		defaultAtk = Core.plugin.getConfig().getInt("Player.Ability.DefaultATK");
@@ -180,8 +180,8 @@ public class PropertySettings{
 		return vitalityRestoreTime;
 	}
 
-	public static long getVitalityDecreaseTime(){
-		return vitalityDecreaseTime;
+	public static int getVitalityDecreaseWalkDistance(){
+		return vitalityDecreaseWalkDistance;
 	}
 
 	public static int getVitalityDecrease(){

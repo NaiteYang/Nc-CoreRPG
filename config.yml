@@ -22,7 +22,7 @@ Player:
       DefaultMax: 30
       DefaultRestore: 3
       RestoreTime: 54000
-      DecreaseTime: 1200
+      DecreaseWalkDistance: 5
       Decrease: 1
     DefaultATK: 2
     DefaultMAG: 3
