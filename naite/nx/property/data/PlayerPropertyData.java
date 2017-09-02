@@ -162,85 +162,25 @@ public class PlayerPropertyData{
 		//讀取資料
 
 		//基本資料
-		if(yaml.getString("point", null) == null){
-			yaml.set("point", 0);
-		}
-		point = yaml.getInt("point");
-
-		if(yaml.getString("level", null) == null){
-			yaml.set("level", 1);
-		}
-		level = yaml.getInt("level");
-
-		if(yaml.getString("exp", null) == null){
-			yaml.set("exp", 0);
-		}
-		setExp(yaml.getInt("exp"));
+		setPoint(yaml.getInt("point", 0));
+		setLevel(yaml.getInt("level", 1));
+		setExp(yaml.getInt("exp", 0));
 
 		//屬性
-		if(yaml.getString("str", null) == null){
-			yaml.set("str", 0);
-		}
-		str = yaml.getInt("str") > PropertySettings.getMaxStr() ? PropertySettings.getMaxStr() : yaml.getInt("str");
-		computeStr();
-
-		if(yaml.getString("int", null) == null){
-			yaml.set("int", 0);
-		}
-		inte = yaml.getInt("int") > PropertySettings.getMaxInt() ? PropertySettings.getMaxInt() : yaml.getInt("int");
-		computeInt();
-
-		if(yaml.getString("agi", null) == null){
-			yaml.set("agi", 0);
-		}
-		agi = yaml.getInt("agi") > PropertySettings.getMaxAgi() ? PropertySettings.getMaxAgi() : yaml.getInt("agi");
-		computeAgi();
-
-		if(yaml.getString("luk", null) == null){
-			yaml.set("luk", 0);
-		}
-		luk = yaml.getInt("luk") > PropertySettings.getMaxLuk() ? PropertySettings.getMaxLuk() : yaml.getInt("luk");
-		computeLuk();
-
-		if(yaml.getString("con", null) == null){
-			yaml.set("con", 0);
-		}
-		con = yaml.getInt("con");
-		computeCon();
-
-		if(yaml.getString("wis", null) == null){
-			yaml.set("wis", 0);
-		}
-		wis = yaml.getInt("wis");
-		computeWis();
+		setStr(yaml.getInt("str", 0));
+		setInt(yaml.getInt("int", 0));
+		setAgi(yaml.getInt("agi", 0));
+		setLuk(yaml.getInt("luk", 0));
+		setCon(yaml.getInt("con", 0));
+		setWis(yaml.getInt("wis", 0));
 
 		//狀態值
-		if(yaml.getString("mana", null) == null){
-			yaml.set("mana", getMaxMana());
-		}
-		setMana(yaml.getInt("mana") > getMaxMana() ? getMaxMana() : yaml.getInt("mana"));
+		setMana(yaml.getInt("mana", 0));
+		setHealth(yaml.getInt("health", 0));
+		setMentality(yaml.getInt("mentality", 0));
+		setVitality(yaml.getInt("vitality", 0));
 
-		if(yaml.getString("health", null) == null){
-			yaml.set("health", getMaxHealth());
-		}
-		setHealth(yaml.getInt("health") > getMaxHealth() ? getMaxHealth() : yaml.getInt("health"));
-
-		if(yaml.getString("mentality", null) == null){
-			yaml.set("mentality", getMaxMentality());
-		}
-		setMentality(yaml.getInt("mentality") > getMaxMentality() ? getMaxMentality() : yaml.getInt("mentality"));
-
-		if(yaml.getString("vitality", null) == null){
-			yaml.set("vitality", getMaxVitality());
-		}
-		setVitality(yaml.getInt("vitality") > getMaxVitality() ? getMaxVitality() : yaml.getInt("vitality"));
-
-		try{
-			yaml.save(file);
-		}
-		catch(IOException e){
-			e.printStackTrace();
-		}
+		saveData();
 	}
 
 	//計算屬性相關的能力值與狀態值
