@@ -72,6 +72,9 @@ public class PlayerPropertyData{
 	private BukkitTask mentalityRestoreTask = null;
 	private BukkitTask vitalityRestoreTask = null;
 
+	//狀態值減少task
+	private BukkitTask mentalityDecreaseTask = null;
+
 	private static HashMap<Player, PlayerPropertyData> playerDataMap = new HashMap<>();
 
 	// 玩家資料
@@ -577,10 +580,17 @@ public class PlayerPropertyData{
 		if(value >= getMaxMentality()){
 			mentality = getMaxMentality();
 			stopMentalityRestore();
+			startMentalityDecrease();
+		}
+		else if(value <= 0){
+			mentality = 0;
+			startMentalityRestore();
+			stopMentalityDecrease();
 		}
 		else{
-			mentality = value < 0 ? 0 : value;
+			mentality = value;
 			startMentalityRestore();
+			startMentalityDecrease();
 		}
 	}
 
@@ -624,7 +634,7 @@ public class PlayerPropertyData{
 		setVitality(getVitality() + value);
 	}
 
-	//狀態值回復
+	//狀態值自動回復
 	private void startManaRestore(){
 		if(manaRestoreTask != null){
 			return;
@@ -698,6 +708,27 @@ public class PlayerPropertyData{
 		if(vitalityRestoreTask != null){
 			vitalityRestoreTask.cancel();
 			vitalityRestoreTask = null;
+		}
+	}
+
+	//精力自動減少
+
+	private void startMentalityDecrease(){
+		if(mentalityDecreaseTask != null){
+			return;
+		}
+		mentalityDecreaseTask = new BukkitRunnable(){
+			@Override
+			public void run(){
+				removeMentality(PropertySettings.getMentalityDecrease());
+			}
+		}.runTaskTimer(Core.plugin, PropertySettings.getMentalityDecreaseTime(), PropertySettings.getMentalityDecreaseTime());
+	}
+
+	private void stopMentalityDecrease(){
+		if(mentalityDecreaseTask != null){
+			mentalityDecreaseTask.cancel();
+			mentalityDecreaseTask = null;
 		}
 	}
 
