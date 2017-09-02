@@ -2,253 +2,161 @@ package nx.property.data;
 
 
 import nx.property.core.Core;
+import org.bukkit.configuration.file.FileConfiguration;
 
 /**
  * Created by User on 2017/7/9.
  */
 public class PropertySettings{
-
-	private static int maxLevel; //最高等級
-	private static int maxExpDefault;
-	private static double maxExpFloat; //經驗值變量
-
-	private static int defaultMaxMana;
-	private static int defaultRestoreMana;
-	private static long manaRestoreTime;
-	private static int defaultMaxHealth;
-	private static int defaultRestoreHealth;
-	private static long healthRestoreTime;
-	private static int defaultMaxMentality;
-	private static int defaultRestoreMentality;
-	private static long mentalityRestoreTime;
-	private static long mentalityDecreaseTime;
-	private static int mentalityDecrease;
-	private static int defaultMaxVitality;
-	private static int defaultRestoreVitality;
-	private static long vitalityRestoreTime;
-	private static int vitalityDecreaseWalkDistance;
-	private static int vitalityDecrease;
-
-	private static int defaultAtk;
-	private static int defaultMag;
-	private static int defaultDef;
-	private static int defaultRes;
-	private static double defaultAar;
-	private static double defaultSar;
-	private static double defaultAkb;
-	private static double defaultSkb;
-	private static double defaultAhit;
-	private static double defaultShit;
-
-	private static int maxStr;
-	private static int maxInt;
-	private static int maxAgi;
-	private static int maxLuk;
-	private static int maxCon;
-	private static int maxWis;
+	
+	private static FileConfiguration config;
 
 	public static void reload(){
 		Core.plugin.reloadConfig();
-
-		maxLevel = Core.plugin.getConfig().getInt("Player.MaxLevel");
-		maxExpDefault = Core.plugin.getConfig().getInt("Player.MaxExp.Default");
-		maxExpFloat = Core.plugin.getConfig().getDouble("Player.MaxExp.Float");
-
-		defaultMaxMana = Core.plugin.getConfig().getInt("Player.Ability.Mana.DefaultMax");
-		defaultRestoreMana = Core.plugin.getConfig().getInt("Player.Ability.Mana.DefaultRestore");
-		manaRestoreTime = Core.plugin.getConfig().getLong("Player.Ability.Mana.RestoreTime");
-		defaultMaxHealth = Core.plugin.getConfig().getInt("Player.Ability.Health.DefaultMax");
-		defaultRestoreHealth = Core.plugin.getConfig().getInt("Player.Ability.Health.DefaultRestore");
-		healthRestoreTime = Core.plugin.getConfig().getLong("Player.Ability.Health.RestoreTime");
-		defaultMaxMentality = Core.plugin.getConfig().getInt("Player.Ability.Mentality.DefaultMax");
-		defaultRestoreMentality = Core.plugin.getConfig().getInt("Player.Ability.Mentality.DefaultRestore");
-		mentalityRestoreTime = Core.plugin.getConfig().getLong("Player.Ability.Mentality.RestoreTime");
-		mentalityDecreaseTime = Core.plugin.getConfig().getLong("Player.Ability.Mentality.DecreaseTime");
-		mentalityDecrease = Core.plugin.getConfig().getInt("Player.Ability.Mentality.Decrease");
-		defaultMaxVitality = Core.plugin.getConfig().getInt("Player.Ability.Vitality.DefaultMax");
-		defaultRestoreVitality = Core.plugin.getConfig().getInt("Player.Ability.Vitality.DefaultRestore");
-		vitalityRestoreTime = Core.plugin.getConfig().getLong("Player.Ability.Vitality.RestoreTime");
-		vitalityDecreaseWalkDistance = Core.plugin.getConfig().getInt("Player.Ability.Vitality.DecreaseWalkDistance");
-		vitalityDecrease = Core.plugin.getConfig().getInt("Player.Ability.Vitality.Decrease");
-
-		defaultAtk = Core.plugin.getConfig().getInt("Player.Ability.DefaultATK");
-		defaultMag = Core.plugin.getConfig().getInt("Player.Ability.DefaultMAG");
-		defaultDef = Core.plugin.getConfig().getInt("Player.Ability.DefaultDEF");
-		defaultRes = Core.plugin.getConfig().getInt("Player.Ability.DefaultRES");
-		defaultAar = Core.plugin.getConfig().getDouble("Player.Ability.DefaultAAR");
-		defaultSar = Core.plugin.getConfig().getDouble("Player.Ability.DefaultSAR");
-		defaultAkb = Core.plugin.getConfig().getDouble("Player.Ability.DefaultAKB");
-		defaultSkb = Core.plugin.getConfig().getDouble("Player.Ability.DefaultSKB");
-		defaultAhit = Core.plugin.getConfig().getDouble("Player.Ability.DefaultAHIT");
-		defaultShit = Core.plugin.getConfig().getDouble("Player.Ability.DefaultSHIT");
-
-		maxStr = Core.plugin.getConfig().getInt("Player.AttributeMax.STR");
-		maxInt = Core.plugin.getConfig().getInt("Player.AttributeMax.INT");
-		maxAgi = Core.plugin.getConfig().getInt("Player.AttributeMax.AGI");
-		maxLuk = Core.plugin.getConfig().getInt("Player.AttributeMax.LUK");
-		maxCon = Core.plugin.getConfig().getInt("Player.AttributeMax.Con");
-		maxWis = Core.plugin.getConfig().getInt("Player.AtrributeMax.Wis");
+		config = Core.plugin.getConfig();
 	}
 
 	public static int getMaxExp(int level){
-		return (int) Math.pow(level * maxExpDefault, maxExpFloat);
+		return (int) Math.pow(level * getMaxExpDefault(), getMaxExpFloat());
 	}
 
 	public static int getMaxLevel(){
-		return maxLevel;
+		return config.getInt("Player.MaxLevel");
 	}
 
 	public static int getMaxExpDefault(){
-		return maxExpDefault;
+		return config.getInt("Player.MaxExp.Default");
 	}
 
 	public static double getMaxExpFloat(){
-		return maxExpFloat;
-	}
-
-	public static void setMaxLevel(int level){
-		maxLevel = level;
-		Core.plugin.getConfig().set("player.maxLevel", level);
-		Core.plugin.saveConfig();
-	}
-
-	public static void setMaxExpDefault(int exp){
-		maxExpDefault = exp;
-		Core.plugin.getConfig().set("player.maxExp.Default", exp);
-		Core.plugin.saveConfig();
-	}
-
-	public static void setMaxExpFloat(double f){
-		maxExpFloat = f;
-		Core.plugin.getConfig().set("player.maxExp.Float", f);
-		Core.plugin.saveConfig();
+		return config.getDouble("Player.MaxExp.Float");
 	}
 
 	public static int getDefaultMaxMana(){
-		return defaultMaxMana;
+		return config.getInt("Player.Ability.Mana.DefaultMax");
 	}
 
 	public static int getDefaultRestoreMana(){
-		return defaultRestoreMana;
+		return config.getInt("Player.Ability.Mana.DefaultRestore");
 	}
 
 	public static long getManaRestoreTime(){
-		return manaRestoreTime;
+		return config.getLong("Player.Ability.Mana.RestoreTime");
 	}
 
 	public static int getDefaultMaxHealth(){
-		return defaultMaxHealth;
+		return config.getInt("Player.Ability.Health.DefaultMax");
 	}
 
 	public static int getDefaultRestoreHealth(){
-		return  defaultRestoreHealth;
+		return config.getInt("Player.Ability.Health.DefaultRestore");
 	}
 
 	public static long getHealthRestoreTime(){
-		return healthRestoreTime;
+		return config.getLong("Player.Ability.Health.RestoreTime");
 	}
 
 	public static int getDefaultMaxMentality(){
-		return defaultMaxMentality;
+		return config.getInt("Player.Ability.Mentality.DefaultMax");
 	}
 
 	public static int getDefaultRestoreMentality(){
-		return defaultRestoreMentality;
+		return config.getInt("Player.Ability.Mentality.DefaultRestore");
 	}
 
 	public static long getMentalityRestoreTime(){
-		return mentalityRestoreTime;
+		return config.getLong("Player.Ability.Mentality.RestoreTime");
 	}
 
 	public static long getMentalityDecreaseTime(){
-		return mentalityDecreaseTime;
+		return config.getLong("Player.Ability.Mentality.DecreaseTime");
 	}
 
 	public static int getMentalityDecrease(){
-		return mentalityDecrease;
+		return config.getInt("Player.Ability.Mentality.Decrease");
 	}
 
 	public static int getDefaultMaxVitality(){
-		return defaultMaxVitality;
+		return config.getInt("Player.Ability.Vitality.DefaultMax");
 	}
 
 	public static int getDefaultRestoreVitality(){
-		return defaultRestoreVitality;
+		return config.getInt("Player.Ability.Vitality.DefaultRestore");
 	}
 
 	public static long getVitalityRestoreTime(){
-		return vitalityRestoreTime;
+		return config.getLong("Player.Ability.Vitality.RestoreTime");
 	}
 
 	public static int getVitalityDecreaseWalkDistance(){
-		return vitalityDecreaseWalkDistance;
+		return config.getInt("Player.Ability.Vitality.DecreaseWalkDistance");
 	}
 
 	public static int getVitalityDecrease(){
-		return vitalityDecrease;
+		return config.getInt("Player.Ability.Vitality.Decrease");
 	}
 
 	public static int getDefaultAtk(){
-		return defaultAtk;
+		return config.getInt("Player.Ability.DefaultATK");
 	}
 
 	public static int getDefaultMag(){
-		return defaultMag;
+		return config.getInt("Player.Ability.DefaultMAG");
 	}
 
 	public static int getDefaultDef(){
-		return defaultDef;
+		return config.getInt("Player.Ability.DefaultDEF");
 	}
 
 	public static int getDefaultRes(){
-		return defaultRes;
+		return config.getInt("Player.Ability.DefaultRES");
 	}
 
 	public static double getDefaultAar(){
-		return defaultAar;
+		return config.getDouble("Player.Ability.DefaultAAR");
 	}
 
 	public static double getDefaultSar(){
-		return defaultSar;
+		return config.getDouble("Player.Ability.DefaultSAR");
 	}
 
 	public static double getDefaultAkb(){
-		return defaultAkb;
+		return config.getDouble("Player.Ability.DefaultAKB");
 	}
 
 	public static double getDefaultSkb(){
-		return defaultSkb;
+		return config.getDouble("Player.Ability.DefaultSKB");
 	}
 
 	public static double getDefaultAhit(){
-		return defaultAhit;
+		return config.getDouble("Player.Ability.DefaultAHIT");
 	}
 
 	public static double getDefaultShit(){
-		return defaultShit;
+		return config.getDouble("Player.Ability.DefaultSHIT");
 	}
 
 	public static int getMaxStr(){
-		return maxStr;
+		return config.getInt("Player.AttributeMax.STR");
 	}
 
 	public static int getMaxInt(){
-		return maxInt;
+		return config.getInt("Player.AttributeMax.INT");
 	}
 
 	public static int getMaxAgi(){
-		return maxAgi;
+		return config.getInt("Player.AttributeMax.AGI");
 	}
 
 	public static int getMaxLuk(){
-		return maxLuk;
+		return config.getInt("Player.AttributeMax.LUK");
 	}
 
 	public static int getMaxCon(){
-		return maxCon;
+		return config.getInt("Player.AttributeMax.Con");
 	}
 
 	public static int getMaxWis(){
-		return maxWis;
+		return config.getInt("Player.AtrributeMax.Wis");
 	}
 }
