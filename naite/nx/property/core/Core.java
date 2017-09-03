@@ -9,11 +9,11 @@ import nx.property.file.ClientMessages;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.ConsoleCommandSender;
 import nx.property.data.PropertySettings;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import nx.property.cmd.AdminCmd;
 import nx.property.cmd.PlayerCmd;
 import nx.property.event.InvClick;
 import nx.property.file.ClientCoreGUI;
@@ -81,8 +81,10 @@ public class Core extends JavaPlugin{
 	
 	public void commands()
 	{
-		getCommand("np").setExecutor(new PlayerCmd());
-		getCommand("npa").setExecutor(new AdminCmd());
+		CommandExecutor executor = new PlayerCmd();
+		getCommand("np").setExecutor(executor);
+		getCommand("property").setExecutor(executor);
+		getCommand("pro").setExecutor(executor);
 	}
 	
 	public void events()

@@ -5,7 +5,6 @@ author: WeiNaite
 description: This is a player base data value on RPG games.
 
 commands:
-    np:
-      description: Player user main commands.
-    npa:
-      description: Admin user main commands.
+    property:
+      aliases: [pro, np]
+      description: Get player info.
