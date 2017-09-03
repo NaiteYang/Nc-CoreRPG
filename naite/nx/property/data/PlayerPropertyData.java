@@ -672,107 +672,65 @@ public class PlayerPropertyData{
 		}
 	}
 
-	//取得能力值
+	//取得屬性
 
 	public int getAtk(){
-		return atk;
+		int increase = 0; //提升
+		double times = 1; //倍數
+		return (int) (atk * times) + increase;
 	}
 
 	public int getMag(){
-		return mag;
+		int increase = 0;
+		double times = 1;
+		return (int) (mag * times) + increase;
 	}
 
 	public int getDef(){
-		return def;
+		int increase = 0;
+		double times = 1;
+		return (int) (def * times) + increase;
 	}
 
 	public int getRes(){
-		return res;
+		int increase = 0;
+		double times = 1;
+		return (int) (res * times) + increase;
 	}
 
 	public double getAar(){
-		return aar;
+		double increase = 0;
+		double times = 1;
+		return aar * times + increase;
 	}
 
 	public double getSar(){
-		return sar;
+		double increase = 0;
+		double times = 1;
+		return sar * times + increase;
 	}
 
 	public double getAkb(){
-		return akb;
+		double increase = 0;
+		double times = 1;
+		return akb * times + increase;
 	}
 
 	public double getSkb(){
-		return skb;
+		double increase = 0;
+		double times = 1;
+		return skb * times + increase;
 	}
 
 	public double getAhit(){
-		return ahit;
+		double increase = 0;
+		double times = 1;
+		return ahit * times + increase;
 	}
 
 	public double getShit(){
-		return shit;
-	}
-
-	//取得實際攻擊和防禦
-
-	public int getRealAtk(){
-		int equipmentAtkIncrease = 0; //裝備物理攻擊提升
-		double equipmentAtkTimes = 1; //裝備物理攻擊加倍
-		return (int) (getAtk() * equipmentAtkTimes) + equipmentAtkIncrease;
-	}
-
-	public int getRealMag(){
-		int equipmentMagIncrease = 0;
-		double equipmentMagTimes = 1;
-		return (int) (getMag() * equipmentMagTimes) + equipmentMagIncrease;
-	}
-
-	public int getRealDef(){
-		int equipmentDefIncrease = 0;
-		double equipmentDefTimes = 1;
-		return (int) (getDef() * equipmentDefTimes) + equipmentDefIncrease;
-	}
-
-	public int getRealRes(){
-		int equipmentResIncrease = 0;
-		double equipmentResTimes = 1;
-		return (int) (getRes() * equipmentResTimes) + equipmentResIncrease;
-	}
-
-	public double getRealAar(){
-		double equipmentAarIncrease = 0;
-		double equipmentAarTimes = 1;
-		return getAar() * equipmentAarTimes + equipmentAarIncrease;
-	}
-
-	public double getRealSar(){
-		double equipmentSarIncrease = 0;
-		double equipmentSarTimes = 1;
-		return getSar() * equipmentSarTimes + equipmentSarIncrease;
-	}
-
-	public double getRealAkb(){
-		double equipmentAkbIncrease = 0;
-		double equipmentAkbTimes = 1;
-		return getAkb() * equipmentAkbTimes + equipmentAkbIncrease;
-	}
-
-	public double getRealSkb(){
-		double equipmentSkbIncrease = 0;
-		double equipmentSkbTimes = 1;
-		return getSkb() * equipmentSkbTimes + equipmentSkbIncrease;
-	}
-
-	public double getRealAhit(){
-		double equipmentAhitIncrease = 0;
-		double equipmentAhitTimes = 1;
-		return getAhit() * equipmentAhitTimes + equipmentAhitIncrease;
-	}
-
-	public double getRealShit(){
-		double equipmentShitIncrease = 0;
-		double equipmentShitTimes = 1;
-		return getShit() * equipmentShitTimes + equipmentShitIncrease;
+		double increase = 0;
+		double times = 1;
+		return shit * times + increase;
 	}
 }

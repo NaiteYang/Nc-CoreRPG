@@ -104,25 +104,25 @@ public class DataGUI
 						.replaceAll("%rema%", String.valueOf(data.getRestoreVitality()))
 						.replaceAll("%maxma%", String.valueOf(data.getMaxVitality()));
 			case "Atk":
-				return str.replaceAll("%atk%", String.valueOf(data.getRealAtk()));
+				return str.replaceAll("%atk%", String.valueOf(data.getAtk()));
 			case "Def":
-				return str.replaceAll("%def%", String.valueOf(data.getRealDef()));
+				return str.replaceAll("%def%", String.valueOf(data.getDef()));
 			case "Aar":
-				return str.replaceAll("%aar%", percent.format(data.getRealAar()));
+				return str.replaceAll("%aar%", percent.format(data.getAar()));
 			case "Akb":
-				return str.replaceAll("%akb%", percent.format(data.getRealAkb()));
+				return str.replaceAll("%akb%", percent.format(data.getAkb()));
 			case "Ahit":
-				return str.replaceAll("%ahit%", percent.format(data.getRealAhit()));
+				return str.replaceAll("%ahit%", percent.format(data.getAhit()));
 			case "Mag":
-				return str.replaceAll("%mag%", String.valueOf(data.getRealMag()));
+				return str.replaceAll("%mag%", String.valueOf(data.getMag()));
 			case "Res":
-				return str.replaceAll("%res%", String.valueOf(data.getRealRes()));
+				return str.replaceAll("%res%", String.valueOf(data.getRes()));
 			case "Sar":
-				return str.replaceAll("%sar%", percent.format(data.getRealSar()));
+				return str.replaceAll("%sar%", percent.format(data.getSar()));
 			case "Skb":
-				return str.replaceAll("%skb%", percent.format(data.getRealSkb()));
+				return str.replaceAll("%skb%", percent.format(data.getSkb()));
 			case "Shit":
-				return str.replaceAll("%shit%", percent.format(data.getRealShit()));
+				return str.replaceAll("%shit%", percent.format(data.getShit()));
 			default:
 				return str;
 		}
