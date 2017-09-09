@@ -160,25 +160,40 @@ public class PlayerPropertyData{
 		yaml = YamlConfiguration.loadConfiguration(file);
 
 		//讀取資料
+		int po = yaml.getInt("point", 0);
+		int le = yaml.getInt("level", 1);
+		int ex = yaml.getInt("exp", 0);
+
+		int st = yaml.getInt("str", 0);
+		int in = yaml.getInt("int", 0);
+		int ag = yaml.getInt("agi", 0);
+		int lu = yaml.getInt("luk", 0);
+		int co = yaml.getInt("con", 0);
+		int wi = yaml.getInt("wis", 0);
+
+		int ma = yaml.getInt("mana", 0);
+		int he = yaml.getInt("health", 0);
+		int me = yaml.getInt("mentality", 0);
+		int vi = yaml.getInt("vitality", 0);
 
 		//基本資料
-		setPoint(yaml.getInt("point", 0));
-		setLevel(yaml.getInt("level", 1));
-		setExp(yaml.getInt("exp", 0));
+		setPoint(po);
+		setLevel(le);
+		setExp(ex);
 
 		//屬性
-		setStr(yaml.getInt("str", 0));
-		setInt(yaml.getInt("int", 0));
-		setAgi(yaml.getInt("agi", 0));
-		setLuk(yaml.getInt("luk", 0));
-		setCon(yaml.getInt("con", 0));
-		setWis(yaml.getInt("wis", 0));
+		setStr(st);
+		setInt(in);
+		setAgi(ag);
+		setLuk(lu);
+		setCon(co);
+		setWis(wi);
 
 		//狀態值
-		setMana(yaml.getInt("mana", 0));
-		setHealth(yaml.getInt("health", 0));
-		setMentality(yaml.getInt("mentality", 0));
-		setVitality(yaml.getInt("vitality", 0));
+		setMana(ma);
+		setHealth(he);
+		setMentality(me);
+		setVitality(vi);
 
 		saveData();
 	}
