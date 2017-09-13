@@ -1,4 +1,4 @@
-package nx.property.data;
+package nx.property.config;
 
 
 import nx.property.core.Core;

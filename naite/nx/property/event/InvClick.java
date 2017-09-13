@@ -1,7 +1,7 @@
 package nx.property.event;
 
 import nx.property.data.PlayerPropertyData;
-import nx.property.file.ClientMessages;
+import nx.property.config.ClientMessages;
 import nx.property.gui.CoreGUI;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;

@@ -1,5 +1,6 @@
 package nx.property.data;
 
+import nx.property.config.PropertySettings;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;

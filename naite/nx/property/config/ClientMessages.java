@@ -1,8 +1,7 @@
-package nx.property.file;
+package nx.property.config;
 
 import java.io.File;
 
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import nx.property.core.Core;
 

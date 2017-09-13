@@ -2,7 +2,7 @@ package nx.property.gui;
 
 import nx.property.core.Core;
 import nx.property.event.ColorSwitch;
-import nx.property.file.ClientCoreGUI;
+import nx.property.config.ClientCoreGUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;

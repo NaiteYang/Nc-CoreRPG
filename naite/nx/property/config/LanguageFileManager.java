@@ -1,4 +1,4 @@
-package nx.property.file;
+package nx.property.config;
 
 import nx.property.core.Core;
 import org.bukkit.Bukkit;

@@ -1,9 +1,9 @@
 package nx.property.gui;
 
 import nx.property.data.PlayerPropertyData;
-import nx.property.data.PropertySettings;
+import nx.property.config.PropertySettings;
 import nx.property.event.ColorSwitch;
-import nx.property.file.ClientDataGUI;
+import nx.property.config.ClientDataGUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;

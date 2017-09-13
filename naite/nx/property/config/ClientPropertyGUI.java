@@ -1,9 +1,8 @@
-package nx.property.file;
+package nx.property.config;
 
 import java.io.File;
 
 import nx.property.core.Core;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 public class ClientPropertyGUI{

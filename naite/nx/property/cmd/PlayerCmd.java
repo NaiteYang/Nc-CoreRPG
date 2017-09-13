@@ -1,7 +1,7 @@
 package nx.property.cmd;
 
 import nx.property.data.PlayerPropertyData;
-import nx.property.data.PropertySettings;
+import nx.property.config.PropertySettings;
 import nx.property.gui.CoreGUI;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;

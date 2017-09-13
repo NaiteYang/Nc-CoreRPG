@@ -1,4 +1,4 @@
-package nx.property.file;
+package nx.property.config;
 
 import java.io.File;
 
