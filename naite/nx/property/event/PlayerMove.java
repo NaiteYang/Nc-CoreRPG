@@ -2,6 +2,7 @@ package nx.property.event;
 
 import nx.property.data.PlayerPropertyData;
 import nx.property.data.PropertySettings;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,7 +22,10 @@ public class PlayerMove implements Listener{
 		Player player = event.getPlayer();
 		double distance = playerLoc.containsKey(player) ? playerLoc.get(player) : 0;
 		double decreaseDistance = PropertySettings.getVitalityDecreaseWalkDistance();
-		distance += event.getFrom().distance(event.getTo());
+		Location from = event.getFrom();
+		Location to = event.getTo().clone();
+		to.setY(from.getY());
+		distance += from.distance(to);
 		if(distance >= decreaseDistance){ //已經移動了要減少耐力的格數
 			distance -= decreaseDistance;
 			PlayerPropertyData.getPlayerData(player).removeVitality(PropertySettings.getVitalityDecrease());
