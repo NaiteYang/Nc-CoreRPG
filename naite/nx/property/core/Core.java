@@ -25,7 +25,7 @@ public class Core extends JavaPlugin{
 		// console
 		Server server = getServer();
 		ConsoleCommandSender console = server.getConsoleSender();
-		console.sendMessage(ChatColor.YELLOW + "NcProperty v1.0.1 has been enabled");
+		console.sendMessage(ChatColor.YELLOW + "NcMultiSystem v1.0.1 has been enabled");
 
 		commands();
 		reload();

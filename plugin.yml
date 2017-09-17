@@ -1,7 +1,7 @@
-name: NcProperty
+name: NcMultiSystem
 main: nx.property.core.Core
 version: 0.0.1
-author: WeiNaite
+authors: [WeiNaite, WiwiHo]
 description: This is a player base data value on RPG games.
 
 commands:
