@@ -171,35 +171,35 @@ public class GUILanguage{
 					"",
 					"§f當前魔法防禦: §a%res%");
 
-	public static final String ITEM_SAR_NAME = "§b魔法防禦";
+	public static final String ITEM_MAR_NAME = "§b魔法防禦";
 
-	public static final List<String> ITEM_SAR_LORE =
+	public static final List<String> ITEM_MAR_LORE =
 			Arrays.asList("",
 					"§7提升屬性 §e\u262c §7可讓您的魔法閃避率提升",
 					"§7也可以從其他物品裝備取得提升能力",
 					"§7每受到一次技能攻擊可使閃避率觸發一次迴避",
 					"",
-					"§f當前魔法閃避率: §a%sar%");
+					"§f當前魔法閃避率: §a%mar%");
 
-	public static final String ITEM_SKB_NAME = "§b魔法爆擊率";
+	public static final String ITEM_MKB_NAME = "§b魔法爆擊率";
 
-	public static final List<String> ITEM_SKB_LORE =
+	public static final List<String> ITEM_MKB_LORE =
 			Arrays.asList("",
 					"§7提升屬性 §4\u2623 §7可讓您的魔法爆擊率提升",
 					"§7也可以從其他物品裝備取得提升能力",
 					"§7每施放技能一次可使爆擊率觸發一次雙倍傷害",
 					"",
-					"§f當前魔法爆擊率: §a%skb%");
+					"§f當前魔法爆擊率: §a%mkb%");
 
-	public static final String ITEM_SHIT_NAME = "§b魔法命中率";
+	public static final String ITEM_MHIT_NAME = "§b魔法命中率";
 
-	public static final List<String> ITEM_SHIT_LORE =
+	public static final List<String> ITEM_MHIT_LORE =
 			Arrays.asList("",
 					"§7提升屬性 §4\u2623 §7可讓您的魔法命中率提升",
 					"§7也可以從其他物品裝備取得提升能力",
 					"§7每施放技能一次可使命中率觸發是否造成傷害",
 					"",
-					"§f當前魔法命中率: §a%shit%");
+					"§f當前魔法命中率: §a%mhit%");
 
 	public static final String PROPERTY_DISPLAY_NAME = "§2玩家屬性  您剩下 §c§l%point% §2點";
 

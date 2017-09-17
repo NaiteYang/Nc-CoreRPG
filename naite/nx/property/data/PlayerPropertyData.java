@@ -48,11 +48,11 @@ public class PlayerPropertyData{
 	private int def = 0;        // 物理防禦		(屬性制 - 敏捷)
 	private int res = 0;        // 魔法防禦		(屬性制 - 敏捷)
 	private double aar = 0;        // 物理閃避率	(屬性制 - 敏捷)
-	private double sar = 0;        // 魔法閃避率	(屬性制 - 敏捷)
+	private double mar = 0;        // 魔法閃避率	(屬性制 - 敏捷)
 	private double akb = 0;        // 物理爆擊率	(屬性制 - 幸運)
-	private double skb = 0;        // 魔法爆擊率	(屬性制 - 幸運)
+	private double mkb = 0;        // 魔法爆擊率	(屬性制 - 幸運)
 	private double ahit = 0;    // 物理命中率	(屬性制 - 幸運)
-	private double shit = 0;    // 魔法命中率	(屬性制 - 幸運)
+	private double mhit = 0;    // 魔法命中率	(屬性制 - 幸運)
 
 	// 屬性數值
 	private int str = 0;        // 力量屬性  (物理攻擊)
@@ -212,14 +212,14 @@ public class PlayerPropertyData{
 		def = PropertySettings.getDefaultDef() + getAgi() * 2; //物理防禦 = 預設 + 敏捷*2
 		res = PropertySettings.getDefaultRes() + getAgi(); //魔法防禦 = 預設 + 敏捷*1
 		aar = PropertySettings.getDefaultAar() + getAgi() * 0.003; //物理閃避 = 預設 + 敏捷*0.003
-		sar = PropertySettings.getDefaultSar() + getAgi() * 0.002; //魔法閃避 = 預設 + 敏捷*0.002
+		mar = PropertySettings.getDefaultMar() + getAgi() * 0.002; //魔法閃避 = 預設 + 敏捷*0.002
 	}
 
 	private void computeLuk(){
 		akb = PropertySettings.getDefaultAkb() + getLuk() * 0.005; //物理爆擊 = 預設 + 幸運*0.005
-		skb = PropertySettings.getDefaultSkb() + getLuk() * 0.003; //魔法爆擊 = 預設 + 幸運*0.003
+		mkb = PropertySettings.getDefaultMkb() + getLuk() * 0.003; //魔法爆擊 = 預設 + 幸運*0.003
 		ahit = PropertySettings.getDefaultAhit() + getLuk() * 0.002; //物理命中 = 預設 + 幸運*0.002
-		shit = PropertySettings.getDefaultShit() + getLuk() * 0.001; //魔法命中 = 預設 + 幸運*0.001
+		mhit = PropertySettings.getDefaultMhit() + getLuk() * 0.001; //魔法命中 = 預設 + 幸運*0.001
 	}
 
 	private void computeCon(){
@@ -718,10 +718,10 @@ public class PlayerPropertyData{
 		return aar * times + increase;
 	}
 
-	public double getSar(){
+	public double getMar(){
 		double increase = 0;
 		double times = 1;
-		return sar * times + increase;
+		return mar * times + increase;
 	}
 
 	public double getAkb(){
@@ -730,10 +730,10 @@ public class PlayerPropertyData{
 		return akb * times + increase;
 	}
 
-	public double getSkb(){
+	public double getMkb(){
 		double increase = 0;
 		double times = 1;
-		return skb * times + increase;
+		return mkb * times + increase;
 	}
 
 	public double getAhit(){
@@ -742,9 +742,9 @@ public class PlayerPropertyData{
 		return ahit * times + increase;
 	}
 
-	public double getShit(){
+	public double getMhit(){
 		double increase = 0;
 		double times = 1;
-		return shit * times + increase;
+		return mhit * times + increase;
 	}
 }

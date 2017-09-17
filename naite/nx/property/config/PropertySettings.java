@@ -116,24 +116,24 @@ public class PropertySettings{
 		return config.getDouble("Player.Ability.DefaultAAR");
 	}
 
-	public static double getDefaultSar(){
-		return config.getDouble("Player.Ability.DefaultSAR");
+	public static double getDefaultMar(){
+		return config.getDouble("Player.Ability.DefaultMAR");
 	}
 
 	public static double getDefaultAkb(){
 		return config.getDouble("Player.Ability.DefaultAKB");
 	}
 
-	public static double getDefaultSkb(){
-		return config.getDouble("Player.Ability.DefaultSKB");
+	public static double getDefaultMkb(){
+		return config.getDouble("Player.Ability.DefaultMKB");
 	}
 
 	public static double getDefaultAhit(){
 		return config.getDouble("Player.Ability.DefaultAHIT");
 	}
 
-	public static double getDefaultShit(){
-		return config.getDouble("Player.Ability.DefaultSHIT");
+	public static double getDefaultMhit(){
+		return config.getDouble("Player.Ability.DefaultMHIT");
 	}
 
 	public static int getMaxStr(){

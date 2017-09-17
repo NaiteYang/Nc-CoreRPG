@@ -84,9 +84,9 @@ public class PlayerCmd implements CommandExecutor{
 						"",
 						"§c物理攻擊(ATK): " + data.getAtk() + "  §b魔法攻擊(MAG): " + data.getMag(),
 						"§c物理防禦(DEF): " + data.getDef() + "  §b魔法防禦(RES): " + data.getRes(),
-						"§c物理閃避(AAR): " + probability.format(data.getAar()) + "  §b魔法閃避(SAR): " + probability.format(data.getSar()),
-						"§c物理爆擊(AKB): " + probability.format(data.getAkb()) + "  §b魔法爆擊(SKB): " + probability.format(data.getSkb()),
-						"§c物理命中(AHIT): " + probability.format(data.getAhit()) + "  §b魔法命中(SHIT): " + probability.format(data.getShit()),
+						"§c物理閃避(AAR): " + probability.format(data.getAar()) + "  §b魔法閃避(MAR): " + probability.format(data.getMar()),
+						"§c物理爆擊(AKB): " + probability.format(data.getAkb()) + "  §b魔法爆擊(MKB): " + probability.format(data.getMkb()),
+						"§c物理命中(AHIT): " + probability.format(data.getAhit()) + "  §b魔法命中(MHIT): " + probability.format(data.getMhit()),
 						"",
 						"§c✸力量(STR): " + data.getStr() + "  §b❋智力(INT): " + data.getInt() + "  §e☬敏捷(AGI): " + data.getAgi(),
 						"§4☣幸運(LUK): " + data.getLuk() + "  §d✚體質(CON): " + data.getCon() + "  §2✤感知(WIS): " + data.getWis()

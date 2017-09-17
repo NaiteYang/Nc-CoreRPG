@@ -29,11 +29,11 @@ Player:
     DefaultDEF: 1
     DefaultRES: 2
     DefaultAAR: 0.012
-    DefaultSAR: 0.027
+    DefaultMAR: 0.027
     DefaultAKB: 0.037
-    DefaultSKB: 0.023
+    DefaultMKB: 0.023
     DefaultAHIT: 0.674
-    DefaultSHIT: 0.496
+    DefaultMHIT: 0.496
   AttributeMax:
     STR: 30
     INT: 20

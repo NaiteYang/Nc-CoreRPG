@@ -43,9 +43,9 @@ public class DataGUI{
 		inv.setItem(33, getAhitItem(data));
 		inv.setItem(38, getMagItem(data));
 		inv.setItem(39, getResItem(data));
-		inv.setItem(40, getSarItem(data));
-		inv.setItem(41, getSkbItem(data));
-		inv.setItem(42, getShitItem(data));
+		inv.setItem(40, getMarItem(data));
+		inv.setItem(41, getMkbItem(data));
+		inv.setItem(42, getMhitItem(data));
 		inv.setItem(53, GUIItemGenerator.getBackItem());
 		p.openInventory(inv);
 	}
@@ -190,29 +190,29 @@ public class DataGUI{
 		return item;
 	}
 
-	private static ItemStack getSarItem(PlayerPropertyData p){
+	private static ItemStack getMarItem(PlayerPropertyData p){
 		ItemStack item = new ItemStack(Material.FEATHER, 1);
 		ItemMeta im = item.getItemMeta();
-		im.setDisplayName(GUILanguage.ITEM_SAR_NAME);
-		im.setLore(StringFormat.stringListReplace(GUILanguage.ITEM_SAR_LORE, "%sar%", percent.format(p.getSar())));
+		im.setDisplayName(GUILanguage.ITEM_MAR_NAME);
+		im.setLore(StringFormat.stringListReplace(GUILanguage.ITEM_MAR_LORE, "%mar%", percent.format(p.getMar())));
 		item.setItemMeta(im);
 		return item;
 	}
 
-	private static ItemStack getSkbItem(PlayerPropertyData p){
+	private static ItemStack getMkbItem(PlayerPropertyData p){
 		ItemStack item = new ItemStack(Material.FIREBALL, 1);
 		ItemMeta im = item.getItemMeta();
-		im.setDisplayName(GUILanguage.ITEM_SKB_NAME);
-		im.setLore(StringFormat.stringListReplace(GUILanguage.ITEM_SKB_LORE, "%skb%", percent.format(p.getSkb())));
+		im.setDisplayName(GUILanguage.ITEM_MKB_NAME);
+		im.setLore(StringFormat.stringListReplace(GUILanguage.ITEM_MKB_LORE, "%mkb%", percent.format(p.getMkb())));
 		item.setItemMeta(im);
 		return item;
 	}
 
-	private static ItemStack getShitItem(PlayerPropertyData p){
+	private static ItemStack getMhitItem(PlayerPropertyData p){
 		ItemStack item = new ItemStack(Material.SPECTRAL_ARROW, 1);
 		ItemMeta im = item.getItemMeta();
-		im.setDisplayName(GUILanguage.ITEM_SHIT_NAME);
-		im.setLore(StringFormat.stringListReplace(GUILanguage.ITEM_SHIT_LORE, "%shit%", percent.format(p.getShit())));
+		im.setDisplayName(GUILanguage.ITEM_MHIT_NAME);
+		im.setLore(StringFormat.stringListReplace(GUILanguage.ITEM_MHIT_LORE, "%mhit%", percent.format(p.getMhit())));
 		item.setItemMeta(im);
 		return item;
 	}
