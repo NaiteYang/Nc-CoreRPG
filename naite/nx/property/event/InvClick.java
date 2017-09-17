@@ -14,58 +14,48 @@ import org.bukkit.inventory.Inventory;
 import nx.property.gui.DataGUI;
 import nx.property.gui.PropertyGUI;
 
-public class InvClick implements Listener
-{
-	
+public class InvClick implements Listener{
+
 	@EventHandler
-	public void onInventoryClick(InventoryClickEvent invce)
-	{
+	public void onInventoryClick(InventoryClickEvent invce){
 		Player p = (Player) invce.getWhoClicked();
 		Inventory inv = invce.getInventory();
-		
-		if(inv.getName().equals(GUILanguage.CORE_DISPLAY_NAME)||inv.getName().equals(GUILanguage.DATA_DISPLAY_NAME)||inv.getName().equals(GUILanguage.PROPERTY_DISPLAY_NAME.replaceAll("%point%", String.valueOf(PlayerPropertyData.getPlayerData(p).getPoint()))))
-		{
+
+		if(inv.getName().equals(GUILanguage.CORE_DISPLAY_NAME) || inv.getName().equals(GUILanguage.DATA_DISPLAY_NAME) || inv.getName().equals(GUILanguage.PROPERTY_DISPLAY_NAME.replaceAll("%point%", String.valueOf(PlayerPropertyData.getPlayerData(p).getPoint())))){
 			try{
 				invce.getCurrentItem().equals(null);
 				invce.getCurrentItem().getItemMeta().getDisplayName().equals(null);
-			}catch (NullPointerException ex){
+			}
+			catch(NullPointerException ex){
 				invce.setCancelled(true);
 				return;
 			}
-			
-			if(invce.getClick() == ClickType.RIGHT || invce.getClick() == ClickType.LEFT)
-			{
+
+			if(invce.getClick() == ClickType.RIGHT || invce.getClick() == ClickType.LEFT){
 				invce.setCancelled(true);
-				if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_DATA_NAME))
-				{
+				if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_DATA_NAME)){
 					p.closeInventory();
 					DataGUI.openInterface(p);
 				}
-				if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_PROPERTY_NAME))
-				{
+				if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_PROPERTY_NAME)){
 					p.closeInventory();
 					PropertyGUI.openInterface(p);
 				}
-				if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_BACK_NAME))
-				{
+				if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_BACK_NAME)){
 					p.closeInventory();
 					CoreGUI.openInterface(p);
 				}
-				if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_STR_NAME)||
-				   invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_INT_NAME)||
-				   invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_AGI_NAME)||
-				   invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_LUK_NAME)||
-				   invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_CON_NAME)||
-				   invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_WIS_NAME))
-				{
-					if(PlayerPropertyData.getPlayerData(p).getPoint() == 0)
-					{
+				if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_STR_NAME) ||
+						invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_INT_NAME) ||
+						invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_AGI_NAME) ||
+						invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_LUK_NAME) ||
+						invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_CON_NAME) ||
+						invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_WIS_NAME)){
+					if(PlayerPropertyData.getPlayerData(p).getPoint() == 0){
 						p.sendMessage(MessageLanguage.POINT_LACK);
 					}
-					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_STR_NAME))
-					{
-						if(PlayerPropertyData.getPlayerData(p).getPoint() >= 1)
-						{
+					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_STR_NAME)){
+						if(PlayerPropertyData.getPlayerData(p).getPoint() >= 1){
 							PlayerPropertyData.getPlayerData(p).removePoint(1);
 							PlayerPropertyData.getPlayerData(p).addStr(1);
 							p.sendMessage(MessageLanguage.ADD_STR);
@@ -73,10 +63,8 @@ public class InvClick implements Listener
 							PropertyGUI.openInterface(p);
 						}
 					}
-					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_INT_NAME))
-					{
-						if(PlayerPropertyData.getPlayerData(p).getPoint() >= 1)
-						{
+					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_INT_NAME)){
+						if(PlayerPropertyData.getPlayerData(p).getPoint() >= 1){
 							PlayerPropertyData.getPlayerData(p).removePoint(1);
 							PlayerPropertyData.getPlayerData(p).addInt(1);
 							p.sendMessage(MessageLanguage.ADD_INT);
@@ -84,10 +72,8 @@ public class InvClick implements Listener
 							PropertyGUI.openInterface(p);
 						}
 					}
-					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_AGI_NAME))
-					{
-						if(PlayerPropertyData.getPlayerData(p).getPoint() >= 1)
-						{
+					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_AGI_NAME)){
+						if(PlayerPropertyData.getPlayerData(p).getPoint() >= 1){
 							PlayerPropertyData.getPlayerData(p).removePoint(1);
 							PlayerPropertyData.getPlayerData(p).addAgi(1);
 							p.sendMessage(MessageLanguage.ADD_AGI);
@@ -95,10 +81,8 @@ public class InvClick implements Listener
 							PropertyGUI.openInterface(p);
 						}
 					}
-					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_LUK_NAME))
-					{
-						if(PlayerPropertyData.getPlayerData(p).getPoint() >= 1)
-						{
+					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_LUK_NAME)){
+						if(PlayerPropertyData.getPlayerData(p).getPoint() >= 1){
 							PlayerPropertyData.getPlayerData(p).removePoint(1);
 							PlayerPropertyData.getPlayerData(p).addLuk(1);
 							p.sendMessage(MessageLanguage.ADD_LUK);
@@ -106,10 +90,8 @@ public class InvClick implements Listener
 							PropertyGUI.openInterface(p);
 						}
 					}
-					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_CON_NAME))
-					{
-						if(PlayerPropertyData.getPlayerData(p).getPoint() >= 1)
-						{
+					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_CON_NAME)){
+						if(PlayerPropertyData.getPlayerData(p).getPoint() >= 1){
 							PlayerPropertyData.getPlayerData(p).removePoint(1);
 							PlayerPropertyData.getPlayerData(p).addCon(1);
 							p.sendMessage(MessageLanguage.ADD_CON);
@@ -117,10 +99,8 @@ public class InvClick implements Listener
 							PropertyGUI.openInterface(p);
 						}
 					}
-					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_WIS_NAME))
-					{
-						if(PlayerPropertyData.getPlayerData(p).getPoint() >= 1)
-						{
+					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_WIS_NAME)){
+						if(PlayerPropertyData.getPlayerData(p).getPoint() >= 1){
 							PlayerPropertyData.getPlayerData(p).removePoint(1);
 							PlayerPropertyData.getPlayerData(p).addWis(1);
 							p.sendMessage(MessageLanguage.ADD_WIS);
@@ -129,7 +109,8 @@ public class InvClick implements Listener
 						}
 					}
 				}
-			}else invce.setCancelled(true);
+			}
+			else invce.setCancelled(true);
 		}
 	}
 }

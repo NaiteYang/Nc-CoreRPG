@@ -8,7 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration;
  * Created by User on 2017/7/9.
  */
 public class PropertySettings{
-	
+
 	private static FileConfiguration config;
 
 	public static void reload(){

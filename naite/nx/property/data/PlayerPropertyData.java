@@ -17,8 +17,6 @@ import java.util.UUID;
 
 public class PlayerPropertyData{
 
-	private static String title = "§6[NcProperty] ";
-
 	// 客戶端數值
 
 	private Player player;  // 玩家
@@ -398,7 +396,7 @@ public class PlayerPropertyData{
 
 	private void changeMinecraftExp(){ //修改原版經驗條
 		player.setLevel(level);
-		player.setExp((float)exp / PropertySettings.getMaxExp(level));
+		player.setExp((float) exp / PropertySettings.getMaxExp(level));
 	}
 
 	public void addLevel(int lvl){ //提升等級(並且發送訊息及增加技能點)

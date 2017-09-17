@@ -14,9 +14,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import nx.property.cmd.PlayerCmd;
 import nx.property.event.InvClick;
-import nx.property.gui.CoreGUI;
-import nx.property.gui.DataGUI;
-import nx.property.gui.PropertyGUI;
 
 public class Core extends JavaPlugin{
 

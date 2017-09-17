@@ -22,7 +22,7 @@ public class PlayerCmd implements CommandExecutor{
 				sender.sendMessage("§cYou must be a player to use this commmand.");
 				return true;
 			}
-			openGUI((Player)sender);
+			openGUI((Player) sender);
 			return true;
 		}
 		else if(args.length == 1 && args[0].equalsIgnoreCase("info")){
@@ -30,7 +30,7 @@ public class PlayerCmd implements CommandExecutor{
 				sender.sendMessage("§cYou must be a player to use this commmand.");
 				return true;
 			}
-			sendPlayerInfo(sender, (Player)sender);
+			sendPlayerInfo(sender, (Player) sender);
 			return true;
 		}
 		else if(args.length == 2 && args[0].equalsIgnoreCase("info")){
@@ -43,7 +43,7 @@ public class PlayerCmd implements CommandExecutor{
 				sender.sendMessage("§6[NcProperty]§c目標不在線上");
 				return true;
 			}
-			sendPlayerInfo(sender, (Player)target);
+			sendPlayerInfo(sender, (Player) target);
 			return true;
 		}
 		else{
@@ -96,7 +96,7 @@ public class PlayerCmd implements CommandExecutor{
 
 	private String percentFormat(int a, int b){
 		NumberFormat percent = StringFormat.percentFormat(1);
-		return a + "/" + b + "(" + percent.format((double)a / b) + ")";
+		return a + "/" + b + "(" + percent.format((double) a / b) + ")";
 	}
 
 	private String timeFormat(int value, long time){
