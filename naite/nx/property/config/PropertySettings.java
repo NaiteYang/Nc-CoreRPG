@@ -157,6 +157,6 @@ public class PropertySettings{
 	}
 
 	public static int getMaxWis(){
-		return config.getInt("Player.AtrributeMax.WIS");
+		return config.getInt("Player.AttributeMax.WIS");
 	}
 }
