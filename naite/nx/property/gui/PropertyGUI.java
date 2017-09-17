@@ -1,12 +1,12 @@
 package nx.property.gui;
 
 import nx.property.data.PlayerPropertyData;
-import nx.property.event.ColorSwitch;
-import nx.property.config.ClientPropertyGUI;
+import nx.property.language.GUILanguage;
+import nx.property.util.GUIItemGenerator;
+import nx.property.util.StringFormat;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
@@ -14,112 +14,80 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 
-import java.util.ArrayList;
-import java.util.List;
+public class PropertyGUI{
 
-public class PropertyGUI 
-{
-	// create item
-	public static ItemStack none = new ItemStack(Material.STAINED_GLASS_PANE ,1 ,(short)15);
-	public static ItemStack str = new ItemStack(Material.IRON_SWORD,1);
-	public static ItemStack ints = new ItemStack(Material.STICK,1);
-	public static ItemStack agi = new ItemStack(Material.FEATHER,1);
-	public static ItemStack luk = new ItemStack(Material.TIPPED_ARROW,1);
-	public static ItemStack con = new ItemStack(Material.BONE,1);
-	public static ItemStack wis = new ItemStack(Material.TOTEM,1);
-	public static ItemStack back = new ItemStack(Material.SPRUCE_DOOR_ITEM,1);
-	
-	// yaml connection path
-	static YamlConfiguration yaml = (YamlConfiguration) ClientPropertyGUI.getPropertyGUI();
-
-	// string
-	public static String invName = yaml.getString("Setting.Inventory.DisplayName");
-	
-	// get item meta
-	public static void setMeta(ItemStack stack,String item, Player p)
-	{
-		ItemMeta im = stack.getItemMeta(); 
-		im.setDisplayName(yaml.getString("Setting.Items." + item + ".DisplayName", " "));
-		im.setLore(replaceData(yaml.getStringList("Setting.Items." + item + ".Lore"), item, p));
-		im.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-		stack.setItemMeta(im);
-	}
-	
-	// get potion meta
-	public static void setMeta(ItemStack stack,String item, Color color, Player p)
-	{
-		PotionMeta pm = (PotionMeta) stack.getItemMeta(); 
-		pm.setDisplayName(yaml.getString("Setting.Items." + item + ".DisplayName", " "));
-		pm.setLore(replaceData(yaml.getStringList("Setting.Items." + item + ".Lore"), item, p));
-		pm.setColor(color);
-		pm.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
-		stack.setItemMeta(pm);
-	}
-
-	private static List<String> replaceData(List<String> list, String item, Player p){
-		List<String> replace = new ArrayList<>();
-		for(String str : list){
-			replace.add(replaceData(str, item, p));
-		}
-		return replace;
-	}
-
-	private static String replaceData(String str, String item, Player p){
-		PlayerPropertyData data = PlayerPropertyData.getPlayerData(p);
-		switch(item){
-			case "Str":
-				return str.replaceAll("%str%", String.valueOf(data.getStr()));
-			case "Int":
-				return str.replaceAll("%int%", String.valueOf(data.getInt()));
-			case "Agi":
-				return str.replaceAll("%agi%", String.valueOf(data.getAgi()));
-			case "Luk":
-				return str.replaceAll("%luk%", String.valueOf(data.getLuk()));
-			case "Con":
-				return str.replaceAll("%con%", String.valueOf(data.getCon()));
-			case "Wis":
-				return str.replaceAll("%wis%", String.valueOf(data.getWis()));
-			default:
-				return str;
-		}
-	}
-	
 	// open gui
-	public static void openInterface(Player p)
-	{
-		setItem(p);
-		Inventory inv = Bukkit.createInventory(null, 54, invName.replaceAll("%point%", String.valueOf(PlayerPropertyData.getPlayerData(p).getPoint())));
-		for (int i = 0;i<54;i++){inv.setItem(i, none);}
-		CoreGUI.getGeneralPlayerSkull(p);
-		inv.setItem(4, CoreGUI.generalPlayerSkull);
-		inv.setItem(20, str);
-		inv.setItem(22, ints);
-		inv.setItem(24, agi);
-		inv.setItem(38, luk);
-		inv.setItem(40, con);
-		inv.setItem(42, wis);
-		inv.setItem(53, back);
+	public static void openInterface(Player p){
+		Inventory inv = Bukkit.createInventory(null, 54, GUILanguage.PROPERTY_DISPLAY_NAME.replaceAll("%point%", String.valueOf(PlayerPropertyData.getPlayerData(p).getPoint())));
+		for(int i = 0; i < 54; i++){
+			inv.setItem(i, GUIItemGenerator.getBlankItem());
+		}
+		inv.setItem(4, GUIItemGenerator.getPlayerSkull(p.getName()));
+		PlayerPropertyData data = PlayerPropertyData.getPlayerData(p);
+		inv.setItem(20, getStrItem(data));
+		inv.setItem(22, getIntItem(data));
+		inv.setItem(24, getAgiItem(data));
+		inv.setItem(38, getLukItem(data));
+		inv.setItem(40, getConItem(data));
+		inv.setItem(42, getWisItem(data));
+		inv.setItem(53, GUIItemGenerator.getBackItem());
 		p.openInventory(inv);
 	}
-	
-	// ymal reload
-	public static void reload()
-	{
-		ColorSwitch.replaceColor(yaml);
-		invName = yaml.getString("Setting.Inventory.DisplayName");
+
+	private static ItemStack getStrItem(PlayerPropertyData p){
+		ItemStack item = new ItemStack(Material.IRON_SWORD, 1);
+		ItemMeta im = item.getItemMeta();
+		im.setDisplayName(GUILanguage.ITEM_STR_NAME);
+		im.setLore(StringFormat.stringListReplace(GUILanguage.ITEM_STR_LORE, "%str%", p.getStr()));
+		item.setItemMeta(im);
+		return item;
 	}
-	
-	// set items
-	public static void setItem(Player p)
-	{
-		setMeta(none, "None", p); // None
-		setMeta(str, "Str", p); // Str
-		setMeta(ints, "Int", p); // Int
-		setMeta(agi, "Agi", p); // Agi
-		setMeta(luk, "Luk", Color.GREEN, p); // Luk
-		setMeta(con, "Con", p); // Con
-		setMeta(wis, "Wis", p); // Wis
-		setMeta(back, "Back", p); //back the system gui
+
+	private static ItemStack getIntItem(PlayerPropertyData p){
+		ItemStack item = new ItemStack(Material.STICK, 1);
+		ItemMeta im = item.getItemMeta();
+		im.setDisplayName(GUILanguage.ITEM_INT_NAME);
+		im.setLore(StringFormat.stringListReplace(GUILanguage.ITEM_INT_LORE, "%int%", p.getInt()));
+		item.setItemMeta(im);
+		return item;
+	}
+
+	private static ItemStack getAgiItem(PlayerPropertyData p){
+		ItemStack item = new ItemStack(Material.FEATHER, 1);
+		ItemMeta im = item.getItemMeta();
+		im.setDisplayName(GUILanguage.ITEM_AGI_NAME);
+		im.setLore(StringFormat.stringListReplace(GUILanguage.ITEM_AGI_LORE, "%agi%", p.getAgi()));
+		item.setItemMeta(im);
+		return item;
+	}
+
+	private static ItemStack getLukItem(PlayerPropertyData p){
+		ItemStack item = new ItemStack(Material.TIPPED_ARROW);
+		PotionMeta pm = (PotionMeta) item.getItemMeta();
+		pm.setDisplayName(GUILanguage.ITEM_LUK_NAME);
+		pm.setLore(StringFormat.stringListReplace(GUILanguage.ITEM_LUK_LORE, "%luk%", p.getLuk()));
+		pm.setColor(Color.GREEN);
+		pm.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+		item.setItemMeta(pm);
+		return item;
+	}
+
+	private static ItemStack getConItem(PlayerPropertyData p){
+		ItemStack item = new ItemStack(Material.BONE, 1);
+		ItemMeta im = item.getItemMeta();
+		im.setDisplayName(GUILanguage.ITEM_CON_NAME);
+		im.setLore(StringFormat.stringListReplace(GUILanguage.ITEM_CON_LORE, "%con%", p.getCon()));
+		item.setItemMeta(im);
+		return item;
+	}
+
+	private static ItemStack getWisItem(PlayerPropertyData p){
+		ItemStack item = new ItemStack(Material.TOTEM, 1);
+		ItemMeta im = item.getItemMeta();
+		im.setDisplayName(GUILanguage.ITEM_WIS_NAME);
+		im.setLore(StringFormat.stringListReplace(GUILanguage.ITEM_WIS_LORE, "%wis%", p.getWis()));
+		item.setItemMeta(im);
+		return item;
 	}
 }
 

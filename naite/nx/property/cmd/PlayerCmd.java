@@ -3,6 +3,7 @@ package nx.property.cmd;
 import nx.property.data.PlayerPropertyData;
 import nx.property.config.PropertySettings;
 import nx.property.gui.CoreGUI;
+import nx.property.util.StringFormat;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
@@ -94,8 +95,7 @@ public class PlayerCmd implements CommandExecutor{
 	}
 
 	private String percentFormat(int a, int b){
-		NumberFormat percent = NumberFormat.getPercentInstance();
-		percent.setMaximumFractionDigits(1);
+		NumberFormat percent = StringFormat.percentFormat(1);
 		return a + "/" + b + "(" + percent.format((double)a / b) + ")";
 	}
 

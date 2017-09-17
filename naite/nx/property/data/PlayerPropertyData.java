@@ -1,6 +1,7 @@
 package nx.property.data;
 
 import nx.property.config.PropertySettings;
+import nx.property.language.MessageLanguage;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -404,8 +405,7 @@ public class PlayerPropertyData{
 		setLevel(getLevel() + lvl); //提升等級
 		addPoint(2 * lvl); //point + 2
 
-		player.sendMessage(title + "§a恭喜您升級了!");
-		player.sendMessage(title + "§e目前等級是§f" + level + "§e級");
+		player.sendMessage(MessageLanguage.LEVEL_UP.replaceAll("%level%", String.valueOf(level)));
 	}
 
 	public void setLevel(int lvl){ //設定等級並變更檔案內容

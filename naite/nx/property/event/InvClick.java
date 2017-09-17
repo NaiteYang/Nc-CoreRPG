@@ -1,8 +1,9 @@
 package nx.property.event;
 
 import nx.property.data.PlayerPropertyData;
-import nx.property.config.ClientMessages;
 import nx.property.gui.CoreGUI;
+import nx.property.language.GUILanguage;
+import nx.property.language.MessageLanguage;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,12 +16,6 @@ import nx.property.gui.PropertyGUI;
 
 public class InvClick implements Listener
 {
-	private static YamlConfiguration yaml = (YamlConfiguration) ClientMessages.getConfig();
-	
-	public static void reload()
-	{
-		ColorSwitch.replaceColor(yaml);
-	}
 	
 	@EventHandler
 	public void onInventoryClick(InventoryClickEvent invce)
@@ -28,7 +23,7 @@ public class InvClick implements Listener
 		Player p = (Player) invce.getWhoClicked();
 		Inventory inv = invce.getInventory();
 		
-		if(inv.getName().equals(CoreGUI.invName)||inv.getName().equals(DataGUI.invName)||inv.getName().equals(PropertyGUI.invName.replaceAll("%point%", String.valueOf(PlayerPropertyData.getPlayerData(p).getPoint()))))
+		if(inv.getName().equals(GUILanguage.CORE_DISPLAY_NAME)||inv.getName().equals(GUILanguage.DATA_DISPLAY_NAME)||inv.getName().equals(GUILanguage.PROPERTY_DISPLAY_NAME.replaceAll("%point%", String.valueOf(PlayerPropertyData.getPlayerData(p).getPoint()))))
 		{
 			try{
 				invce.getCurrentItem().equals(null);
@@ -41,95 +36,94 @@ public class InvClick implements Listener
 			if(invce.getClick() == ClickType.RIGHT || invce.getClick() == ClickType.LEFT)
 			{
 				invce.setCancelled(true);
-				if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(CoreGUI.corePlayerSkull.getItemMeta().getDisplayName()))
+				if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_DATA_NAME))
 				{
 					p.closeInventory();
 					DataGUI.openInterface(p);
 				}
-				if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(CoreGUI.property.getItemMeta().getDisplayName()))
+				if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_PROPERTY_NAME))
 				{
 					p.closeInventory();
 					PropertyGUI.openInterface(p);
 				}
-				if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(DataGUI.back.getItemMeta().getDisplayName())||
-				   invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.back.getItemMeta().getDisplayName()))
+				if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_BACK_NAME))
 				{
 					p.closeInventory();
 					CoreGUI.openInterface(p);
 				}
-				if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.str.getItemMeta().getDisplayName())||
-				   invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.ints.getItemMeta().getDisplayName())||
-				   invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.agi.getItemMeta().getDisplayName())||
-				   invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.luk.getItemMeta().getDisplayName())||
-				   invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.con.getItemMeta().getDisplayName())||
-				   invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.wis.getItemMeta().getDisplayName()))
+				if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_STR_NAME)||
+				   invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_INT_NAME)||
+				   invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_AGI_NAME)||
+				   invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_LUK_NAME)||
+				   invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_CON_NAME)||
+				   invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_WIS_NAME))
 				{
 					if(PlayerPropertyData.getPlayerData(p).getPoint() == 0)
 					{
-						p.sendMessage(yaml.getString("Property.Lack"));
+						p.sendMessage(MessageLanguage.POINT_LACK);
 					}
-					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.str.getItemMeta().getDisplayName()))
+					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_STR_NAME))
 					{
 						if(PlayerPropertyData.getPlayerData(p).getPoint() >= 1)
 						{
 							PlayerPropertyData.getPlayerData(p).removePoint(1);
 							PlayerPropertyData.getPlayerData(p).addStr(1);
-							p.sendMessage(yaml.getString("Property.Add.Str"));
+							p.sendMessage(MessageLanguage.ADD_STR);
 							p.closeInventory();
 							PropertyGUI.openInterface(p);
 						}
 					}
-					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.ints.getItemMeta().getDisplayName()))
+					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_INT_NAME))
 					{
 						if(PlayerPropertyData.getPlayerData(p).getPoint() >= 1)
 						{
 							PlayerPropertyData.getPlayerData(p).removePoint(1);
 							PlayerPropertyData.getPlayerData(p).addInt(1);
-							p.sendMessage(yaml.getString("Property.Add.Int"));
+							p.sendMessage(MessageLanguage.ADD_INT);
 							p.closeInventory();
 							PropertyGUI.openInterface(p);
 						}
 					}
-					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.agi.getItemMeta().getDisplayName()))
+					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_AGI_NAME))
 					{
 						if(PlayerPropertyData.getPlayerData(p).getPoint() >= 1)
 						{
 							PlayerPropertyData.getPlayerData(p).removePoint(1);
 							PlayerPropertyData.getPlayerData(p).addAgi(1);
-							p.sendMessage(yaml.getString("Property.Add.Agi"));
+							p.sendMessage(MessageLanguage.ADD_AGI);
 							p.closeInventory();
 							PropertyGUI.openInterface(p);
 						}
 					}
-					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.luk.getItemMeta().getDisplayName()))
+					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_LUK_NAME))
 					{
 						if(PlayerPropertyData.getPlayerData(p).getPoint() >= 1)
 						{
 							PlayerPropertyData.getPlayerData(p).removePoint(1);
 							PlayerPropertyData.getPlayerData(p).addLuk(1);
-							p.sendMessage(yaml.getString("Property.Add.Luk"));
+							p.sendMessage(MessageLanguage.ADD_LUK);
 							p.closeInventory();
 							PropertyGUI.openInterface(p);
 						}
 					}
-					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.con.getItemMeta().getDisplayName()))
+					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_CON_NAME))
 					{
 						if(PlayerPropertyData.getPlayerData(p).getPoint() >= 1)
 						{
 							PlayerPropertyData.getPlayerData(p).removePoint(1);
 							PlayerPropertyData.getPlayerData(p).addCon(1);
-							p.sendMessage(yaml.getString("Property.Add.Con"));
+							p.sendMessage(MessageLanguage.ADD_CON);
 							p.closeInventory();
 							PropertyGUI.openInterface(p);
 						}
 					}
-					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(PropertyGUI.wis.getItemMeta().getDisplayName()))
+					if(invce.getCurrentItem().getItemMeta().getDisplayName().equals(GUILanguage.ITEM_WIS_NAME))
 					{
 						if(PlayerPropertyData.getPlayerData(p).getPoint() >= 1)
 						{
 							PlayerPropertyData.getPlayerData(p).removePoint(1);
 							PlayerPropertyData.getPlayerData(p).addWis(1);
-							p.sendMessage(yaml.getString("Property.Add.Wis"));
+							p.sendMessage(MessageLanguage.ADD_WIS);
 							p.closeInventory();
 							PropertyGUI.openInterface(p);
 						}
