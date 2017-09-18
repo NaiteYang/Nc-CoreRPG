@@ -1,23 +1,23 @@
-package nx.property.core;
+package nx.multisystem;
 
-import nx.property.data.PlayerPropertyData;
-import nx.property.event.PlayerJoinAndQuit;
-import nx.property.event.PlayerMove;
-import nx.property.event.PlayerRegainHealth;
+import nx.multisystem.data.PlayerPropertyData;
+import nx.multisystem.event.PlayerJoinAndQuit;
+import nx.multisystem.event.PlayerMove;
+import nx.multisystem.event.PlayerRegainHealth;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.ConsoleCommandSender;
-import nx.property.config.PropertySettings;
+import nx.multisystem.config.PropertySettings;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import nx.property.cmd.PlayerCmd;
-import nx.property.event.InvClick;
+import nx.multisystem.cmd.PropertyPlayerCommand;
+import nx.multisystem.event.InvClick;
 
-public class Core extends JavaPlugin{
+public class NcMultiSystem extends JavaPlugin{
 
-	public static Core plugin;
+	public static NcMultiSystem plugin;
 
 	public void onEnable(){
 		plugin = this;
@@ -50,7 +50,7 @@ public class Core extends JavaPlugin{
 	}
 
 	public void commands(){
-		CommandExecutor executor = new PlayerCmd();
+		CommandExecutor executor = new PropertyPlayerCommand();
 		getCommand("np").setExecutor(executor);
 		getCommand("property").setExecutor(executor);
 		getCommand("pro").setExecutor(executor);

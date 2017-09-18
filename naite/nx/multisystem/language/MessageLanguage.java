@@ -1,4 +1,4 @@
-package nx.property.language;
+package nx.multisystem.language;
 
 public class MessageLanguage{
 

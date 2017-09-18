@@ -1,4 +1,4 @@
-package nx.property.event;
+package nx.multisystem.event;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

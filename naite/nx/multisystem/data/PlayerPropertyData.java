@@ -1,12 +1,12 @@
-package nx.property.data;
+package nx.multisystem.data;
 
-import nx.property.config.PropertySettings;
-import nx.property.language.MessageLanguage;
+import nx.multisystem.NcMultiSystem;
+import nx.multisystem.config.PropertySettings;
+import nx.multisystem.language.MessageLanguage;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-import nx.property.core.Core;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -147,7 +147,7 @@ public class PlayerPropertyData{
 
 	//檔案讀取
 	private void loadFile(){
-		file = new File(Core.plugin.getDataFolder() + File.separator + "PlayerData" + File.separator + player.getUniqueId() + ".yml");
+		file = new File(NcMultiSystem.plugin.getDataFolder() + File.separator + "PlayerData" + File.separator + player.getUniqueId() + ".yml");
 
 		if(!file.exists()){
 			try{
@@ -598,7 +598,7 @@ public class PlayerPropertyData{
 			public void run(){
 				addMana(getRestoreMana());
 			}
-		}.runTaskTimer(Core.plugin, PropertySettings.getManaRestoreTime(), PropertySettings.getManaRestoreTime());
+		}.runTaskTimer(NcMultiSystem.plugin, PropertySettings.getManaRestoreTime(), PropertySettings.getManaRestoreTime());
 	}
 
 	private void stopManaRestore(){
@@ -617,7 +617,7 @@ public class PlayerPropertyData{
 			public void run(){
 				addHealth(getRestoreHealth());
 			}
-		}.runTaskTimer(Core.plugin, PropertySettings.getHealthRestoreTime(), PropertySettings.getHealthRestoreTime());
+		}.runTaskTimer(NcMultiSystem.plugin, PropertySettings.getHealthRestoreTime(), PropertySettings.getHealthRestoreTime());
 	}
 
 	private void stopHealthRestore(){
@@ -636,7 +636,7 @@ public class PlayerPropertyData{
 			public void run(){
 				addMentality(getRestoreMentality());
 			}
-		}.runTaskTimer(Core.plugin, PropertySettings.getMentalityRestoreTime(), PropertySettings.getMentalityRestoreTime());
+		}.runTaskTimer(NcMultiSystem.plugin, PropertySettings.getMentalityRestoreTime(), PropertySettings.getMentalityRestoreTime());
 	}
 
 	private void stopMentalityRestore(){
@@ -655,7 +655,7 @@ public class PlayerPropertyData{
 			public void run(){
 				addVitality(getRestoreVitality());
 			}
-		}.runTaskTimer(Core.plugin, PropertySettings.getVitalityRestoreTime(), PropertySettings.getVitalityRestoreTime());
+		}.runTaskTimer(NcMultiSystem.plugin, PropertySettings.getVitalityRestoreTime(), PropertySettings.getVitalityRestoreTime());
 	}
 
 	private void stopVitalityRestore(){
@@ -676,7 +676,7 @@ public class PlayerPropertyData{
 			public void run(){
 				removeMentality(PropertySettings.getMentalityDecrease());
 			}
-		}.runTaskTimer(Core.plugin, PropertySettings.getMentalityDecreaseTime(), PropertySettings.getMentalityDecreaseTime());
+		}.runTaskTimer(NcMultiSystem.plugin, PropertySettings.getMentalityDecreaseTime(), PropertySettings.getMentalityDecreaseTime());
 	}
 
 	private void stopMentalityDecrease(){

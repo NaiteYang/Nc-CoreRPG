@@ -1,9 +1,9 @@
-package nx.property.gui;
+package nx.multisystem.gui;
 
-import nx.property.data.PlayerPropertyData;
-import nx.property.language.GUILanguage;
-import nx.property.util.GUIItemGenerator;
-import nx.property.util.StringFormat;
+import nx.multisystem.data.PlayerPropertyData;
+import nx.multisystem.language.GUILanguage;
+import nx.multisystem.util.GUIItemGenerator;
+import nx.multisystem.util.StringFormat;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;

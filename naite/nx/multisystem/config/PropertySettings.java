@@ -1,7 +1,7 @@
-package nx.property.config;
+package nx.multisystem.config;
 
 
-import nx.property.core.Core;
+import nx.multisystem.NcMultiSystem;
 import org.bukkit.configuration.file.FileConfiguration;
 
 /**
@@ -12,8 +12,8 @@ public class PropertySettings{
 	private static FileConfiguration config;
 
 	public static void reload(){
-		Core.plugin.reloadConfig();
-		config = Core.plugin.getConfig();
+		NcMultiSystem.plugin.reloadConfig();
+		config = NcMultiSystem.plugin.getConfig();
 	}
 
 	public static int getMaxExp(int level){

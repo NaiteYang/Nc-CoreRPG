@@ -1,9 +1,9 @@
-package nx.property.cmd;
+package nx.multisystem.cmd;
 
-import nx.property.data.PlayerPropertyData;
-import nx.property.config.PropertySettings;
-import nx.property.gui.CoreGUI;
-import nx.property.util.StringFormat;
+import nx.multisystem.data.PlayerPropertyData;
+import nx.multisystem.config.PropertySettings;
+import nx.multisystem.gui.CoreGUI;
+import nx.multisystem.util.StringFormat;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 
 import java.text.NumberFormat;
 
-public class PlayerCmd implements CommandExecutor{
+public class PropertyPlayerCommand implements CommandExecutor{
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String lable, String[] args){

@@ -1,5 +1,5 @@
 name: NcMultiSystem
-main: nx.property.core.Core
+main: nx.multisystem.NcMultiSystem
 version: 0.0.1
 authors: [WeiNaite, WiwiHo]
 description: This is a player base data value on RPG games.

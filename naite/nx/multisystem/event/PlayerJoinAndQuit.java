@@ -1,6 +1,6 @@
-package nx.property.event;
+package nx.multisystem.event;
 
-import nx.property.data.PlayerPropertyData;
+import nx.multisystem.data.PlayerPropertyData;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;

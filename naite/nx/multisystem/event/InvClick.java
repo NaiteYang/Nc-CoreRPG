@@ -1,18 +1,17 @@
-package nx.property.event;
+package nx.multisystem.event;
 
-import nx.property.data.PlayerPropertyData;
-import nx.property.gui.CoreGUI;
-import nx.property.language.GUILanguage;
-import nx.property.language.MessageLanguage;
-import org.bukkit.configuration.file.YamlConfiguration;
+import nx.multisystem.data.PlayerPropertyData;
+import nx.multisystem.gui.CoreGUI;
+import nx.multisystem.language.GUILanguage;
+import nx.multisystem.language.MessageLanguage;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
-import nx.property.gui.DataGUI;
-import nx.property.gui.PropertyGUI;
+import nx.multisystem.gui.DataGUI;
+import nx.multisystem.gui.PropertyGUI;
 
 public class InvClick implements Listener{
 

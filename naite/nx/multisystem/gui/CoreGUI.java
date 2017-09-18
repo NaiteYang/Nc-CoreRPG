@@ -1,16 +1,13 @@
-package nx.property.gui;
+package nx.multisystem.gui;
 
-import nx.property.core.Core;
-import nx.property.language.GUILanguage;
-import nx.property.util.GUIItemGenerator;
+import nx.multisystem.language.GUILanguage;
+import nx.multisystem.util.GUIItemGenerator;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.SkullMeta;
 
 public class CoreGUI{
 

@@ -1,4 +1,4 @@
-package nx.property.util;
+package nx.multisystem.util;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;

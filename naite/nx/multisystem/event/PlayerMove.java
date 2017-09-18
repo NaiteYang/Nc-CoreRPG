@@ -1,7 +1,7 @@
-package nx.property.event;
+package nx.multisystem.event;
 
-import nx.property.data.PlayerPropertyData;
-import nx.property.config.PropertySettings;
+import nx.multisystem.data.PlayerPropertyData;
+import nx.multisystem.config.PropertySettings;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

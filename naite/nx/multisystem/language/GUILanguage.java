@@ -1,4 +1,4 @@
-package nx.property.language;
+package nx.multisystem.language;
 
 import java.util.Arrays;
 import java.util.List;

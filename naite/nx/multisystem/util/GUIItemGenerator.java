@@ -1,6 +1,6 @@
-package nx.property.util;
+package nx.multisystem.util;
 
-import nx.property.language.GUILanguage;
+import nx.multisystem.language.GUILanguage;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
