@@ -3,6 +3,7 @@ package nx.multisystem.cmd;
 import nx.multisystem.data.PlayerPropertyData;
 import nx.multisystem.config.PropertySettings;
 import nx.multisystem.gui.CoreGUI;
+import nx.multisystem.language.MessageLanguage;
 import nx.multisystem.util.StringFormat;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -19,7 +20,7 @@ public class PropertyPlayerCommand implements CommandExecutor{
 	public boolean onCommand(CommandSender sender, Command cmd, String lable, String[] args){
 		if(args.length == 0){
 			if(!(sender instanceof Player)){
-				sender.sendMessage("§cYou must be a player to use this commmand.");
+				sender.sendMessage(MessageLanguage.ONLY_PLAYER);
 				return true;
 			}
 			openGUI((Player) sender);
@@ -27,7 +28,7 @@ public class PropertyPlayerCommand implements CommandExecutor{
 		}
 		else if(args.length == 1 && args[0].equalsIgnoreCase("info")){
 			if(!(sender instanceof Player)){
-				sender.sendMessage("§cYou must be a player to use this commmand.");
+				sender.sendMessage(MessageLanguage.ONLY_PLAYER);
 				return true;
 			}
 			sendPlayerInfo(sender, (Player) sender);
@@ -35,24 +36,19 @@ public class PropertyPlayerCommand implements CommandExecutor{
 		}
 		else if(args.length == 2 && args[0].equalsIgnoreCase("info")){
 			if(!sender.hasPermission("NcProperty.info.other")){
-				sender.sendMessage("§6[NcProperty]&c你沒有權限使用此指令");
+				sender.sendMessage(MessageLanguage.NOT_PERMISSION);
 				return true;
 			}
 			OfflinePlayer target = Bukkit.getOfflinePlayer(args[1]);
 			if(!target.isOnline()){
-				sender.sendMessage("§6[NcProperty]§c目標不在線上");
+				sender.sendMessage(MessageLanguage.NOT_ONLINE);
 				return true;
 			}
 			sendPlayerInfo(sender, (Player) target);
 			return true;
 		}
 		else{
-			sender.sendMessage(new String[]{
-					"§6[NcProperty]§a指令列表:",
-					"§7/property §f- §a開啟屬性GUI",
-					"§7/property info §f- §a於聊天欄查看自己的屬性資訊",
-					"§7/property info <ID> §f- §a查看他人的屬性資訊"
-			});
+			sender.sendMessage(MessageLanguage.COMMAND_HELP_PLAYER);
 			return true;
 		}
 	}

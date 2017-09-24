@@ -48,4 +48,13 @@ public class MessageLanguage{
 
 	public static final String COMMAND_HELP_TITLE = PREFIX + "§a指令列表:";
 
+	public static final String ONLY_PLAYER = "§cYou must be a player to use this commmand.";
+
+	public static final String[] COMMAND_HELP_PLAYER = new String[]{
+			"§6[NcProperty]§a指令列表:",
+			"§7/property §f- §a開啟屬性GUI",
+			"§7/property info §f- §a於聊天欄查看自己的屬性資訊",
+			"§7/property info <ID> §f- §a查看他人的屬性資訊"
+	};
+
 }
