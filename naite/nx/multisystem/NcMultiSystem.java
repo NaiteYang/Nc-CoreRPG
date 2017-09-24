@@ -1,5 +1,6 @@
 package nx.multisystem;
 
+import nx.multisystem.cmd.PropertyAdminCommand;
 import nx.multisystem.data.PlayerPropertyData;
 import nx.multisystem.event.PlayerJoinAndQuit;
 import nx.multisystem.event.PlayerMove;
@@ -50,10 +51,15 @@ public class NcMultiSystem extends JavaPlugin{
 	}
 
 	public void commands(){
-		CommandExecutor executor = new PropertyPlayerCommand();
-		getCommand("np").setExecutor(executor);
-		getCommand("property").setExecutor(executor);
-		getCommand("pro").setExecutor(executor);
+		CommandExecutor playerCommandExecutor = new PropertyPlayerCommand();
+		getCommand("np").setExecutor(playerCommandExecutor);
+		getCommand("property").setExecutor(playerCommandExecutor);
+		getCommand("pro").setExecutor(playerCommandExecutor);
+
+		CommandExecutor adminCommandExecutor = new PropertyAdminCommand();
+		getCommand("npadmin").setExecutor(adminCommandExecutor);
+		getCommand("propertyadmin").setExecutor(adminCommandExecutor);
+		getCommand("proadmin").setExecutor(adminCommandExecutor);
 	}
 
 	public void events(){
