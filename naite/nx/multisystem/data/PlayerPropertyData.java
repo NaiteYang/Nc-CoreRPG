@@ -26,9 +26,6 @@ public class PlayerPropertyData{
 	private int exp = 0;  // 經驗
 
 	//狀態值
-	private int mana = 0;        // 魔力
-	private int maxMana = 0;  // 最大魔力  (屬性制 - 體質)
-	private int restoreMana = 0;  // 魔力恢復  (屬性制 - 感知)
 
 	private int health = 0;      // 血量
 	private int maxHealth = 0;  // 最大血量  (屬性制 - 體質)
@@ -44,15 +41,10 @@ public class PlayerPropertyData{
 
 	// 能力值
 	private int atk = 0;        // 物理攻擊		(屬性制 - 力量)
-	private int mag = 0;        // 魔法攻擊		(屬性制 - 智力)
 	private int def = 0;        // 物理防禦		(屬性制 - 敏捷)
-	private int res = 0;        // 魔法防禦		(屬性制 - 敏捷)
 	private double aar = 0;        // 物理閃避率	(屬性制 - 敏捷)
-	private double mar = 0;        // 魔法閃避率	(屬性制 - 敏捷)
 	private double akb = 0;        // 物理爆擊率	(屬性制 - 幸運)
-	private double mkb = 0;        // 魔法爆擊率	(屬性制 - 幸運)
 	private double ahit = 0;    // 物理命中率	(屬性制 - 幸運)
-	private double mhit = 0;    // 魔法命中率	(屬性制 - 幸運)
 
 	// 屬性數值
 	private int str = 0;        // 力量屬性  (物理攻擊)
@@ -67,7 +59,6 @@ public class PlayerPropertyData{
 	private YamlConfiguration yaml = null;
 
 	//狀態值回復task
-	private BukkitTask manaRestoreTask = null;
 	private BukkitTask healthRestoreTask = null;
 	private BukkitTask mentalityRestoreTask = null;
 	private BukkitTask vitalityRestoreTask = null;
@@ -116,7 +107,6 @@ public class PlayerPropertyData{
 
 	public static void removePlayerData(Player player){
 		PlayerPropertyData data = getPlayerData(player);
-		data.stopManaRestore();
 		data.stopHealthRestore();
 		data.stopMentalityRestore();
 		data.stopVitalityRestore();
@@ -132,7 +122,6 @@ public class PlayerPropertyData{
 
 	//儲存狀態值與經驗值
 	public void saveData(){
-		yaml.set("mana", getMana());
 		yaml.set("health", getHealth());
 		yaml.set("mentality", getMentality());
 		yaml.set("vitality", getVitality());
@@ -171,7 +160,6 @@ public class PlayerPropertyData{
 		int co = yaml.getInt("con", 0);
 		int wi = yaml.getInt("wis", 0);
 
-		int ma = yaml.getInt("mana", 0);
 		int he = yaml.getInt("health", 0);
 		int me = yaml.getInt("mentality", 0);
 		int vi = yaml.getInt("vitality", 0);
@@ -190,7 +178,6 @@ public class PlayerPropertyData{
 		setWis(wi);
 
 		//狀態值
-		setMana(ma);
 		setHealth(he);
 		setMentality(me);
 		setVitality(vi);
@@ -205,26 +192,21 @@ public class PlayerPropertyData{
 	}
 
 	private void computeInt(){
-		mag = PropertySettings.getDefaultMag() + getInt() * 2; //魔法攻擊 = 預設 + 智力*2
+
 	}
 
 	private void computeAgi(){
 		def = PropertySettings.getDefaultDef() + getAgi() * 2; //物理防禦 = 預設 + 敏捷*2
-		res = PropertySettings.getDefaultRes() + getAgi(); //魔法防禦 = 預設 + 敏捷*1
 		aar = PropertySettings.getDefaultAar() + getAgi() * 0.003; //物理閃避 = 預設 + 敏捷*0.003
-		mar = PropertySettings.getDefaultMar() + getAgi() * 0.002; //魔法閃避 = 預設 + 敏捷*0.002
 	}
 
 	private void computeLuk(){
 		akb = PropertySettings.getDefaultAkb() + getLuk() * 0.005; //物理爆擊 = 預設 + 幸運*0.005
-		mkb = PropertySettings.getDefaultMkb() + getLuk() * 0.003; //魔法爆擊 = 預設 + 幸運*0.003
 		ahit = PropertySettings.getDefaultAhit() + getLuk() * 0.002; //物理命中 = 預設 + 幸運*0.002
-		mhit = PropertySettings.getDefaultMhit() + getLuk() * 0.001; //魔法命中 = 預設 + 幸運*0.001
 	}
 
 	private void computeCon(){
 		maxHealth = PropertySettings.getDefaultMaxHealth() + getCon() * 10; //最大血量 = 預設 + 體質*10
-		maxMana = PropertySettings.getDefaultMaxMana() + getCon() * 5; //最大魔力 = 預設 + 體質*5
 		maxMentality = PropertySettings.getDefaultMaxMentality() + getCon(); //最大精力 = 預設 + 體質*1
 		maxVitality = PropertySettings.getDefaultMaxVitality() + getCon(); //最大耐力 = 預設 + 體質*1
 
@@ -233,7 +215,6 @@ public class PlayerPropertyData{
 
 	private void computeWis(){
 		restoreHealth = PropertySettings.getDefaultRestoreHealth() + getWis() * 5; //血量恢復 = 預設 + 感知*5
-		restoreMana = PropertySettings.getDefaultRestoreMana() + getWis() * 5; //魔力恢復 = 預設 + 感知*5
 		restoreMentality = PropertySettings.getDefaultRestoreMentality() + getWis(); //精力恢復 = 預設 + 感知*1
 		restoreVitality = PropertySettings.getDefaultRestoreVitality() + getWis(); //耐力恢復 = 預設 + 感知*1
 	}
@@ -452,38 +433,6 @@ public class PlayerPropertyData{
 
 	//狀態值控制
 
-	//mana
-	public int getMana(){
-		return mana;
-	}
-
-	public int getMaxMana(){
-		return maxMana;
-	}
-
-	public int getRestoreMana(){
-		return restoreMana;
-	}
-
-	public void setMana(int value){
-		if(value >= getMaxMana()){
-			mana = getMaxMana();
-			stopManaRestore();
-		}
-		else{
-			mana = value < 0 ? 0 : value;
-			startManaRestore();
-		}
-	}
-
-	public void removeMana(int value){
-		setMana(getMana() - value);
-	}
-
-	public void addMana(int value){
-		setMana(getMana() + value);
-	}
-
 	//health
 	public int getHealth(){
 		return health;
@@ -588,26 +537,6 @@ public class PlayerPropertyData{
 		setVitality(getVitality() + value);
 	}
 
-	//狀態值自動回復
-	private void startManaRestore(){
-		if(manaRestoreTask != null){
-			return;
-		}
-		manaRestoreTask = new BukkitRunnable(){
-			@Override
-			public void run(){
-				addMana(getRestoreMana());
-			}
-		}.runTaskTimer(NcMultiSystem.plugin, PropertySettings.getManaRestoreTime(), PropertySettings.getManaRestoreTime());
-	}
-
-	private void stopManaRestore(){
-		if(manaRestoreTask != null){
-			manaRestoreTask.cancel();
-			manaRestoreTask = null;
-		}
-	}
-
 	private void startHealthRestore(){
 		if(healthRestoreTask != null){
 			return;
@@ -694,22 +623,10 @@ public class PlayerPropertyData{
 		return (int) (atk * times) + increase;
 	}
 
-	public int getMag(){
-		int increase = 0;
-		double times = 1;
-		return (int) (mag * times) + increase;
-	}
-
 	public int getDef(){
 		int increase = 0;
 		double times = 1;
 		return (int) (def * times) + increase;
-	}
-
-	public int getRes(){
-		int increase = 0;
-		double times = 1;
-		return (int) (res * times) + increase;
 	}
 
 	public double getAar(){
@@ -718,33 +635,15 @@ public class PlayerPropertyData{
 		return aar * times + increase;
 	}
 
-	public double getMar(){
-		double increase = 0;
-		double times = 1;
-		return mar * times + increase;
-	}
-
 	public double getAkb(){
 		double increase = 0;
 		double times = 1;
 		return akb * times + increase;
 	}
 
-	public double getMkb(){
-		double increase = 0;
-		double times = 1;
-		return mkb * times + increase;
-	}
-
 	public double getAhit(){
 		double increase = 0;
 		double times = 1;
 		return ahit * times + increase;
-	}
-
-	public double getMhit(){
-		double increase = 0;
-		double times = 1;
-		return mhit * times + increase;
 	}
 }

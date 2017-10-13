@@ -33,7 +33,6 @@ public class DataGUI{
 		inv.setItem(10, getLevelItem(data));
 		inv.setItem(11, getExpItem(data));
 		inv.setItem(13, getHealthItem(data));
-		inv.setItem(14, getManaItem(data));
 		inv.setItem(15, getMentalityItem(data));
 		inv.setItem(16, getVitalityItem(data));
 		inv.setItem(29, getAtkItem(data));
@@ -41,11 +40,6 @@ public class DataGUI{
 		inv.setItem(31, getAarItem(data));
 		inv.setItem(32, getAkbItem(data));
 		inv.setItem(33, getAhitItem(data));
-		inv.setItem(38, getMagItem(data));
-		inv.setItem(39, getResItem(data));
-		inv.setItem(40, getMarItem(data));
-		inv.setItem(41, getMkbItem(data));
-		inv.setItem(42, getMhitItem(data));
 		inv.setItem(53, GUIItemGenerator.getBackItem());
 		p.openInventory(inv);
 	}
@@ -80,20 +74,6 @@ public class DataGUI{
 		lore = StringFormat.stringListReplace(lore, "%maxhp%", p.getMaxHealth());
 		pm.setLore(lore);
 		pm.setColor(Color.RED);
-		pm.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
-		item.setItemMeta(pm);
-		return item;
-	}
-
-	private static ItemStack getManaItem(PlayerPropertyData p){
-		ItemStack item = new ItemStack(Material.SPLASH_POTION, 1);
-		PotionMeta pm = (PotionMeta) item.getItemMeta();
-		pm.setDisplayName(GUILanguage.ITEM_MANA_NAME);
-		List<String> lore = StringFormat.stringListReplace(GUILanguage.ITEM_MANA_LORE, "%mp%", p.getMana());
-		lore = StringFormat.stringListReplace(lore, "%remp%", p.getRestoreMana());
-		lore = StringFormat.stringListReplace(lore, "%maxmp%", p.getMaxMana());
-		pm.setLore(lore);
-		pm.setColor(Color.BLUE);
 		pm.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
 		item.setItemMeta(pm);
 		return item;
@@ -168,51 +148,6 @@ public class DataGUI{
 		ItemMeta im = item.getItemMeta();
 		im.setDisplayName(GUILanguage.ITEM_AHIT_NAME);
 		im.setLore(StringFormat.stringListReplace(GUILanguage.ITEM_AHIT_LORE, "%ahit%", percent.format(p.getAhit())));
-		item.setItemMeta(im);
-		return item;
-	}
-
-	private static ItemStack getMagItem(PlayerPropertyData p){
-		ItemStack item = new ItemStack(Material.STICK, 1);
-		ItemMeta im = item.getItemMeta();
-		im.setDisplayName(GUILanguage.ITEM_MAG_NAME);
-		im.setLore(StringFormat.stringListReplace(GUILanguage.ITEM_MAG_LORE, "%mag%", p.getMag()));
-		item.setItemMeta(im);
-		return item;
-	}
-
-	private static ItemStack getResItem(PlayerPropertyData p){
-		ItemStack item = new ItemStack(Material.DIAMOND_CHESTPLATE, 1);
-		ItemMeta im = item.getItemMeta();
-		im.setDisplayName(GUILanguage.ITEM_RES_NAME);
-		im.setLore(StringFormat.stringListReplace(GUILanguage.ITEM_RES_LORE, "%res%", p.getRes()));
-		item.setItemMeta(im);
-		return item;
-	}
-
-	private static ItemStack getMarItem(PlayerPropertyData p){
-		ItemStack item = new ItemStack(Material.FEATHER, 1);
-		ItemMeta im = item.getItemMeta();
-		im.setDisplayName(GUILanguage.ITEM_MAR_NAME);
-		im.setLore(StringFormat.stringListReplace(GUILanguage.ITEM_MAR_LORE, "%mar%", percent.format(p.getMar())));
-		item.setItemMeta(im);
-		return item;
-	}
-
-	private static ItemStack getMkbItem(PlayerPropertyData p){
-		ItemStack item = new ItemStack(Material.FIREBALL, 1);
-		ItemMeta im = item.getItemMeta();
-		im.setDisplayName(GUILanguage.ITEM_MKB_NAME);
-		im.setLore(StringFormat.stringListReplace(GUILanguage.ITEM_MKB_LORE, "%mkb%", percent.format(p.getMkb())));
-		item.setItemMeta(im);
-		return item;
-	}
-
-	private static ItemStack getMhitItem(PlayerPropertyData p){
-		ItemStack item = new ItemStack(Material.SPECTRAL_ARROW, 1);
-		ItemMeta im = item.getItemMeta();
-		im.setDisplayName(GUILanguage.ITEM_MHIT_NAME);
-		im.setLore(StringFormat.stringListReplace(GUILanguage.ITEM_MHIT_LORE, "%mhit%", percent.format(p.getMhit())));
 		item.setItemMeta(im);
 		return item;
 	}

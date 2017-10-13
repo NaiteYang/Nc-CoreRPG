@@ -71,18 +71,16 @@ public class PropertyPlayerCommand implements CommandExecutor{
 						"§6[NcProperty]§f" + target.getDisplayName() + " §a的屬性資訊:",
 						"§6等級(Level): " + level + "  §a經驗(EXP): " + percentFormat(exp, maxExp) + "  §e屬性點數(Point): " + data.getPoint(),
 						"",
-						"§c血量(HP): " + percentFormat(data.getHealth(), data.getMaxHealth()) + "  §b魔力(MP): " + percentFormat(data.getMana(), data.getMaxMana()),
-						"§e精力(MEN): " + percentFormat(data.getMentality(), data.getMaxMentality()) + "  §a耐力(VIT): " + percentFormat(data.getVitality(), data.getMaxVitality()),
+						"§c血量(HP): " + percentFormat(data.getHealth(), data.getMaxHealth()) + "  §e精力(MEN): " + percentFormat(data.getMentality(), data.getMaxMentality()) + "  §a耐力(VIT): " + percentFormat(data.getVitality(), data.getMaxVitality()),
 						"§c血量回復: " + timeFormat(data.getRestoreHealth(), PropertySettings.getHealthRestoreTime()) +
-								"§b  魔力回復: " + timeFormat(data.getRestoreMana(), PropertySettings.getManaRestoreTime()) +
 								"§e  精力回復: " + timeFormat(data.getRestoreMentality(), PropertySettings.getMentalityRestoreTime()) +
 								"§a  耐力回復: " + timeFormat(data.getRestoreVitality(), PropertySettings.getVitalityRestoreTime()),
 						"",
-						"§c物理攻擊(ATK): " + data.getAtk() + "  §b魔法攻擊(MAG): " + data.getMag(),
-						"§c物理防禦(DEF): " + data.getDef() + "  §b魔法防禦(RES): " + data.getRes(),
-						"§c物理閃避(AAR): " + probability.format(data.getAar()) + "  §b魔法閃避(MAR): " + probability.format(data.getMar()),
-						"§c物理爆擊(AKB): " + probability.format(data.getAkb()) + "  §b魔法爆擊(MKB): " + probability.format(data.getMkb()),
-						"§c物理命中(AHIT): " + probability.format(data.getAhit()) + "  §b魔法命中(MHIT): " + probability.format(data.getMhit()),
+						"§c物理攻擊(ATK): " + data.getAtk(),
+						"§c物理防禦(DEF): " + data.getDef(),
+						"§c物理閃避(AAR): " + probability.format(data.getAar()),
+						"§c物理爆擊(AKB): " + probability.format(data.getAkb()),
+						"§c物理命中(AHIT): " + probability.format(data.getAhit()),
 						"",
 						"§c✸力量(STR): " + data.getStr() + "  §b❋智力(INT): " + data.getInt() + "  §e☬敏捷(AGI): " + data.getAgi(),
 						"§4☣幸運(LUK): " + data.getLuk() + "  §d✚體質(CON): " + data.getCon() + "  §2✤感知(WIS): " + data.getWis()

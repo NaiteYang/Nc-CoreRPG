@@ -32,18 +32,6 @@ public class PropertySettings{
 		return config.getDouble("Player.MaxExp.Float");
 	}
 
-	public static int getDefaultMaxMana(){
-		return config.getInt("Player.Ability.Mana.DefaultMax");
-	}
-
-	public static int getDefaultRestoreMana(){
-		return config.getInt("Player.Ability.Mana.DefaultRestore");
-	}
-
-	public static long getManaRestoreTime(){
-		return config.getLong("Player.Ability.Mana.RestoreTime");
-	}
-
 	public static int getDefaultMaxHealth(){
 		return config.getInt("Player.Ability.Health.DefaultMax");
 	}
@@ -100,40 +88,20 @@ public class PropertySettings{
 		return config.getInt("Player.Ability.DefaultATK");
 	}
 
-	public static int getDefaultMag(){
-		return config.getInt("Player.Ability.DefaultMAG");
-	}
-
 	public static int getDefaultDef(){
 		return config.getInt("Player.Ability.DefaultDEF");
-	}
-
-	public static int getDefaultRes(){
-		return config.getInt("Player.Ability.DefaultRES");
 	}
 
 	public static double getDefaultAar(){
 		return config.getDouble("Player.Ability.DefaultAAR");
 	}
 
-	public static double getDefaultMar(){
-		return config.getDouble("Player.Ability.DefaultMAR");
-	}
-
 	public static double getDefaultAkb(){
 		return config.getDouble("Player.Ability.DefaultAKB");
 	}
 
-	public static double getDefaultMkb(){
-		return config.getDouble("Player.Ability.DefaultMKB");
-	}
-
 	public static double getDefaultAhit(){
 		return config.getDouble("Player.Ability.DefaultAHIT");
-	}
-
-	public static double getDefaultMhit(){
-		return config.getDouble("Player.Ability.DefaultMHIT");
 	}
 
 	public static int getMaxStr(){

@@ -4,10 +4,6 @@ Player:
     Default: 100
     Float: 0.87
   Ability:
-    Mana:
-      DefaultMax: 100
-      DefaultRestore: 5
-      RestoreTime: 1200
     Health:
       DefaultMax: 100
       DefaultRestore: 5
@@ -25,15 +21,10 @@ Player:
       DecreaseWalkDistance: 5
       Decrease: 1
     DefaultATK: 2
-    DefaultMAG: 3
     DefaultDEF: 1
-    DefaultRES: 2
     DefaultAAR: 0.012
-    DefaultMAR: 0.027
     DefaultAKB: 0.037
-    DefaultMKB: 0.023
     DefaultAHIT: 0.674
-    DefaultMHIT: 0.496
   AttributeMax:
     STR: 30
     INT: 20
@@ -41,5 +32,3 @@ Player:
     LUK: 100
     CON: 70
     WIS: 10
-Replice:
-  PlayerSkull: "&c&l{Skull}"

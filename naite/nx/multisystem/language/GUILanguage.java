@@ -62,19 +62,6 @@ public class GUILanguage{
 					"§f生命恢復: §a%rehp%",
 					"§f最大生命: §a%maxhp%");
 
-	public static final String ITEM_MANA_NAME = "§e魔力";
-
-	public static final List<String> ITEM_MANA_LORE =
-			Arrays.asList("",
-					"§7提升屬性 §d\u271a §7可讓您的魔力值提升",
-					"§7提升屬性 §2\u2724 §7可讓您的魔力恢復提升",
-					"§7使用技能時會減少您的魔力值",
-					"§7每 1 分鐘恢復一次魔力值",
-					"",
-					"§f當前魔力: §a%mp%",
-					"§f魔力恢復: §a%remp%",
-					"§f最大魔力: §a%maxmp%");
-
 	public static final String ITEM_MENTALITY_NAME = "§e精力";
 
 	public static final List<String> ITEM_MENTALITY_LORE =
@@ -150,56 +137,6 @@ public class GUILanguage{
 					"§7每攻擊一次可使命中率觸發是否造成傷害",
 					"§0 ",
 					"§f當前物理命中率: §a%ahit%");
-
-	public static final String ITEM_MAG_NAME = "§b魔法攻擊";
-
-	public static final List<String> ITEM_MAG_LORE =
-			Arrays.asList("",
-					"§7提升屬性 §b\u274b §7可讓您的魔法攻擊提升",
-					"§7也可以從其他物品裝備取得提升能力",
-					"§7每施放技能一次可造成技能傷害",
-					"§0 ",
-					"§f當前魔法攻擊: §a%mag%");
-
-	public static final String ITEM_RES_NAME = "§b魔法防禦";
-
-	public static final List<String> ITEM_RES_LORE =
-			Arrays.asList(
-					"§7提升屬性 §e\u262c §7可讓您的魔法防禦提升",
-					"§7也可以從其他物品裝備取得提升能力",
-					"§7每受到一次技能傷害可使防禦抵抗",
-					"",
-					"§f當前魔法防禦: §a%res%");
-
-	public static final String ITEM_MAR_NAME = "§b魔法防禦";
-
-	public static final List<String> ITEM_MAR_LORE =
-			Arrays.asList("",
-					"§7提升屬性 §e\u262c §7可讓您的魔法閃避率提升",
-					"§7也可以從其他物品裝備取得提升能力",
-					"§7每受到一次技能攻擊可使閃避率觸發一次迴避",
-					"",
-					"§f當前魔法閃避率: §a%mar%");
-
-	public static final String ITEM_MKB_NAME = "§b魔法爆擊率";
-
-	public static final List<String> ITEM_MKB_LORE =
-			Arrays.asList("",
-					"§7提升屬性 §4\u2623 §7可讓您的魔法爆擊率提升",
-					"§7也可以從其他物品裝備取得提升能力",
-					"§7每施放技能一次可使爆擊率觸發一次雙倍傷害",
-					"",
-					"§f當前魔法爆擊率: §a%mkb%");
-
-	public static final String ITEM_MHIT_NAME = "§b魔法命中率";
-
-	public static final List<String> ITEM_MHIT_LORE =
-			Arrays.asList("",
-					"§7提升屬性 §4\u2623 §7可讓您的魔法命中率提升",
-					"§7也可以從其他物品裝備取得提升能力",
-					"§7每施放技能一次可使命中率觸發是否造成傷害",
-					"",
-					"§f當前魔法命中率: §a%mhit%");
 
 	public static final String PROPERTY_DISPLAY_NAME = "§2玩家屬性  您剩下 §c§l%point% §2點";
 

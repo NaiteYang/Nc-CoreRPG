@@ -12,7 +12,7 @@ public class PropertyAdminCommand implements CommandExecutor{
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
-		if(args.length == 4){ // propertyadmin health|hp|mana|mp|mentality|men|vitality|vit|exp set|add|remove <player> <value>
+		if(args.length == 4){ // propertyadmin health|hp|mp|mentality|men|vitality|vit|exp set|add|remove <player> <value>
 			if(!sender.hasPermission("NcProperty.set")){
 				sender.sendMessage(MessageLanguage.NOT_PERMISSION);
 				return true;
@@ -53,23 +53,6 @@ public class PropertyAdminCommand implements CommandExecutor{
 					return true;
 				}
 				sender.sendMessage(MessageLanguage.COMMAND_ADMIN_HP_SET.replaceAll("%player%", target.getName()).replaceAll("%value%", String.valueOf(data.getHealth())));
-				return true;
-			}
-			else if(option.equalsIgnoreCase("mana") || option.equalsIgnoreCase("mp")){
-				if(action.equalsIgnoreCase("set")){
-					data.setMana(value);
-				}
-				else if(action.equalsIgnoreCase("add")){
-					data.addMana(value);
-				}
-				else if(action.equalsIgnoreCase("remove")){
-					data.removeMana(value);
-				}
-				else{
-					sender.sendMessage(MessageLanguage.COMMAND_HELP_ADMIN_MP);
-					return true;
-				}
-				sender.sendMessage(MessageLanguage.COMMAND_ADMIN_MP_SET.replaceAll("%player%", target.getName()).replaceAll("%value%", String.valueOf(data.getMana())));
 				return true;
 			}
 			else if(option.equalsIgnoreCase("mentality") || option.equalsIgnoreCase("men")){
@@ -115,7 +98,6 @@ public class PropertyAdminCommand implements CommandExecutor{
 		sender.sendMessage(new String[]{
 				MessageLanguage.COMMAND_HELP_TITLE,
 				MessageLanguage.COMMAND_HELP_ADMIN_HP,
-				MessageLanguage.COMMAND_HELP_ADMIN_MP,
 				MessageLanguage.COMMAND_HELP_ADMIN_MEN,
 				MessageLanguage.COMMAND_HELP_ADMIN_VIT,
 				MessageLanguage.COMMAND_HELP_ADMIN_EXP

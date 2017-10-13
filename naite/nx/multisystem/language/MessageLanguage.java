@@ -28,8 +28,6 @@ public class MessageLanguage{
 
 	public static final String COMMAND_HELP_ADMIN_HP = "§7/propertyadmin health set|add|remove <target> <value>§f- §a設定血量";
 
-	public static final String COMMAND_HELP_ADMIN_MP = "§7/propertyadmin mana set|add|remove <target> <value>§f- §a設定魔力";
-
 	public static final String COMMAND_HELP_ADMIN_MEN = "§7/propertyadmin mentality set|add|remove <target> <value>§f- §a設定精力";
 
 	public static final String COMMAND_HELP_ADMIN_VIT = "§7/propertyadmin vitality set|add|remove <target> <value>§f- §a設定耐力";
@@ -37,8 +35,6 @@ public class MessageLanguage{
 	public static final String COMMAND_HELP_ADMIN_EXP = "§7/propertyadmin exp add <target> <value>§f- §a增加經驗";
 
 	public static final String COMMAND_ADMIN_HP_SET = PREFIX + "§a已將 §f%player% §a的血量設定為 §f%value%";
-
-	public static final String COMMAND_ADMIN_MP_SET = PREFIX + "§a已將 §f%player% §a的魔力設定為 §f%value%";
 
 	public static final String COMMAND_ADMIN_MEN_SET = PREFIX + "§a已將 §f%player% §a的精力設定為 §f%value%";
 
