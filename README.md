@@ -1,17 +1,17 @@
-# NcMultiSystem 
-This is a Rpg plugin in Minecraft.
- 
-It can run on the server.
- 
-The plugin is a combination of the overall system for the game.
- 
-Related to other systems can be configured.
- 
+# Nc-Core 
+This is a Minecraft RPG plugin
+
+Development began in 2017
+
+It integrates important RPG data cores
+
+( Currently no longer under development )
+
 # Function
-1. Player's data
- 
-2. RPG game of attributes
- 
-3. Custom items for props
- 
-4. Props Box for equipment
+．Basic RPG Stats
+
+．GUI Display
+
+．Stats Support
+
+．Balance Settings
